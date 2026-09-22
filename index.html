@@ -7,778 +7,452 @@
 <title>CozyNest – Unsere Auswahl</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500&family=Nunito+Sans:wght@400;600;700&display=swap">
 <style>
-:root{--bg:#F6EFE6;--surface:#FFFBF5;--text:#3B2F2A;--muted:#8C7B6E;--accent:#C0643F;--accent-soft:#F3DDD0;--sage:#7C8C6E;--note-bg:#F1EBDC;--border:#E6DCCF;--shadow:0 2px 12px rgba(59,47,42,.08);--r:16px;color-scheme:light dark}
-@media (prefers-color-scheme:dark){:root{--bg:#231E1B;--surface:#2E2724;--text:#F2E8DC;--muted:#B3A294;--accent:#D98A64;--accent-soft:#4A3328;--sage:#98A889;--note-bg:#3A322C;--border:#40362F;--shadow:0 2px 12px rgba(0,0,0,.3)}}
+:root{
+  --bg:#F8F4EC;--surface:#FFFDF8;--sand:#EFE7DA;--beige:#E3D8C6;--border:#E8E0D2;
+  --text:#3A3835;--muted:#8A857D;--sage:#8FA088;--sage-soft:#E3EADF;
+  --rose:#B98589;--rose-soft:#F2E1DE;--note-bg:#F3EDE2;--img-bg:#FFFFFF;
+  --shadow:0 2px 14px rgba(40,38,35,.06);--r:16px;
+  --serif:"Fraunces",Georgia,serif;--sans:"Nunito Sans",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#1E1D1B;--surface:#292826;--sand:#34322F;--beige:#403D39;--border:#3D3B37;
+  --text:#F1ECE4;--muted:#A8A298;--sage:#A7B7A0;--sage-soft:#2F3A2D;
+  --rose:#D7A9AC;--rose-soft:#3E2F30;--note-bg:#2F2D2A;
+}}
 *{box-sizing:border-box}
-html,body{margin:0}
-body{background:var(--bg);color:var(--text);font:400 16px/1.5 "Nunito Sans",system-ui,sans-serif;padding-bottom:calc(96px + env(safe-area-inset-bottom,0px));-webkit-text-size-adjust:100%}
-h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.2;margin:0}
-a{color:var(--accent)}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 var(--sans);padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+h1,h2,h3{font-family:var(--serif);font-weight:500;margin:0;line-height:1.2}
+a{color:var(--text)}
 button,textarea,input{font:inherit;color:inherit}
-:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
-header.top{padding:calc(20px + env(safe-area-inset-top,0px)) 0 16px;background:var(--bg)}
-header.top h1{font-size:2rem;letter-spacing:-.01em}
-header.top p{margin:2px 0 14px;color:var(--muted)}
-.progress{display:flex;align-items:center;gap:12px}
-.bar{flex:1;height:8px;background:var(--border);border-radius:99px;overflow:hidden}
-.bar>span{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .3s}
-.progress small{color:var(--muted);white-space:nowrap}
-.room{margin:28px 0 8px}
-.room h2{font-size:1.4rem;margin-bottom:12px}
-.grid{display:grid;grid-template-columns:1fr;gap:18px}
+:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.top{padding:28px 0 8px}
+.top h1{font-size:2rem}
+.sub{color:var(--muted);margin:2px 0 16px}
+.progress{height:4px;background:var(--sand);border-radius:4px;overflow:hidden}
+.progress span{display:block;height:100%;background:var(--sage);transition:width .3s}
+.plabel{font-size:.875rem;color:var(--muted);margin-top:8px}
+.room{margin:32px 0}
+.room>h2{font-size:1.5rem;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:1fr;gap:20px}
 @media (min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
-.tile{display:block;width:100%;text-align:left;border:1px solid var(--border);background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);padding:0;cursor:pointer;overflow:hidden}
-.tile .tb{padding:14px 16px 16px}
-.tile h3{font-size:1.2rem;margin-bottom:4px}
-.tile .meta{color:var(--muted);font-size:.92rem}
-.tile .st{display:flex;align-items:center;gap:8px;margin-top:10px;font-weight:700}
-.tile .st.done{color:var(--accent)}
-.tile .st.ordered{color:var(--sage)}
-.tile .st.open{color:var(--muted);font-weight:600}
-.mini{width:36px;height:36px;border-radius:8px;background:#fff;object-fit:contain;padding:2px;border:1px solid var(--border)}
-.imgbox{position:relative;aspect-ratio:4/3;background:#FFFFFF;padding:8px;border-radius:var(--r) var(--r) 0 0;overflow:hidden}
-.imgbox img{display:block;width:100%;height:100%;object-fit:contain}
-.imgfallback{display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--muted);font-size:.8rem;text-decoration:none}
-.badge{position:absolute;top:10px;padding:4px 10px;border-radius:99px;font-size:.8rem;font-weight:700;color:#fff;background:var(--sage)}
-.badge.rec{left:10px}.badge.ord{right:10px}
-.back{display:inline-flex;align-items:center;min-height:44px;color:var(--muted);text-decoration:none;font-weight:600}
-.cathead h2{font-size:1.8rem}
-.cathead .room-l{color:var(--muted)}
-.chip{display:inline-block;margin:10px 0 0;padding:6px 12px;border-radius:99px;background:var(--accent-soft);font-size:.9rem;font-weight:600}
-.recline{margin:10px 0 0;color:var(--sage);font-weight:600}
-.cards{margin-top:20px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);display:flex;flex-direction:column;transition:opacity .2s}
-.card.is-no{opacity:.55}
-.card.is-fav{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft),var(--shadow)}
-.cb{padding:16px;display:flex;flex-direction:column;gap:8px}
+.panel,.card,.tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow)}
+.tile{padding:12px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:10px;width:100%}
+.tile:hover{border-color:var(--beige)}
+.tile h3{font-size:1.25rem}
+.tmeta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:.9rem}
+.tcount{color:var(--muted)}
+.state{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--sand);font-size:.85rem;font-weight:600}
+.state.done{background:var(--rose-soft)}
+.state.ordered{background:var(--sage-soft)}
+.mini{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted)}
+.mini .imgbox{width:56px;flex:0 0 56px;padding:3px;border-radius:8px}
+.mini span{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.imgbox{aspect-ratio:4/3;background:var(--img-bg);padding:8px;border-radius:12px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.imgbox img{width:100%;height:100%;object-fit:contain;display:block}
+.imgbox.fb{background:var(--note-bg)}
+.imgfb{display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--muted);font-size:.8rem;text-decoration:none}
+.badge{position:absolute;top:10px;padding:3px 10px;border-radius:999px;font-size:.78rem;font-weight:700;background:var(--sage-soft);color:var(--text);border:1px solid var(--sage)}
+.badge.r{right:10px}.badge.l{left:10px}
+.back{background:none;border:0;padding:10px 0;min-height:44px;cursor:pointer;color:var(--muted);font-weight:600}
+.back:hover{color:var(--text)}
+.chead{margin:4px 0 20px}
+.chead h2{font-size:1.75rem}
+.chead .room-name{color:var(--muted);font-size:.95rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{padding:6px 12px;border-radius:999px;background:var(--rose-soft);border:1px solid var(--rose);font-size:.85rem}
+.emp{margin-top:12px;padding:10px 14px;border-radius:12px;background:var(--sage-soft);font-size:.95rem}
+.card{padding:12px;display:flex;flex-direction:column;gap:10px;transition:opacity .2s}
+.card.dim{opacity:.55}
+.card h3{font-family:var(--sans);font-weight:700;font-size:1.05rem;line-height:1.35}
 .clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.card h3{font-family:"Nunito Sans",system-ui,sans-serif;font-weight:700;font-size:1.05rem;line-height:1.35}
-.desc{color:var(--muted);font-size:.93rem;margin:0}
-.price{font-family:Fraunces,Georgia,serif;font-size:1.6rem;font-weight:600}
-.price.unk{font-size:1.1rem;color:var(--muted)}
-.dims{font-size:.95rem}
-.warn{color:var(--accent);font-size:.88rem;font-weight:600}
-.note{background:var(--note-bg);border-left:4px solid var(--sage);border-radius:8px;padding:10px 12px;font-size:.93rem}
-.note b{display:block;margin-bottom:2px}
-.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
-.seg button{min-height:44px;border:1.5px solid var(--border);background:transparent;border-radius:12px;font-weight:700;font-size:.9rem;cursor:pointer;padding:0 4px}
-.seg button.on-fav{background:var(--accent);border-color:var(--accent);color:#fff}
-.seg button.on-ok{background:var(--sage);border-color:var(--sage);color:#fff}
-.seg button.on-no{background:var(--muted);border-color:var(--muted);color:var(--surface)}
-.plink{display:inline-flex;align-items:center;min-height:44px;font-weight:700;text-decoration:none}
-.cm{position:relative}
-textarea{width:100%;min-height:44px;resize:none;overflow:hidden;border:1.5px solid var(--border);border-radius:12px;padding:10px 12px;background:var(--bg);line-height:1.4}
-textarea:focus{border-color:var(--accent);outline:none}
-.saved{position:absolute;right:10px;bottom:-18px;font-size:.78rem;color:var(--sage);opacity:0;transition:opacity .2s}
+.desc{color:var(--muted);font-size:.92rem;margin:0}
+.price{font-family:var(--serif);font-size:1.6rem;line-height:1.1}
+.price.unknown{font-family:var(--sans);font-size:1rem;color:var(--muted)}
+.dims{font-size:.92rem}
+.warn{color:var(--rose);font-size:.88rem}
+.note{background:var(--note-bg);border-left:4px solid var(--sage);border-radius:0 12px 12px 0;padding:10px 12px}
+.note b{display:block;font-size:.88rem}
+.note p{margin:4px 0 0;white-space:pre-line;overflow-wrap:anywhere}
+.note textarea{margin-top:6px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.btn,.seg button{background:var(--sand);border:1px solid var(--border);border-radius:12px;min-height:44px;padding:8px 12px;cursor:pointer;font-weight:600;font-size:.92rem}
+.btn:hover,.seg button:hover{background:var(--beige)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn[disabled]:hover{background:var(--sand)}
+.seg .ic{color:var(--muted);margin-right:4px}
+.seg button.on-fav{background:var(--rose-soft);border-color:var(--rose)}
+.seg button.on-fav .ic{color:var(--rose)}
+.seg button.on-ok{background:var(--sage-soft);border-color:var(--sage)}
+.seg button.on-ok .ic{color:var(--sage)}
+.seg button.on-no{background:var(--sand);border-color:var(--muted)}
+.plink{font-size:.92rem;font-weight:600;padding:6px 0;display:inline-block}
+.cwrap{position:relative}
+textarea.cm{width:100%;min-height:44px;resize:none;overflow:hidden;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:10px 12px;line-height:1.45}
+textarea.cm:focus{border-color:var(--beige)}
+textarea.cm::placeholder{color:var(--muted)}
+.saved{position:absolute;right:10px;bottom:-18px;font-size:.75rem;color:var(--sage);opacity:0;transition:opacity .2s}
 .saved.show{opacity:1}
-details{border-top:1px solid var(--border);margin-top:10px;padding-top:4px}
-summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:700;color:var(--muted)}
-.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
-.thumbs .imgbox{border-radius:10px;padding:4px}
-dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0 0 10px;font-size:.92rem}
+details{border-top:1px solid var(--border);padding-top:6px}
+summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600;color:var(--muted)}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
+.thumbs .imgbox{padding:4px;border-radius:8px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0 0 10px;font-size:.9rem}
 dt{color:var(--muted)}dd{margin:0}
-.pc{margin:0 0 6px;padding-left:0;list-style:none;font-size:.92rem}
-.pc li{padding-left:18px;position:relative;margin:2px 0}
-.pc li::before{position:absolute;left:0;font-weight:700}
-.pc.pro li::before{content:"+";color:var(--sage)}
-.pc.con li::before{content:"–";color:var(--accent)}
-.catcomment{margin:28px 0 8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px}
-.catcomment h3{font-size:1.1rem;margin-bottom:8px}
-.sendbar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--bg) 70%,transparent);display:flex;justify-content:center;z-index:20}
-.btn{min-height:48px;padding:0 22px;border-radius:99px;border:0;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;box-shadow:var(--shadow)}
-.btn.sec{background:var(--surface);color:var(--text);border:1.5px solid var(--border);box-shadow:none}
-.btn[disabled]{opacity:.45;cursor:not-allowed}
-.sendbar .btn{width:100%;max-width:420px;font-size:1.05rem}
-.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--text);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;z-index:40;max-width:90vw;text-align:center}
+.pc h4{margin:6px 0 2px;font-size:.85rem;color:var(--muted)}
+.pc ul{margin:0;padding-left:18px;font-size:.9rem}
+.ccat{margin:28px 0}
+.ccat h3{font-size:1.2rem;margin-bottom:8px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--border);box-shadow:var(--shadow);padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px));z-index:5}
+.bar .wrap{display:flex;align-items:center;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.bar .info{margin-right:auto;font-size:.88rem;color:var(--muted)}
+.primary{background:var(--text);color:var(--surface);border:1px solid var(--text);border-radius:12px;min-height:44px;padding:10px 20px;font-weight:700;cursor:pointer}
+.primary[disabled]{opacity:.5;cursor:not-allowed}
+.toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--text);color:var(--surface);padding:10px 16px;border-radius:12px;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .2s;max-width:calc(100% - 40px);z-index:6}
 .toast.show{opacity:1}
-.ov{position:fixed;inset:0;background:rgba(35,30,27,.5);display:flex;align-items:flex-end;justify-content:center;z-index:30;padding:16px}
-@media (min-width:720px){.ov{align-items:center}}
-.dlg{background:var(--surface);border-radius:var(--r);padding:20px;max-width:480px;width:100%;box-shadow:var(--shadow)}
-.dlg h3{font-size:1.25rem;margin-bottom:8px}
-.dlg .acts{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
-.shop{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin:18px 0;box-shadow:var(--shadow)}
-.shophead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px}
-.shophead h2{font-size:1.35rem}
+.panel{padding:16px;margin:20px 0}
+.panel>h2{font-size:1.35rem}
+.shophead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
 .sum{font-weight:700}
-.hint{color:var(--muted);font-size:.85rem;margin:6px 0 0}
-.row{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--border)}
-.row .imgbox{border-radius:10px;padding:4px}
-.row h3{font-family:"Nunito Sans",system-ui,sans-serif;font-size:1rem;font-weight:700}
-.rmeta{color:var(--muted);font-size:.88rem}
-.art{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:.9rem}
-.cp{min-height:36px;min-width:44px;border:1.5px solid var(--border);border-radius:10px;background:transparent;cursor:pointer;font-size:.82rem;font-weight:700}
-.rline{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin-top:6px}
-.chk{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:700;cursor:pointer}
-.chk input{width:22px;height:22px;accent-color:var(--sage)}
-.pcom{background:var(--accent-soft);border-radius:8px;padding:6px 10px;font-size:.9rem;margin-top:6px}
-.totals{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;margin:18px 0;font-size:1.05rem}
-.totals b{font-family:Fraunces,Georgia,serif;font-size:1.4rem}
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 24px}
-.open{margin:28px 0}
-.open h2{font-size:1.4rem;margin-bottom:10px}
-.oc{background:var(--surface);border:1px dashed var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:12px}
-.oc ul{margin:6px 0 0;padding-left:20px}
-.empty{color:var(--muted);padding:24px 0}
-.editfield{margin-top:6px}
-.editfield label{display:block;font-size:.85rem;font-weight:700;color:var(--muted);margin-bottom:4px}
+.row{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--border)}
+.row .imgbox{padding:4px;border-radius:10px}
+.row h3{font-family:var(--sans);font-weight:700;font-size:1rem}
+.rmeta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:.9rem;margin-top:4px}
+.copy{background:var(--sand);border:1px solid var(--border);border-radius:8px;min-height:32px;min-width:44px;padding:2px 10px;cursor:pointer;font-size:.85rem}
+.pcomment{margin-top:6px;font-size:.9rem;padding:6px 10px;background:var(--rose-soft);border-radius:10px}
+.check{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;font-weight:600;font-size:.9rem}
+.check input{width:22px;height:22px;accent-color:var(--sage)}
+.check.locked{color:var(--muted);cursor:default}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.hint{font-size:.82rem;color:var(--muted)}
+.total{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:1.05rem}
+.muted{color:var(--muted)}
+.foot{margin:40px 0 10px;font-size:.78rem;color:var(--muted);text-align:center}
+.open-item{padding:4px 0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap">
-<h1>CozyNest</h1>
-<p>Unsere Auswahl für die neue Wohnung</p>
-<div class="progress" id="progress"><div class="bar"><span id="barfill"></span></div><small id="progtext"></small></div>
-</div></header>
-<main class="wrap" id="app"></main>
-<div class="sendbar" id="sendbar" hidden><button class="btn" id="sendbtn" type="button">Auswahl senden</button></div>
+<main id="app" class="wrap"></main>
+<div class="bar" id="bar"><div class="wrap" id="barin"></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script type="application/json" id="shortlist-data">{"meta":{"version":"20260922-2","noteLabel":"Anmerkung aus der Recherche"},"kategorien":[{"id":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","vorgabe":null,"vergleichsdimensionen":["Breite","Höhe","Tiefe","Material","Preis"],"empfehlung":""},{"id":"k-wohnzimmer-raumtrenner","raum":"Wohnzimmer","kategorie":"Raumtrenner","vorgabe":null,"vergleichsdimensionen":["Breite","Höhe","Tiefe","Preis"],"empfehlung":""},{"id":"k-wohnzimmer-tv-board","raum":"Wohnzimmer","kategorie":"TV Board","vorgabe":null,"vergleichsdimensionen":["Breite","Höhe","Material","Preis"],"empfehlung":""}],"items":[{"id":"xxxl-001630021901","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.xxxlutz.de/p/landscape-regal-akazie-mangoholz-vollmassiv-schwarz-akaziefarben-001630021901","shop":"xxxl","artikelnr":"001630021901","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"Landscape REGAL Akazie, Mangoholz vollmassiv, Schwarz/Akaziefarben","shop":"XXXLutz","preis":349.0,"preis_status":"BELEGT","streichpreis":851.0,"artikelnr":"1630021901","artikelnr_status":"BELEGT","masse_b":120,"masse_t":38,"masse_h":201,"masse_status":"BELEGT","material":"Holz (Akazie/Mangoholz, vollmassiv), Metall","material_status":"BELEGT","farbe":"Schwarz, Akaziefarben","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PIjGzYeIGpR1iRo5ODvr5h_Q/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIgquaicMkcdTQNkvouDH2LA/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Stehregal aus massivem Akazienholz mit Metallfüßen, 7 offene Fächer, industrieller Look.","lieferzeit":"ab sofort lieferbar (Standardversand 59,99€)","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Massivholz Akazie, robuste Bauweise","Sofort lieferbar","Großzügige Höhe (201cm) für viel Stauraum"],"cons":["Mit 349€ teuerste Option der Kategorie","Sehr hoch (201cm) – Deckenhöhe prüfen","45kg Eigengewicht, aufwendiger Transport"]}},{"id":"xxxl-001749018632","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.xxxlutz.de/p/mid-you-regal-schwarz-eichefarben-001749018632","shop":"xxxl","artikelnr":"001749018632","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"MID.YOU REGAL Schwarz, Eichefarben","shop":"XXXLutz","preis":155.0,"preis_status":"BELEGT","streichpreis":254.0,"artikelnr":"1749018632","artikelnr_status":"BELEGT","masse_b":114,"masse_t":35,"masse_h":185,"masse_status":"BELEGT","material":"Metall (Stahl, pulverbeschichtet), Holzwerkstoff (MDF-Nachbildung)","material_status":"BELEGT","farbe":"Schwarz, Eichefarben","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PIhiIUh686OMMHa8OA9DuVZQ/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIwBYLstF4o_lpSTeOl0krXA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIKQBK0X2ScIeDPH_iV3RSTA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIaDhUm4CTwb4zF_NA0rCdtg/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Wandregal mit versetzten Ebenen, filigranes Stahlgestell, 6 Ablageflächen in Eichefarben.","lieferzeit":"ca. 6-7 Wochen","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Günstigster Preis der Metall/Holz-Regale (155€)","Filigranes Design, geringes Gewicht","6 Ablageflächen"],"cons":["Lange Lieferzeit (6-7 Wochen)","MDF-Nachbildung statt Massivholz","Nur 15kg Gesamtbelastbarkeit"]}},{"id":"xxxl-800001368666","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.xxxlutz.de/p/mirjan24-standregal-wrap-r105-800001368666","shop":"xxxl","artikelnr":"800001368666","prio":null,"notiz_researcher":"Finde ich an sich hübsch, auch wenn es vermutlich nicht mit den Türen passt.","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"MIRJAN24 STANDREGAL Wrap R105","shop":"XXXLutz (Marktplatz: MIRJAN24)","preis":223.0,"preis_status":"BELEGT","streichpreis":null,"artikelnr":"800001368666","artikelnr_status":"BELEGT","masse_b":105,"masse_t":40,"masse_h":167,"masse_status":"BELEGT","material":"Holzwerkstoff (Melamin), Metallfüße","material_status":"BELEGT","farbe":"Nussbaumfarben, Schwarz","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/NCF2y5LsiyE9Z6LR0Lb3JPBg/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCVPLE1tcqktmubeSFpX0W4Q/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCm3OVi1juFdgKHOHsYhxXgg/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCW4yAot7-KY5-r43qE1Ku3w/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Standregal im Industriestil mit 2 Drehtüren, griffloses Push-to-Open-System.","lieferzeit":null,"lieferzeit_status":"LUECKE","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Geschlossene Fächer durch 2 Türen","Kompakteste Tiefe (40cm)","2 Jahre Garantie"],"cons":["Lieferzeit unbekannt [LÜCKE]","Marktplatz-Anbieter, nicht XXXLutz direkt","Laut Notiz Design-Zweifel bzgl. Türen"]},"notiz_researcher_glatt":"Optisch ansprechend, aber die Türen passen eventuell nicht zum Rest der Einrichtung."},{"id":"xxxl-800001853928","catId":"k-wohnzimmer-raumtrenner","raum":"Wohnzimmer","kategorie":"Raumtrenner","url":"https://www.xxxlutz.de/p/vallsero-raumteiler-stufenregal-industriestil-5-ablagen-102x30x160cm-schwarz-800001853928","shop":"xxxl","artikelnr":"800001853928","prio":null,"notiz_researcher":"Eventuell zu klein als fancy Regal für unsere AZ Lösung. Vermutlich auch zu klein als Raumtrenner für das WZ oder was denkst du?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"Vallsero RAUMTEILER-STUFENREGAL, Industriestil, 5 Ablagen","shop":"XXXLutz (Marktplatz: HEXANTRAT)","preis":101.91,"preis_status":"BELEGT","streichpreis":103.36,"artikelnr":"800001853928","artikelnr_status":"BELEGT","masse_b":102,"masse_t":30,"masse_h":160,"masse_status":"BELEGT","material":"Holzwerkstoff (MDF, Antikholz-Finish)","material_status":"BELEGT","farbe":"Schwarz","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/NCfNEtli1-r7Y3C07e-b-HPA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCiqUk-_hMMAwz7Jy4oszvug/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCvf8tpJRJ-nIKiiuhue2rfQ/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCYyaBLvwSYy-dE0dZXz46Ww/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Gestuftes Bücherregal im Industriestil, 5 Ablagen, integrierte Kippsicherung.","lieferzeit":null,"lieferzeit_status":"LUECKE","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Günstigster Preis der Auswahl (101,91€)","Kompakte Maße für begrenzten Raum","Integrierte Kippsicherung"],"cons":["Laut Notiz evtl. zu klein für beide Einsatzzwecke","Lieferzeit unbekannt [LÜCKE]","Einzige Option in dieser Kategorie"]},"notiz_researcher_glatt":"Könnte sowohl als Regal fürs Arbeitszimmer als auch als Raumtrenner fürs Wohnzimmer zu klein sein."},{"id":"xxxl-800000984646","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.xxxlutz.de/p/riess-ambiente-buecherregal-slim-line-wildeiche-185cm-800000984646","shop":"xxxl","artikelnr":"800000984646","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"riess-ambiente BÜCHERREGAL SLIM LINE Wildeiche 185cm","shop":"XXXLutz (Marktplatz: riess-ambiente)","preis":159.95,"preis_status":"BELEGT","streichpreis":null,"artikelnr":"800000984646","artikelnr_status":"BELEGT","masse_b":114,"masse_t":35,"masse_h":185,"masse_status":"BELEGT","material":"Holz, Metall","material_status":"BELEGT","farbe":"Braun, Schwarz","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/NCcw4H-ErjNlUU0TthC7oniw/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCeOsdHihNEt6JOyhTpk-Tbg/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NClu3HXIc9Bi7t7ng0CA-j7w/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NC1nmwcDwiXzYaLdSpwtTxng/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Standregal mit asymmetrisch angeordneten Böden in Wildeiche-Optik, schwarzes Metallgestell.","lieferzeit":null,"lieferzeit_status":"LUECKE","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Zweitgünstigste Option (159,95€)","Asymmetrisches Design","Kostenloser Versand"],"cons":["Lieferzeit unbekannt [LÜCKE]","Marktplatz-Anbieter","Kein Massivholz-Nachweis"]}},{"id":"xxxl-002479000303","catId":"k-wohnzimmer-tv-board","raum":"Wohnzimmer","kategorie":"TV Board","url":"https://www.xxxlutz.de/p/milino-lowboard-lino-181-50-40-cm-typenauswahl-beimoebel-erhaeltlich-stehend-002479000303","shop":"xxxl","artikelnr":"002479000303","prio":null,"notiz_researcher":"Wie gesagt schwierig in Vorstellung und Farbe ohne das Sofa live im WZ zu haben. Aber Interessant für das backlog?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"Milino LOWBOARD LINO 181/50/40 cm","shop":"XXXLutz","preis":119.0,"preis_status":"BELEGT","streichpreis":448.0,"artikelnr":"2479000303","artikelnr_status":"BELEGT","masse_b":181,"masse_t":40,"masse_h":50,"masse_status":"BELEGT","material":"Metall (Gusseisen), Holzwerkstoff (MDF-Nachbildung)","material_status":"BELEGT","farbe":"Schwarz, Eichefarben","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PIIAMWufAf8bGPml0jobl1WQ/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIa7DYz6ATzcsWUuEpxzOlsQ/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIO2yPrm2kDjcFrZ73zfVa3g/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIXOxg9k9WQxhy8eX7O5EpPA/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Lowboard mit 4 grifflosen Drehtüren, Soft-Close, Gusseisenfüße, 100 kg belastbar.","lieferzeit":"ca. 3 Werktage (Postversand 19,99€)","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Günstigster Preis der TV-Boards (119€)","Kurze Lieferzeit (~3 Werktage)","Hohe Belastbarkeit (100kg)"],"cons":["Farbwirkung ohne Sofa laut Notiz schwer einschätzbar","Aufwendige Montage","Grifflose Türen ggf. gewöhnungsbedürftig"]},"notiz_researcher_glatt":"Wirkung und Farbe schwer einschätzbar ohne das Sofa live im Wohnzimmer zu sehen – als Backlog-Option interessant."},{"id":"xxxl-002778006402","catId":"k-wohnzimmer-tv-board","raum":"Wohnzimmer","kategorie":"TV Board","url":"https://www.xxxlutz.de/p/p-b-lowboard-helsinki-180-40-33-cm-stehend-002778006402","shop":"xxxl","artikelnr":"002778006402","prio":null,"notiz_researcher":"Wie gesagt schwierig in Vorstellung und Farbe ohne das Sofa live im WZ zu haben. Aber Interessant für das backlog?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"P & B LOWBOARD Helsinki 180/40/33 cm","shop":"XXXLutz","preis":174.0,"preis_status":"BELEGT","streichpreis":null,"artikelnr":"2778006402","artikelnr_status":"BELEGT","masse_b":180,"masse_t":33,"masse_h":40,"masse_status":"BELEGT","material":"Holzwerkstoff (Flachpressplatte, FSC)","material_status":"BELEGT","farbe":"Beige","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PIxL1p-xPuN_tSknKuWkQFFA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PI83_hVTQQUtbryRtV9rK-3w/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIU-duwadL23hFWwMTSlNcjw/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIXvXPsDADxJkgOaQgVT6iXg/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Lowboard mit 3 Klappen, Stangengriff, FSC-zertifiziertes Holzwerkstoff, online only.","lieferzeit":"ca. 1-2 Wochen (Postversand gratis)","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock (online only)","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Geringste Tiefe (33cm), platzsparend","FSC-zertifiziertes Material","Kurze Lieferzeit (1-2 Wochen)"],"cons":["Farbwirkung ohne Sofa laut Notiz schwer einschätzbar","Nur online ausgestellt","Farbe Beige ggf. weniger vielseitig"]},"notiz_researcher_glatt":"Wirkung und Farbe schwer einschätzbar ohne das Sofa live im Wohnzimmer zu sehen – als Backlog-Option interessant."},{"id":"xxxl-001849025404","catId":"k-wohnzimmer-tv-board","raum":"Wohnzimmer","kategorie":"TV Board","url":"https://www.xxxlutz.de/p/livetastic-lowboard-185-64-41-cm-1-schublade_n_-stehend-001849025404","shop":"xxxl","artikelnr":"001849025404","prio":null,"notiz_researcher":"Wie gesagt schwierig in Vorstellung und Farbe ohne das Sofa live im WZ zu haben. Aber Interessant für das backlog?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"Livetastic LOWBOARD 185/64/41 cm, 1 Schublade","shop":"XXXLutz","preis":289.0,"preis_status":"BELEGT","streichpreis":814.0,"artikelnr":"1849025404","artikelnr_status":"BELEGT","masse_b":185,"masse_t":41,"masse_h":64,"masse_status":"BELEGT","material":"Holzwerkstoff (Flachpressplatte/MDF), Aluminiumgriff","material_status":"BELEGT","farbe":"Kaschmir","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PI8DHKG3bDO0qIwxLRUKZSFw/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PI3h1ELlL0ns_QLAsGF_tcAA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIll0bCuLnhc6WRzPEmVmqOA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIfkaGmqozUSlCPE2AsKMjDA/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Lowboard mit 1 Tür, 1 Schublade, 2 verstellbaren Einlegeböden, FSC-Mix-Holzwerkstoff.","lieferzeit":"ca. 3 Werktage (Postversand gratis)","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock (online only)","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Größte Höhe (64cm), mehr Stauraum","Schublade + Tür kombiniert","Kurze Lieferzeit (~3 Werktage)"],"cons":["Mit 289€ teuerste TV-Board-Option","Farbwirkung ohne Sofa laut Notiz schwer einschätzbar","Nur online ausgestellt"]},"notiz_researcher_glatt":"Wirkung und Farbe schwer einschätzbar ohne das Sofa live im Wohnzimmer zu sehen – als Backlog-Option interessant."}]}</script>
+<script type="application/json" id="shortlist-data">{"meta":{"version":"20260922-3","noteLabel":"Anmerkung aus der Recherche"},"kategorien":[{"id":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","vorgabe":null,"vergleichsdimensionen":["Breite","Höhe","Tiefe","Material","Preis"],"empfehlung":""},{"id":"k-wohnzimmer-raumtrenner","raum":"Wohnzimmer","kategorie":"Raumtrenner","vorgabe":null,"vergleichsdimensionen":["Breite","Höhe","Tiefe","Preis"],"empfehlung":""},{"id":"k-wohnzimmer-tv-board","raum":"Wohnzimmer","kategorie":"TV Board","vorgabe":null,"vergleichsdimensionen":["Breite","Höhe","Material","Preis"],"empfehlung":""}],"items":[{"id":"xxxl-001630021901","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.xxxlutz.de/p/landscape-regal-akazie-mangoholz-vollmassiv-schwarz-akaziefarben-001630021901","shop":"xxxl","artikelnr":"001630021901","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"Landscape REGAL Akazie, Mangoholz vollmassiv, Schwarz/Akaziefarben","shop":"XXXLutz","preis":349.0,"preis_status":"BELEGT","artikelnr":"1630021901","artikelnr_status":"BELEGT","masse_b":120,"masse_t":38,"masse_h":201,"masse_status":"BELEGT","material":"Holz (Akazie/Mangoholz, vollmassiv), Metall","material_status":"BELEGT","farbe":"Schwarz, Akaziefarben","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PIjGzYeIGpR1iRo5ODvr5h_Q/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIgquaicMkcdTQNkvouDH2LA/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Stehregal aus massivem Akazienholz mit Metallfüßen, 7 offene Fächer, industrieller Look.","lieferzeit":"ab sofort lieferbar (Standardversand 59,99€)","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Massivholz Akazie, robuste Bauweise","Sofort lieferbar","Großzügige Höhe (201cm) für viel Stauraum"],"cons":["Mit 349€ teuerste Option der Kategorie","Sehr hoch (201cm) – Deckenhöhe prüfen","45kg Eigengewicht, aufwendiger Transport"]},"status":"offen","bestellt_am":""},{"id":"xxxl-001749018632","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.xxxlutz.de/p/mid-you-regal-schwarz-eichefarben-001749018632","shop":"xxxl","artikelnr":"001749018632","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"MID.YOU REGAL Schwarz, Eichefarben","shop":"XXXLutz","preis":155.0,"preis_status":"BELEGT","artikelnr":"1749018632","artikelnr_status":"BELEGT","masse_b":114,"masse_t":35,"masse_h":185,"masse_status":"BELEGT","material":"Metall (Stahl, pulverbeschichtet), Holzwerkstoff (MDF-Nachbildung)","material_status":"BELEGT","farbe":"Schwarz, Eichefarben","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PIhiIUh686OMMHa8OA9DuVZQ/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIwBYLstF4o_lpSTeOl0krXA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIKQBK0X2ScIeDPH_iV3RSTA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIaDhUm4CTwb4zF_NA0rCdtg/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Wandregal mit versetzten Ebenen, filigranes Stahlgestell, 6 Ablageflächen in Eichefarben.","lieferzeit":"ca. 6-7 Wochen","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Günstigster Preis der Metall/Holz-Regale (155€)","Filigranes Design, geringes Gewicht","6 Ablageflächen"],"cons":["Lange Lieferzeit (6-7 Wochen)","MDF-Nachbildung statt Massivholz","Nur 15kg Gesamtbelastbarkeit"]},"status":"offen","bestellt_am":""},{"id":"xxxl-800001368666","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.xxxlutz.de/p/mirjan24-standregal-wrap-r105-800001368666","shop":"xxxl","artikelnr":"800001368666","prio":null,"notiz_researcher":"Finde ich an sich hübsch, auch wenn es vermutlich nicht mit den Türen passt.","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"MIRJAN24 STANDREGAL Wrap R105","shop":"XXXLutz (Marktplatz: MIRJAN24)","preis":223.0,"preis_status":"BELEGT","artikelnr":"800001368666","artikelnr_status":"BELEGT","masse_b":105,"masse_t":40,"masse_h":167,"masse_status":"BELEGT","material":"Holzwerkstoff (Melamin), Metallfüße","material_status":"BELEGT","farbe":"Nussbaumfarben, Schwarz","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/NCF2y5LsiyE9Z6LR0Lb3JPBg/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCVPLE1tcqktmubeSFpX0W4Q/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCm3OVi1juFdgKHOHsYhxXgg/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCW4yAot7-KY5-r43qE1Ku3w/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Standregal im Industriestil mit 2 Drehtüren, griffloses Push-to-Open-System.","lieferzeit":null,"lieferzeit_status":"LUECKE","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Geschlossene Fächer durch 2 Türen","Kompakteste Tiefe (40cm)","2 Jahre Garantie"],"cons":["Lieferzeit unbekannt [LÜCKE]","Marktplatz-Anbieter, nicht XXXLutz direkt","Laut Notiz Design-Zweifel bzgl. Türen"]},"status":"offen","bestellt_am":""},{"id":"xxxl-800001853928","catId":"k-wohnzimmer-raumtrenner","raum":"Wohnzimmer","kategorie":"Raumtrenner","url":"https://www.xxxlutz.de/p/vallsero-raumteiler-stufenregal-industriestil-5-ablagen-102x30x160cm-schwarz-800001853928","shop":"xxxl","artikelnr":"800001853928","prio":null,"notiz_researcher":"Eventuell zu klein als fancy Regal für unsere AZ Lösung. Vermutlich auch zu klein als Raumtrenner für das WZ oder was denkst du?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"Vallsero RAUMTEILER-STUFENREGAL, Industriestil, 5 Ablagen","shop":"XXXLutz (Marktplatz: HEXANTRAT)","preis":101.91,"preis_status":"BELEGT","artikelnr":"800001853928","artikelnr_status":"BELEGT","masse_b":102,"masse_t":30,"masse_h":160,"masse_status":"BELEGT","material":"Holzwerkstoff (MDF, Antikholz-Finish)","material_status":"BELEGT","farbe":"Schwarz","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/NCfNEtli1-r7Y3C07e-b-HPA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCiqUk-_hMMAwz7Jy4oszvug/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCvf8tpJRJ-nIKiiuhue2rfQ/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCYyaBLvwSYy-dE0dZXz46Ww/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Gestuftes Bücherregal im Industriestil, 5 Ablagen, integrierte Kippsicherung.","lieferzeit":null,"lieferzeit_status":"LUECKE","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Günstigster Preis der Auswahl (101,91€)","Kompakte Maße für begrenzten Raum","Integrierte Kippsicherung"],"cons":["Laut Notiz evtl. zu klein für beide Einsatzzwecke","Lieferzeit unbekannt [LÜCKE]","Einzige Option in dieser Kategorie"]},"status":"offen","bestellt_am":""},{"id":"xxxl-800000984646","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.xxxlutz.de/p/riess-ambiente-buecherregal-slim-line-wildeiche-185cm-800000984646","shop":"xxxl","artikelnr":"800000984646","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"riess-ambiente BÜCHERREGAL SLIM LINE Wildeiche 185cm","shop":"XXXLutz (Marktplatz: riess-ambiente)","preis":159.95,"preis_status":"BELEGT","artikelnr":"800000984646","artikelnr_status":"BELEGT","masse_b":114,"masse_t":35,"masse_h":185,"masse_status":"BELEGT","material":"Holz, Metall","material_status":"BELEGT","farbe":"Braun, Schwarz","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/NCcw4H-ErjNlUU0TthC7oniw/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCeOsdHihNEt6JOyhTpk-Tbg/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NClu3HXIc9Bi7t7ng0CA-j7w/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NC1nmwcDwiXzYaLdSpwtTxng/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Standregal mit asymmetrisch angeordneten Böden in Wildeiche-Optik, schwarzes Metallgestell.","lieferzeit":null,"lieferzeit_status":"LUECKE","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Zweitgünstigste Option (159,95€)","Asymmetrisches Design","Kostenloser Versand"],"cons":["Lieferzeit unbekannt [LÜCKE]","Marktplatz-Anbieter","Kein Massivholz-Nachweis"]},"status":"offen","bestellt_am":""},{"id":"xxxl-002479000303","catId":"k-wohnzimmer-tv-board","raum":"Wohnzimmer","kategorie":"TV Board","url":"https://www.xxxlutz.de/p/milino-lowboard-lino-181-50-40-cm-typenauswahl-beimoebel-erhaeltlich-stehend-002479000303","shop":"xxxl","artikelnr":"002479000303","prio":null,"notiz_researcher":"Wie gesagt schwierig in Vorstellung und Farbe ohne das Sofa live im WZ zu haben. Aber Interessant für das backlog?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"Milino LOWBOARD LINO 181/50/40 cm","shop":"XXXLutz","preis":119.0,"preis_status":"BELEGT","artikelnr":"2479000303","artikelnr_status":"BELEGT","masse_b":181,"masse_t":40,"masse_h":50,"masse_status":"BELEGT","material":"Metall (Gusseisen), Holzwerkstoff (MDF-Nachbildung)","material_status":"BELEGT","farbe":"Schwarz, Eichefarben","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PIIAMWufAf8bGPml0jobl1WQ/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIa7DYz6ATzcsWUuEpxzOlsQ/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIO2yPrm2kDjcFrZ73zfVa3g/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIXOxg9k9WQxhy8eX7O5EpPA/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Lowboard mit 4 grifflosen Drehtüren, Soft-Close, Gusseisenfüße, 100 kg belastbar.","lieferzeit":"ca. 3 Werktage (Postversand 19,99€)","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Günstigster Preis der TV-Boards (119€)","Kurze Lieferzeit (~3 Werktage)","Hohe Belastbarkeit (100kg)"],"cons":["Farbwirkung ohne Sofa laut Notiz schwer einschätzbar","Aufwendige Montage","Grifflose Türen ggf. gewöhnungsbedürftig"]},"status":"offen","bestellt_am":""},{"id":"xxxl-002778006402","catId":"k-wohnzimmer-tv-board","raum":"Wohnzimmer","kategorie":"TV Board","url":"https://www.xxxlutz.de/p/p-b-lowboard-helsinki-180-40-33-cm-stehend-002778006402","shop":"xxxl","artikelnr":"002778006402","prio":null,"notiz_researcher":"Wie gesagt schwierig in Vorstellung und Farbe ohne das Sofa live im WZ zu haben. Aber Interessant für das backlog?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"P & B LOWBOARD Helsinki 180/40/33 cm","shop":"XXXLutz","preis":174.0,"preis_status":"BELEGT","artikelnr":"2778006402","artikelnr_status":"BELEGT","masse_b":180,"masse_t":33,"masse_h":40,"masse_status":"BELEGT","material":"Holzwerkstoff (Flachpressplatte, FSC)","material_status":"BELEGT","farbe":"Beige","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PIxL1p-xPuN_tSknKuWkQFFA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PI83_hVTQQUtbryRtV9rK-3w/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIU-duwadL23hFWwMTSlNcjw/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIXvXPsDADxJkgOaQgVT6iXg/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Lowboard mit 3 Klappen, Stangengriff, FSC-zertifiziertes Holzwerkstoff, online only.","lieferzeit":"ca. 1-2 Wochen (Postversand gratis)","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock (online only)","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Geringste Tiefe (33cm), platzsparend","FSC-zertifiziertes Material","Kurze Lieferzeit (1-2 Wochen)"],"cons":["Farbwirkung ohne Sofa laut Notiz schwer einschätzbar","Nur online ausgestellt","Farbe Beige ggf. weniger vielseitig"]},"status":"offen","bestellt_am":""},{"id":"xxxl-001849025404","catId":"k-wohnzimmer-tv-board","raum":"Wohnzimmer","kategorie":"TV Board","url":"https://www.xxxlutz.de/p/livetastic-lowboard-185-64-41-cm-1-schublade_n_-stehend-001849025404","shop":"xxxl","artikelnr":"001849025404","prio":null,"notiz_researcher":"Wie gesagt schwierig in Vorstellung und Farbe ohne das Sofa live im WZ zu haben. Aber Interessant für das backlog?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"Livetastic LOWBOARD 185/64/41 cm, 1 Schublade","shop":"XXXLutz","preis":289.0,"preis_status":"BELEGT","artikelnr":"1849025404","artikelnr_status":"BELEGT","masse_b":185,"masse_t":41,"masse_h":64,"masse_status":"BELEGT","material":"Holzwerkstoff (Flachpressplatte/MDF), Aluminiumgriff","material_status":"BELEGT","farbe":"Kaschmir","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PI8DHKG3bDO0qIwxLRUKZSFw/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PI3h1ELlL0ns_QLAsGF_tcAA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIll0bCuLnhc6WRzPEmVmqOA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIfkaGmqozUSlCPE2AsKMjDA/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Lowboard mit 1 Tür, 1 Schublade, 2 verstellbaren Einlegeböden, FSC-Mix-Holzwerkstoff.","lieferzeit":"ca. 3 Werktage (Postversand gratis)","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock (online only)","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Größte Höhe (64cm), mehr Stauraum","Schublade + Tür kombiniert","Kurze Lieferzeit (~3 Werktage)"],"cons":["Mit 289€ teuerste TV-Board-Option","Farbwirkung ohne Sofa laut Notiz schwer einschätzbar","Nur online ausgestellt"]},"status":"offen","bestellt_am":""}]}</script>
 <script>
-(function () {
-  'use strict';
+(function(){
+'use strict';
+var DATA=JSON.parse(document.getElementById('shortlist-data').textContent);
+var META=DATA.meta||{};
+var NOTE_LABEL=META.noteLabel||'Anmerkung aus der Recherche';
+var CATS=DATA.kategorien||[];
+var ITEMS=(DATA.items||[]).filter(function(i){return !i.archived&&i.status!=='archived';});
+var ITEM=Object.create(null);ITEMS.forEach(function(i){ITEM[i.id]=i;});
+var BYCAT=Object.create(null);ITEMS.forEach(function(i){(BYCAT[i.catId]=BYCAT[i.catId]||[]).push(i);});
+var ACTIVE=CATS.filter(function(c){return BYCAT[c.id]&&BYCAT[c.id].length;});
+var CAT=Object.create(null);ACTIVE.forEach(function(c){CAT[c.id]=c;});
+var KEY='shortlist-state',OKEY='shortlist-ordered',EKEY='shortlist-edits';
 
-  var DATA = JSON.parse(document.getElementById('shortlist-data').textContent);
-  var META = DATA.meta || {};
-  var NOTE_LABEL = META.noteLabel || 'Anmerkung aus der Recherche';
-  var LS_STATE = 'shortlist-state', LS_ORDERED = 'shortlist-ordered', LS_EDITS = 'shortlist-edits';
+/*LOGIC-START*/
+function emptySel(){return {fav:null,ok:[],no:[],c:{},cc:''};}
+function normSel(s){s=s||{};return {
+  fav:typeof s.fav==='string'?s.fav:null,
+  ok:Array.isArray(s.ok)?s.ok.filter(function(x){return typeof x==='string';}):[],
+  no:Array.isArray(s.no)?s.no.filter(function(x){return typeof x==='string';}):[],
+  c:(s.c&&typeof s.c==='object')?Object.assign({},s.c):{},
+  cc:typeof s.cc==='string'?s.cc:''};}
+function statusOf(sel,id){if(sel.fav===id)return 'fav';if(sel.ok.indexOf(id)>-1)return 'ok';if(sel.no.indexOf(id)>-1)return 'no';return null;}
+function applyStatus(sel,id,st){
+  var cur=statusOf(sel,id),s=normSel(sel);
+  if(s.fav===id)s.fav=null;
+  s.ok=s.ok.filter(function(x){return x!==id;});s.no=s.no.filter(function(x){return x!==id;});
+  if(cur===st)return s;
+  if(st==='fav'){if(s.fav){if(s.ok.indexOf(s.fav)<0)s.ok.push(s.fav);}s.fav=id;}
+  else if(st==='ok')s.ok.push(id);
+  else if(st==='no')s.no.push(id);
+  return s;}
+function cleanState(st,itemCat){
+  st=(st&&typeof st==='object')?st:{};
+  var out={v:2,ts:Number(st.ts)||0,sel:{}},src=(st.sel&&typeof st.sel==='object')?st.sel:{};
+  Object.keys(src).forEach(function(cid){
+    var s=normSel(src[cid]);var valid=function(id){return itemCat[id]===cid;};
+    var r=emptySel();r.cc=s.cc;
+    if(s.fav&&valid(s.fav))r.fav=s.fav;
+    s.ok.forEach(function(id){if(valid(id)&&id!==r.fav&&r.ok.indexOf(id)<0)r.ok.push(id);});
+    s.no.forEach(function(id){if(valid(id)&&id!==r.fav&&r.ok.indexOf(id)<0&&r.no.indexOf(id)<0)r.no.push(id);});
+    Object.keys(s.c).forEach(function(id){if(valid(id)&&typeof s.c[id]==='string'&&s.c[id])r.c[id]=s.c[id];});
+    if(r.fav||r.ok.length||r.no.length||r.cc||Object.keys(r.c).length)out.sel[cid]=r;});
+  return out;}
+function parseVorgabe(str){var r={};if(!str)return r;
+  String(str).split(/[,;]/).forEach(function(p){var m=p.trim().match(/^(B|T|H|EUR|€)\s*(<=|<|≤)\s*([\d.,]+)/i);
+    if(m){var k=m[1].toUpperCase();if(k==='€')k='EUR';r[k]=parseFloat(m[3].replace(',','.'));}});return r;}
+function num(v){if(v===null||v===undefined||v==='')return null;var n=typeof v==='number'?v:parseFloat(String(v).replace(/[^\d.,-]/g,'').replace(',','.'));return isFinite(n)?n:null;}
+function dimsOf(it){var m=it.masse_manuell;
+  if(m){var p=String(m).toLowerCase().split(/\s*[x×]\s*/).map(num);if(p.length===3)return {b:p[0],t:p[1],h:p[2]};}
+  var e=it.enrich||{};return {b:num(e.masse_b),t:num(e.masse_t),h:num(e.masse_h)};}
+function priceOf(it){var m=num(it.preis_manuell);if(m!==null)return m;return num((it.enrich||{}).preis);}
+function violations(it,v){var d=dimsOf(it),p=priceOf(it),out=[];
+  if(v.B!=null&&d.b!=null&&d.b>v.B)out.push('breiter als Vorgabe');
+  if(v.T!=null&&d.t!=null&&d.t>v.T)out.push('tiefer als Vorgabe');
+  if(v.H!=null&&d.h!=null&&d.h>v.H)out.push('höher als Vorgabe');
+  if(v.EUR!=null&&p!=null&&p>v.EUR)out.push('über Budget');return out;}
+function b64u(bytes){var s='';for(var i=0;i<bytes.length;i+=8192)s+=String.fromCharCode.apply(null,bytes.subarray(i,i+8192));
+  return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+function fromB64u(str){str=String(str).replace(/-/g,'+').replace(/_/g,'/');while(str.length%4)str+='=';
+  var bin=atob(str),out=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)out[i]=bin.charCodeAt(i);return out;}
+function pipeBytes(bytes,ts){return new Response(new Response(bytes).body.pipeThrough(ts)).arrayBuffer().then(function(b){return new Uint8Array(b);});}
+function encodeState(obj){return pipeBytes(new TextEncoder().encode(JSON.stringify(obj)),new CompressionStream('deflate-raw')).then(b64u);}
+function decodeState(str){return pipeBytes(fromB64u(str),new DecompressionStream('deflate-raw')).then(function(b){return JSON.parse(new TextDecoder().decode(b));});}
+/*LOGIC-END*/
 
-  var CAT_BY_ID = {}, ITEMS_BY_CAT = {}, INFO = {};
-  var CATS = (DATA.kategorien || []).filter(function (k) { return !k.archived; });
-  CATS.forEach(function (k) { CAT_BY_ID[k.id] = k; ITEMS_BY_CAT[k.id] = []; });
-  (DATA.items || []).forEach(function (it, idx) {
-    if (it.archived === true || it.status === 'archived') return;
-    if (!ITEMS_BY_CAT[it.catId]) return;
-    ITEMS_BY_CAT[it.catId].push(it);
-    INFO[it.id] = info(it, idx);
-  });
-  CATS = CATS.filter(function (k) { return ITEMS_BY_CAT[k.id].length > 0; });
+var ITEMCAT=Object.create(null);ITEMS.forEach(function(i){if(CAT[i.catId])ITEMCAT[i.id]=i.catId;});
+function loadJSON(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function saveJSON(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+var state=cleanState(loadJSON(KEY,null),ITEMCAT);
+var edits=loadJSON(EKEY,null)||{};edits.notes=edits.notes||{};edits.emp=edits.emp||{};
+var H=new URLSearchParams(location.hash.slice(1));
+var MODE=H.get('mode')==='order'?'order':(H.get('mode')==='edit'?'edit':'decide');
+var orderState=null,view={cat:null},openDetails=Object.create(null);
+var $app=document.getElementById('app'),$bar=document.getElementById('barin'),$toast=document.getElementById('toast');
 
-  // ---------- helpers ----------
-  function el(tag, props, kids) {
-    var n = document.createElement(tag);
-    if (props) {
-      Object.keys(props).forEach(function (k) {
-        var v = props[k];
-        if (v === null || v === undefined || v === false) return;
-        if (k === 'text') n.textContent = String(v);
-        else if (k === 'cls') n.className = v;
-        else if (k === 'on') Object.keys(v).forEach(function (e) { n.addEventListener(e, v[e]); });
-        else n.setAttribute(k, v === true ? '' : String(v));
-      });
-    }
-    (kids || []).forEach(function (c) {
-      if (c === null || c === undefined || c === false) return;
-      n.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
-    });
-    return n;
-  }
-  function num(v) { if (v === null || v === undefined || v === '') return null; var n = parseFloat(String(v).replace(',', '.')); return isNaN(n) ? null : n; }
-  function safeUrl(u) { return /^https?:\/\//i.test(String(u || '')) ? String(u) : '#'; }
-  function clean(t) { return String(t || '').replace(/\s*\[(LÜCKE|LUECKE|UNSICHER|MANUELL|BELEGT|VORGABE)[^\]]*\]/g, '').trim(); }
-  var EUR = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
-  function fmtPrice(p) { return p === null ? 'Preis im Shop' : EUR.format(p); }
-  function fmtDate(d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ''); return m ? m[3] + '.' + m[2] + '.' : ''; }
+function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=String(text);return e;}
+function attr(e,o){Object.keys(o).forEach(function(k){e.setAttribute(k,o[k]);});return e;}
+function extLink(href,text,cls){var a=el('a',cls,text);if(/^https?:\/\//i.test(href||''))a.setAttribute('href',href);attr(a,{target:'_blank',rel:'noopener'});return a;}
+var toastT;function toast(msg){$toast.textContent=msg;$toast.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){$toast.classList.remove('show');},2800);}
+function copyText(t){if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t).then(function(){return true;},function(){return legacyCopy(t);});return Promise.resolve(legacyCopy(t));}
+function legacyCopy(t){var ta=el('textarea');ta.value=t;attr(ta,{readonly:''});ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand('copy');}catch(e){}ta.remove();return ok;}
+var EUR=new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR'});
+function fmtPrice(p){return p==null?null:EUR.format(p);}
+function shopName(it){return String((it.enrich&&it.enrich.shop)||it.shop||'Shop').split(' (')[0];}
+function titleOf(it){return (it.enrich&&it.enrich.titel)||'Produkt';}
+function artnr(it){return String((it.enrich&&it.enrich.artikelnr)||it.artikelnr||'');}
+function images(it){var l=[];if(it.bild_url_manuell)l.push(it.bild_url_manuell);((it.enrich&&it.enrich.bilder)||[]).forEach(function(u){if(l.indexOf(u)<0)l.push(u);});
+  return l.filter(function(u){return /^https?:\/\//i.test(u);});}
+function isOrdered(it){return it.status==='bestellt';}
+function ddmm(d){var m=String(d||'').match(/^(\d{4})-(\d{2})-(\d{2})/);return m?m[3]+'.'+m[2]+'.':'';}
+function today(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function clean(t){return String(t).replace(/\s*\[[^\]]*\]/g,'').trim();}
+function noteOf(it){if(MODE==='edit'&&Object.prototype.hasOwnProperty.call(edits.notes,it.id))return edits.notes[it.id];return it.notiz_researcher||'';}
+function empOf(c){if(MODE==='edit'&&Object.prototype.hasOwnProperty.call(edits.emp,c.id))return edits.emp[c.id];return c.empfehlung||'';}
+function getSel(cid){return normSel(state.sel[cid]);}
+function setSel(cid,s){state.sel[cid]=s;state.ts=Date.now();saveJSON(KEY,state);}
+function prioN(it){var p=num(it.prio);return p==null?9:p;}
+function sortedItems(c){var l=BYCAT[c.id].map(function(it,i){return {it:it,i:i};});
+  l.sort(function(a,b){return prioN(a.it)-prioN(b.it)||a.i-b.i;});return l.map(function(x){return x.it;});}
+function recItem(c){var l=sortedItems(c);return prioN(l[0])===1?l[0]:null;}
 
-  function info(it, idx) {
-    var e = it.enrich || {};
-    var price = num(it.preis_manuell);
-    if (price === null) price = typeof e.preis === 'number' ? e.preis : null;
-    var dims = { b: num(e.masse_b), t: num(e.masse_t), h: num(e.masse_h) };
-    if (it.masse_manuell) {
-      var m = String(it.masse_manuell).toLowerCase().replace(/\s/g, '').split(/[x×]/);
-      if (m.length === 3) dims = { b: num(m[0]), t: num(m[1]), h: num(m[2]) };
-    }
-    var imgs = [];
-    if (it.bild_url_manuell) imgs.push(String(it.bild_url_manuell));
-    (e.bilder || []).forEach(function (u) { if (imgs.indexOf(u) < 0) imgs.push(u); });
-    imgs = imgs.filter(function (u) { return /^https?:\/\//i.test(u); }).slice(0, 4);
-    var shopFull = e.shop || it.shop || '';
-    return {
-      id: it.id, idx: idx, cat: it.catId,
-      title: e.titel || it.titel || it.url || it.id,
-      desc: e.beschreibung || '',
-      price: price, dims: dims, imgs: imgs,
-      shopKey: it.shop || shopFull,
-      shopLabel: String(shopFull).split(' (')[0] || String(it.shop || ''),
-      shopFull: shopFull,
-      artnr: e.artikelnr || it.artikelnr || '',
-      note: it.notiz_researcher_glatt || it.notiz_researcher || '',
-      material: e.material || '', farbe: e.farbe || '', lieferzeit: e.lieferzeit || '',
-      pros: ((it.curate || {}).pros || []).map(clean).filter(Boolean),
-      cons: ((it.curate || {}).cons || []).map(clean).filter(Boolean),
-      url: it.url, prio: num(it.prio),
-      ordered: it.status === 'bestellt', orderedAt: it.bestellt_am || ''
-    };
-  }
+function mountImage(box,urls,it,linked,alt){
+  function fallback(){box.classList.add('fb');var f=linked?extLink(it.url,shopName(it),'imgfb'):el('span','imgfb',shopName(it));box.appendChild(f);}
+  if(!urls.length){fallback();return;}
+  var i=0,img=document.createElement('img');
+  attr(img,{loading:'lazy',referrerpolicy:'no-referrer',decoding:'async',alt:alt||''});
+  img.addEventListener('error',function(){i++;if(i<urls.length){img.setAttribute('src',urls[i]);}else{img.remove();fallback();}});
+  img.setAttribute('src',urls[0]);box.appendChild(img);}
+function imgBox(it,linked,urls){var b=el('div','imgbox');mountImage(b,urls||images(it),it,linked,titleOf(it));return b;}
 
-  function parseVorgabe(s) {
-    var r = {};
-    String(s || '').split(/[,;]/).forEach(function (p) {
-      var m = /^\s*(B|T|H|EUR|€)\s*<=?\s*([\d.,]+)/i.exec(p);
-      if (m) { var k = m[1].toUpperCase(); if (k === '€') k = 'EUR'; r[k] = num(m[2]); }
-    });
-    return r;
-  }
-  function vorgabeText(s) {
-    var v = parseVorgabe(s), parts = [];
-    if (v.B !== undefined) parts.push('max. ' + v.B + ' cm breit');
-    if (v.T !== undefined) parts.push('max. ' + v.T + ' cm tief');
-    if (v.H !== undefined) parts.push('max. ' + v.H + ' cm hoch');
-    if (v.EUR !== undefined) parts.push('Budget bis ' + EUR.format(v.EUR));
-    return parts.length ? parts.join(', ') : String(s || '');
-  }
-  function violations(cat, I) {
-    var v = parseVorgabe(cat.vorgabe), out = [];
-    if (v.B !== undefined && I.dims.b !== null && I.dims.b > v.B) out.push('breiter als Vorgabe');
-    if (v.T !== undefined && I.dims.t !== null && I.dims.t > v.T) out.push('tiefer als Vorgabe');
-    if (v.H !== undefined && I.dims.h !== null && I.dims.h > v.H) out.push('höher als Vorgabe');
-    if (v.EUR !== undefined && I.price !== null && I.price > v.EUR) out.push('über Budget');
-    return out;
-  }
-  function dimsText(d) {
-    var p = [];
-    if (d.b !== null) p.push('B ' + d.b);
-    if (d.t !== null) p.push('T ' + d.t);
-    if (d.h !== null) p.push('H ' + d.h);
-    return p.length ? p.join(' × ') + ' cm' : '';
-  }
-  function recId(cid) {
-    var k = CAT_BY_ID[cid];
-    if (k && k.empfehlung_id && INFO[k.empfehlung_id]) return k.empfehlung_id;
-    var r = ITEMS_BY_CAT[cid].filter(function (it) { return num(it.prio) === 1; })[0];
-    return r ? r.id : null;
-  }
-  function sortedIds(cid, withNo) {
-    var rec = recId(cid);
-    return ITEMS_BY_CAT[cid].map(function (it) { return it.id; }).sort(function (a, b) {
-      var A = INFO[a], B = INFO[b];
-      if (withNo) { var na = rating(cid, a) === 'no' ? 1 : 0, nb = rating(cid, b) === 'no' ? 1 : 0; if (na !== nb) return na - nb; }
-      if (a === rec) return -1; if (b === rec) return 1;
-      var pa = A.prio === null ? 99 : A.prio, pb = B.prio === null ? 99 : B.prio;
-      return pa !== pb ? pa - pb : A.idx - B.idx;
-    });
-  }
+function autogrow(ta){ta.style.height='auto';ta.style.height=(ta.scrollHeight+2)+'px';}
+function commentField(ph,value,onSave){
+  var w=el('div','cwrap'),ta=el('textarea','cm'),s=el('span','saved','gespeichert'),t;
+  attr(ta,{placeholder:ph,rows:'1','aria-label':ph});ta.value=value||'';
+  ta.addEventListener('input',function(){autogrow(ta);clearTimeout(t);t=setTimeout(function(){onSave(ta.value);s.classList.add('show');setTimeout(function(){s.classList.remove('show');},1400);},500);});
+  w.appendChild(ta);w.appendChild(s);requestAnimationFrame(function(){autogrow(ta);});return w;}
 
-  // ---------- state ----------
-  function lsGet(k, d) { try { var v = JSON.parse(localStorage.getItem(k)); return v || d; } catch (e) { return d; } }
-  function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* ignore */ } }
+/* ---------- Header / Fortschritt ---------- */
+function decidedCount(){return ACTIVE.filter(function(c){return getSel(c.id).fav;}).length;}
+function header(sub){var h=el('header','top');h.appendChild(el('h1',null,'CozyNest'));h.appendChild(el('p','sub',sub));
+  if(MODE!=='order'){var n=decidedCount(),t=ACTIVE.length,p=el('div','progress'),s=el('span');
+    s.style.width=(t?Math.round(n/t*100):0)+'%';p.appendChild(s);attr(p,{role:'progressbar','aria-valuemin':'0','aria-valuemax':String(t),'aria-valuenow':String(n)});
+    h.appendChild(p);h.appendChild(el('div','plabel',n+'/'+t+' entschieden'));}
+  return h;}
 
-  function normalize(s) {
-    var out = { v: 2, ts: (s && s.ts) || 0, sel: {} };
-    var sel = (s && s.sel) || {};
-    Object.keys(sel).forEach(function (cid) {
-      if (!CAT_BY_ID[cid]) return;
-      var c = sel[cid] || {}, ok = {};
-      ITEMS_BY_CAT[cid].forEach(function (it) { ok[it.id] = true; });
-      var o = { fav: null, ok: [], no: [], c: {}, cc: typeof c.cc === 'string' ? c.cc : '' };
-      if (c.fav && ok[c.fav]) o.fav = c.fav;
-      (c.ok || []).forEach(function (i) { if (ok[i] && i !== o.fav && o.ok.indexOf(i) < 0) o.ok.push(i); });
-      (c.no || []).forEach(function (i) { if (ok[i] && i !== o.fav && o.ok.indexOf(i) < 0 && o.no.indexOf(i) < 0) o.no.push(i); });
-      Object.keys(c.c || {}).forEach(function (i) { if (ok[i] && typeof c.c[i] === 'string') o.c[i] = c.c[i]; });
-      out.sel[cid] = o;
-    });
-    return out;
-  }
-  var state = normalize(lsGet(LS_STATE, null));
-  function save() { state.ts = Date.now(); lsSet(LS_STATE, state); }
-  function sel(cid, st) {
-    st = st || state;
-    if (!st.sel[cid]) st.sel[cid] = { fav: null, ok: [], no: [], c: {}, cc: '' };
-    return st.sel[cid];
-  }
-  function rating(cid, id, st) {
-    var s = (st || state).sel[cid];
-    if (!s) return null;
-    if (s.fav === id) return 'fav';
-    if (s.ok.indexOf(id) >= 0) return 'ok';
-    if (s.no.indexOf(id) >= 0) return 'no';
-    return null;
-  }
-  function setRating(cid, id, r) {
-    var s = sel(cid), cur = rating(cid, id);
-    if (s.fav === id) s.fav = null;
-    s.ok = s.ok.filter(function (x) { return x !== id; });
-    s.no = s.no.filter(function (x) { return x !== id; });
-    if (cur !== r) {
-      if (r === 'fav') { if (s.fav) s.ok.push(s.fav); s.fav = id; }
-      else s[r].push(id);
-    }
-    save();
-  }
-  function decidedCount(st) { return CATS.filter(function (k) { var s = (st || state).sel[k.id]; return s && s.fav; }).length; }
+/* ---------- Modus 1/3: Übersicht ---------- */
+function renderHome(){
+  $app.appendChild(header('Unsere Auswahl für die neue Wohnung'));
+  var rooms=[];ACTIVE.forEach(function(c){if(rooms.indexOf(c.raum)<0)rooms.push(c.raum);});
+  rooms.forEach(function(r){var sec=el('section','room');sec.appendChild(el('h2',null,r));var g=el('div','grid');
+    ACTIVE.filter(function(c){return c.raum===r;}).forEach(function(c){g.appendChild(tile(c));});sec.appendChild(g);$app.appendChild(sec);});}
+function tile(c){
+  var sel=getSel(c.id),b=el('button','tile');attr(b,{type:'button'});
+  var lead=recItem(c)||sortedItems(c)[0];b.appendChild(imgBox(lead,false));
+  b.appendChild(el('h3',null,c.kategorie));
+  var n=BYCAT[c.id].length,m=el('div','tmeta');
+  var fav=sel.fav&&ITEM[sel.fav];
+  if(fav)m.appendChild(el('span','state '+(isOrdered(fav)?'ordered':'done'),isOrdered(fav)?'📦 bestellt':'♥ entschieden'));
+  else m.appendChild(el('span','state','offen'));
+  m.appendChild(el('span','tcount',n+(n===1?' Option':' Optionen')+' · ✓ '+sel.ok.length+' · ✕ '+sel.no.length));
+  b.appendChild(m);
+  if(fav){var mi=el('div','mini');var ib=imgBox(fav,false);mi.appendChild(ib);mi.appendChild(el('span',null,titleOf(fav)));b.appendChild(mi);}
+  b.addEventListener('click',function(){openCat(c.id);});return b;}
+function openCat(id){view.cat=id;history.pushState({cat:id},'',location.href);render();window.scrollTo(0,0);}
+window.addEventListener('popstate',function(e){view.cat=(e.state&&e.state.cat&&CAT[e.state.cat])?e.state.cat:null;render();});
 
-  // ---------- encoding ----------
-  function b64url(bytes) {
-    var s = '';
-    for (var i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
-    return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-  }
-  function unb64url(str) {
-    str = str.replace(/-/g, '+').replace(/_/g, '/');
-    while (str.length % 4) str += '=';
-    var bin = atob(str), u = new Uint8Array(bin.length);
-    for (var i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
-    return u;
-  }
-  function encodeState(obj) {
-    var bytes = new TextEncoder().encode(JSON.stringify(obj));
-    var stream = new Response(bytes).body.pipeThrough(new CompressionStream('deflate-raw'));
-    return new Response(stream).arrayBuffer().then(function (buf) { return b64url(new Uint8Array(buf)); });
-  }
-  function decodeState(str) {
-    var stream = new Response(unb64url(str)).body.pipeThrough(new DecompressionStream('deflate-raw'));
-    return new Response(stream).text().then(JSON.parse);
-  }
+/* ---------- Modus 1/3: Kategorie ---------- */
+function vorgabeText(v){var p=[];if(v.B!=null)p.push('max. '+v.B+' cm breit');if(v.T!=null)p.push('max. '+v.T+' cm tief');
+  if(v.H!=null)p.push('max. '+v.H+' cm hoch');if(v.EUR!=null)p.push('Budget max. '+fmtPrice(v.EUR));return p.join(', ');}
+function renderCat(cid){
+  var c=CAT[cid];if(!c){view.cat=null;return renderHome();}
+  $app.appendChild(header('Unsere Auswahl für die neue Wohnung'));
+  var back=el('button','back','← Alle Kategorien');attr(back,{type:'button'});
+  back.addEventListener('click',function(){if(history.state&&history.state.cat)history.back();else{view.cat=null;render();}});
+  $app.appendChild(back);
+  var hd=el('div','chead');hd.appendChild(el('div','room-name',c.raum));hd.appendChild(el('h2',null,c.kategorie));
+  var v=parseVorgabe(c.vorgabe);
+  if(c.vorgabe){var chips=el('div','chips');chips.appendChild(el('span','chip',vorgabeText(v)||String(c.vorgabe)));hd.appendChild(chips);}
+  var emp=empOf(c);
+  if(MODE==='edit'){var ew=el('div','emp');ew.appendChild(el('b',null,'Empfehlung (1 Satz)'));
+    ew.appendChild(commentField('Empfehlung für diese Kategorie …',emp,function(t){edits.emp[c.id]=t;saveJSON(EKEY,edits);}));hd.appendChild(ew);}
+  else if(emp){hd.appendChild(el('div','emp','Empfehlung: '+emp));}
+  $app.appendChild(hd);
+  var sel=getSel(cid),rec=recItem(c),list=sortedItems(c);
+  var yes=list.filter(function(it){return statusOf(sel,it.id)!=='no';}),no=list.filter(function(it){return statusOf(sel,it.id)==='no';});
+  var g=el('div','grid');yes.concat(no).forEach(function(it){g.appendChild(card(it,c,sel,v,rec&&rec.id===it.id));});$app.appendChild(g);
+  var cc=el('section','ccat');cc.appendChild(el('h3',null,'Kommentar zu „'+c.kategorie+'“'));
+  cc.appendChild(commentField('Dein Kommentar zur Kategorie …',sel.cc,function(t){var s=getSel(cid);s.cc=t;setSel(cid,s);}));$app.appendChild(cc);}
+function card(it,c,sel,v,isRec){
+  var st=statusOf(sel,it.id),a=el('article','card'+(st==='no'?' dim':''));
+  var box=imgBox(it,true);
+  if(isRec)box.appendChild(el('span','badge l','Empfehlung'));
+  if(isOrdered(it))box.appendChild(el('span','badge r','📦 Bestellt'));
+  a.appendChild(box);
+  a.appendChild(el('h3','clamp',titleOf(it)));
+  var d=(it.enrich&&it.enrich.beschreibung)||'';if(d)a.appendChild(el('p','desc clamp',d));
+  var p=priceOf(it);a.appendChild(p==null?el('div','price unknown','Preis im Shop'):el('div','price',fmtPrice(p)));
+  var dm=dimsOf(it),parts=[];if(dm.b!=null)parts.push('B '+dm.b);if(dm.t!=null)parts.push('T '+dm.t);if(dm.h!=null)parts.push('H '+dm.h);
+  if(parts.length)a.appendChild(el('div','dims',parts.join(' × ')+' cm'));
+  var vio=violations(it,v);if(vio.length)a.appendChild(el('div','warn',vio.join(', ')));
+  var note=noteOf(it);
+  if(note||MODE==='edit'){var nb=el('div','note');nb.appendChild(el('b',null,'💬 '+NOTE_LABEL));
+    if(MODE==='edit')nb.appendChild(commentField('Notiz …',note,function(t){edits.notes[it.id]=t;saveJSON(EKEY,edits);}));
+    else nb.appendChild(el('p',null,note));a.appendChild(nb);}
+  var seg=el('div','seg');attr(seg,{role:'group','aria-label':'Bewertung'});
+  [['fav','♥','Favorit'],['ok','✓','Auch ok'],['no','✕','Nein']].forEach(function(o){
+    var b=el('button',st===o[0]?'on-'+o[0]:null);attr(b,{type:'button','aria-pressed':String(st===o[0])});
+    b.appendChild(el('span','ic',o[1]));b.appendChild(document.createTextNode(o[2]));
+    b.addEventListener('click',function(){var y=window.scrollY;setSel(c.id,applyStatus(getSel(c.id),it.id,o[0]));render();window.scrollTo(0,y);});
+    seg.appendChild(b);});
+  a.appendChild(seg);
+  var pl=el('div');pl.appendChild(extLink(it.url,'Zum Produkt ↗','plink'));a.appendChild(pl);
+  a.appendChild(commentField('Dein Kommentar …',sel.c[it.id]||'',function(t){var s=getSel(c.id);if(t)s.c[it.id]=t;else delete s.c[it.id];setSel(c.id,s);}));
+  a.appendChild(detailsBlock(it));return a;}
+function detailsBlock(it){
+  var dt=el('details');if(openDetails[it.id])dt.open=true;dt.addEventListener('toggle',function(){openDetails[it.id]=dt.open;});
+  dt.appendChild(el('summary',null,'Details'));
+  var more=images(it).slice(1);
+  if(more.length){var th=el('div','thumbs');more.forEach(function(u){var b=el('div','imgbox'),img=document.createElement('img');
+    attr(img,{loading:'lazy',referrerpolicy:'no-referrer',decoding:'async',alt:''});img.addEventListener('error',function(){b.remove();});
+    img.setAttribute('src',u);b.appendChild(img);th.appendChild(b);});dt.appendChild(th);}
+  var e=it.enrich||{},dl=el('dl');[['Material',e.material],['Farbe',e.farbe],['Lieferzeit',e.lieferzeit],['Shop',e.shop]].forEach(function(r){
+    if(r[1]){dl.appendChild(el('dt',null,r[0]));dl.appendChild(el('dd',null,r[1]));}});
+  if(dl.childNodes.length)dt.appendChild(dl);
+  var cu=it.curate||{},pc=el('div','pc');
+  [['Pro',cu.pros],['Contra',cu.cons]].forEach(function(r){if(r[1]&&r[1].length){pc.appendChild(el('h4',null,r[0]));var ul=el('ul');
+    r[1].forEach(function(x){ul.appendChild(el('li',null,clean(x)));});pc.appendChild(ul);}});
+  if(pc.childNodes.length)dt.appendChild(pc);return dt;}
 
-  // ---------- ui primitives ----------
-  var toastT;
-  function toast(msg) {
-    var t = document.getElementById('toast');
-    t.textContent = msg; t.classList.add('show');
-    clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('show'); }, 2600);
-  }
-  function modal(title, body, actions) {
-    var ov = el('div', { cls: 'ov', role: 'dialog', 'aria-modal': 'true' });
-    function close() { ov.remove(); }
-    var acts = el('div', { cls: 'acts' }, actions.map(function (a) {
-      return el('button', { type: 'button', cls: a.primary ? 'btn' : 'btn sec', text: a.label, on: { click: function () { close(); if (a.fn) a.fn(); } } });
-    }));
-    ov.appendChild(el('div', { cls: 'dlg' }, [el('h3', { text: title })].concat(body, [acts])));
-    ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
-    document.body.appendChild(ov);
-    var b = ov.querySelector('.btn'); if (b) b.focus();
-  }
-  function copyText(txt) {
-    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(txt).then(function () { return true; }, function () { return legacyCopy(txt); });
-    return Promise.resolve(legacyCopy(txt));
-  }
-  function legacyCopy(txt) {
-    var ta = el('textarea', { readonly: true, style: 'position:fixed;top:-1000px' });
-    ta.value = txt; document.body.appendChild(ta); ta.select();
-    var ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
-    ta.remove(); return ok;
-  }
-  function autogrow(ta) { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; }
+/* ---------- Senden / Export ---------- */
+function send(){
+  var payload={v:2,ts:state.ts||Date.now(),sel:state.sel},open=ACTIVE.length-decidedCount();
+  var hint=open?' · '+open+(open===1?' Kategorie':' Kategorien')+' noch offen':'';
+  if(typeof CompressionStream==='undefined'){toast('Dieser Browser kann keinen Link erzeugen. Bitte Browser aktualisieren.');return;}
+  encodeState(payload).then(function(s){
+    var url=location.href.split('#')[0]+'#mode=order&s='+s;
+    if(navigator.share){return navigator.share({title:'CozyNest – unsere Auswahl',url:url}).then(function(){toast('Geteilt'+hint);},function(e){if(e&&e.name==='AbortError')return;return copyText(url).then(function(ok){toast(ok?'Link kopiert'+hint:'Kopieren nicht möglich');});});}
+    return copyText(url).then(function(ok){toast(ok?'Link kopiert'+hint:'Kopieren nicht möglich');});
+  }).catch(function(){toast('Link konnte nicht erzeugt werden.');});}
+function exportEdits(){
+  var notes={},emp={};
+  Object.keys(edits.notes).forEach(function(id){if(ITEM[id]&&edits.notes[id]!==(ITEM[id].notiz_researcher||''))notes[id]=edits.notes[id];});
+  Object.keys(edits.emp).forEach(function(id){if(CAT[id]&&edits.emp[id]!==(CAT[id].empfehlung||''))emp[id]=edits.emp[id];});
+  if(!Object.keys(notes).length&&!Object.keys(emp).length){toast('Keine Änderungen vorhanden');return;}
+  copyText(JSON.stringify({typ:'shortlist-edits',version:META.version,notiz_researcher:notes,empfehlung:emp},null,1)).then(function(ok){
+    toast(ok?'Kopiert – im Projekt-Chat mit /curate einfügen':'Kopieren nicht möglich');});}
+function barDecide(){
+  var open=ACTIVE.length-decidedCount();
+  $bar.appendChild(el('span','info',open?open+(open===1?' Kategorie':' Kategorien')+' offen':'Alles entschieden'));
+  if(MODE==='edit'){var x=el('button','btn','Änderungen exportieren');attr(x,{type:'button'});x.addEventListener('click',exportEdits);$bar.appendChild(x);}
+  var b=el('button','primary','Auswahl senden');attr(b,{type:'button'});b.addEventListener('click',send);$bar.appendChild(b);}
 
-  function imageBox(urls, shopLabel, href, badges) {
-    var box = el('div', { cls: 'imgbox' });
-    var i = 0;
-    function fallback() {
-      var fb = href
-        ? el('a', { cls: 'imgfallback', href: safeUrl(href), target: '_blank', rel: 'noopener', text: shopLabel })
-        : el('span', { cls: 'imgfallback', text: shopLabel });
-      box.insertBefore(fb, box.firstChild);
-    }
-    if (!urls.length) fallback();
-    else {
-      var img = el('img', { alt: '', loading: 'lazy', referrerpolicy: 'no-referrer', decoding: 'async' });
-      img.addEventListener('error', function () {
-        i++;
-        if (i < urls.length) img.setAttribute('src', urls[i]);
-        else { img.remove(); fallback(); }
-      });
-      img.setAttribute('src', urls[0]);
-      box.appendChild(img);
-    }
-    (badges || []).forEach(function (b) { if (b) box.appendChild(b); });
-    return box;
-  }
+/* ---------- Modus 2: Umsetzer ---------- */
+function localOrdered(){var o=loadJSON(OKEY,null)||{};Object.keys(o).forEach(function(k){if(!ITEM[k])delete o[k];});return o;}
+function favRows(st){var rows=[];ACTIVE.forEach(function(c){var s=normSel(st.sel[c.id]);if(s.fav&&ITEM[s.fav])rows.push({it:ITEM[s.fav],cat:c,comment:s.c[s.fav]||'',cc:s.cc});});return rows;}
+function orderStatus(it,lo){if(isOrdered(it))return {st:'bestellt',date:it.bestellt_am||''};if(lo[it.id])return {st:'bestellt',date:typeof lo[it.id]==='string'?lo[it.id]:''};return {st:'offen',date:''};}
+function newlyChecked(rows,lo){return rows.filter(function(r){return !isOrdered(r.it)&&lo[r.it.id];}).map(function(r){return r.it.id;});}
+function sumLine(rows,lo){var t=0,o=0,miss=0;rows.forEach(function(r){var p=priceOf(r.it);if(p==null){miss++;return;}t+=p;if(orderStatus(r.it,lo).st==='bestellt')o+=p;});
+  return fmtPrice(t)+(miss?' + '+miss+' ohne Preis':'')+' · davon bestellt '+fmtPrice(o);}
+function renderOrder(){
+  var st=orderState||state,lo=localOrdered(),rows=favRows(st);
+  $app.appendChild(header('Bestellübersicht'));
+  if(!rows.length){var e=el('div','panel');e.appendChild(el('p',null,'Noch keine Favoriten in diesem Link. Bitte den Link aus „Auswahl senden“ vollständig öffnen.'));$app.appendChild(e);}
+  var shops=[];rows.forEach(function(r){var k=r.it.shop||shopName(r.it);var g=shops.filter(function(x){return x.k===k;})[0];if(!g){g={k:k,name:shopName(r.it),rows:[]};shops.push(g);}g.rows.push(r);});
+  shops.forEach(function(g){
+    var p=el('section','panel'),h=el('div','shophead');h.appendChild(el('h2',null,g.name));h.appendChild(el('span','sum',sumLine(g.rows,lo)));p.appendChild(h);
+    g.rows.forEach(function(r){p.appendChild(orderRow(r,lo));});
+    var ac=el('div','actions'),ob=el('button','btn','Alle Links dieses Shops öffnen');attr(ob,{type:'button'});
+    ob.addEventListener('click',function(){var lo2=localOrdered(),n=0;g.rows.forEach(function(r){if(orderStatus(r.it,lo2).st!=='bestellt'){window.open(r.it.url,'_blank','noopener');n++;}});
+      toast(n?n+' Link'+(n===1?'':'s')+' geöffnet':'Alles bereits bestellt');});
+    ac.appendChild(ob);ac.appendChild(el('span','hint','Bei nur einem Tab: Pop-ups für diese Seite einmalig erlauben. Bestelltes wird übersprungen.'));
+    p.appendChild(ac);$app.appendChild(p);});
+  if(rows.length){var tp=el('section','panel'),tl=el('div','total');tl.appendChild(el('b',null,'Gesamt'));tl.appendChild(el('span','sum',sumLine(rows,lo)));tp.appendChild(tl);$app.appendChild(tp);}
+  var openCats=ACTIVE.filter(function(c){return !normSel(st.sel[c.id]).fav;});
+  if(openCats.length){var op=el('section','panel');op.appendChild(el('h2',null,'Offen'));
+    openCats.forEach(function(c){var s=normSel(st.sel[c.id]),w=el('div','row');w.style.gridTemplateColumns='1fr';var inner=el('div');
+      inner.appendChild(el('h3',null,c.raum+' · '+c.kategorie));
+      var oks=s.ok.filter(function(id){return ITEM[id];});
+      if(oks.length){oks.forEach(function(id){var d=el('div','open-item');d.appendChild(document.createTextNode('✓ Auch ok: '));d.appendChild(extLink(ITEM[id].url,titleOf(ITEM[id])));
+        var pr=priceOf(ITEM[id]);if(pr!=null)d.appendChild(document.createTextNode(' · '+fmtPrice(pr)));inner.appendChild(d);});}
+      else inner.appendChild(el('div','muted','Keine Alternativen markiert'));
+      if(s.cc)inner.appendChild(el('div','pcomment','Kommentar: '+s.cc));w.appendChild(inner);op.appendChild(w);});
+    $app.appendChild(op);}}
+function orderRow(r,lo){
+  var it=r.it,w=el('div','row');w.appendChild(imgBox(it,true));var info=el('div');
+  info.appendChild(el('h3','clamp',titleOf(it)));info.appendChild(el('div','muted',r.cat.raum+' · '+r.cat.kategorie));
+  var m=el('div','rmeta'),nr=artnr(it);
+  if(nr){var s=el('span',null,'Art.-Nr. '+nr);m.appendChild(s);var cb=el('button','copy','Kopieren');attr(cb,{type:'button','aria-label':'Artikelnummer kopieren'});
+    cb.addEventListener('click',function(){copyText(nr).then(function(ok){toast(ok?'Artikelnummer kopiert':'Kopieren nicht möglich');});});m.appendChild(cb);}
+  var p=priceOf(it);m.appendChild(el('b',null,p==null?'Preis im Shop':fmtPrice(p)));m.appendChild(extLink(it.url,'Zum Produkt ↗','plink'));info.appendChild(m);
+  if(r.comment)info.appendChild(el('div','pcomment','Kommentar: '+r.comment));
+  if(r.cc)info.appendChild(el('div','pcomment','Zur Kategorie: '+r.cc));
+  var lab=el('label','check'),ch=document.createElement('input');attr(ch,{type:'checkbox'});
+  if(isOrdered(it)){ch.checked=true;ch.disabled=true;lab.classList.add('locked');lab.appendChild(ch);lab.appendChild(document.createTextNode('bestellt'+(it.bestellt_am?' am '+ddmm(it.bestellt_am):'')));}
+  else{ch.checked=!!lo[it.id];ch.addEventListener('change',function(){var o=localOrdered();if(ch.checked)o[it.id]=today();else delete o[it.id];saveJSON(OKEY,o);var y=window.scrollY;render();window.scrollTo(0,y);});
+    lab.appendChild(ch);lab.appendChild(document.createTextNode('bestellt'));}
+  info.appendChild(lab);w.appendChild(info);return w;}
+function csvCell(v){v=String(v==null?'':v).replace(/[\r\n]+/g,' ').replace(/;/g,',');return /"/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}
+function exportCSV(){
+  var st=orderState||state,lo=localOrdered(),rows=favRows(st);
+  var lines=['ID;Raum;Kategorie;Produkt;Shop;Artikelnr;Preis;Link;Kommentar_Partnerin;Status;Bestellt_am'];
+  rows.forEach(function(r){var it=r.it,p=priceOf(it),os=orderStatus(it,lo);
+    lines.push([it.id,r.cat.raum,r.cat.kategorie,titleOf(it),shopName(it),artnr(it),p==null?'':p.toFixed(2).replace('.',','),it.url,r.comment,os.st,os.date].map(csvCell).join(';'));});
+  var blob=new Blob(['\ufeff'+lines.join('\r\n')+'\r\n'],{type:'text/csv;charset=utf-8'}),a=el('a');
+  attr(a,{href:URL.createObjectURL(blob),download:'bestellliste.csv'});document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},1000);toast('bestellliste.csv erstellt');}
+function barOrder(){
+  var lo=localOrdered(),ids=newlyChecked(favRows(orderState||state),lo);
+  $bar.appendChild(el('span','info',ids.length?ids.length+' neu angehakt':'Keine neuen Haken'));
+  var c=el('button','btn','CSV exportieren');attr(c,{type:'button'});c.addEventListener('click',exportCSV);$bar.appendChild(c);
+  var b=el('button','primary','Bestellstatus übernehmen');attr(b,{type:'button'});if(!ids.length)b.disabled=true;
+  b.addEventListener('click',function(){var ids2=newlyChecked(favRows(orderState||state),localOrdered());if(!ids2.length)return;
+    copyText('/bestellt '+ids2.join(' ')).then(function(ok){toast(ok?'Kopiert – im Projekt-Chat einfügen':'Kopieren nicht möglich');});});
+  $bar.appendChild(b);}
 
-  // ---------- routing ----------
-  function parseHash() {
-    var o = {};
-    location.hash.replace(/^#/, '').split('&').forEach(function (p) {
-      if (!p) return; var i = p.indexOf('=');
-      var k = i < 0 ? p : p.slice(0, i), v = i < 0 ? '' : p.slice(i + 1);
-      try { o[decodeURIComponent(k)] = decodeURIComponent(v); } catch (e) { o[k] = v; }
-    });
-    return o;
-  }
-  var MODE = 'decide', orderState = null;
-  function hashFor(cid) {
-    var parts = [];
-    if (MODE === 'edit') parts.push('mode=edit');
-    if (cid) parts.push('c=' + encodeURIComponent(cid));
-    return '#' + parts.join('&');
-  }
-  function route() {
-    var P = parseHash();
-    if (P.mode === 'order') return;
-    var app = document.getElementById('app');
-    app.textContent = '';
-    if (P.c && CAT_BY_ID[P.c]) renderCategory(app, P.c);
-    else renderOverview(app);
-    updateProgress();
-  }
-  function updateProgress() {
-    var st = MODE === 'order' ? orderState : state;
-    var d = decidedCount(st), t = CATS.length;
-    document.getElementById('barfill').style.width = (t ? Math.round(d / t * 100) : 0) + '%';
-    document.getElementById('progtext').textContent = d + '/' + t + ' entschieden';
-  }
-
-  // ---------- mode 1: overview ----------
-  function renderOverview(app) {
-    var rooms = [];
-    CATS.forEach(function (k) { if (rooms.indexOf(k.raum) < 0) rooms.push(k.raum); });
-    rooms.forEach(function (r) {
-      var grid = el('div', { cls: 'grid' });
-      CATS.filter(function (k) { return k.raum === r; }).forEach(function (k) { grid.appendChild(tile(k)); });
-      app.appendChild(el('section', { cls: 'room' }, [el('h2', { text: r }), grid]));
-    });
-    if (!CATS.length) app.appendChild(el('p', { cls: 'empty', text: 'Noch keine Kategorien vorhanden.' }));
-  }
-  function tile(k) {
-    var ids = sortedIds(k.id, false), lead = INFO[ids[0]], s = state.sel[k.id] || { fav: null, ok: [], no: [] };
-    var st;
-    if (s.fav) {
-      var F = INFO[s.fav];
-      var mini = F.imgs[0] ? el('img', { cls: 'mini', alt: '', loading: 'lazy', referrerpolicy: 'no-referrer', decoding: 'async', src: F.imgs[0] }) : null;
-      if (mini) mini.addEventListener('error', function () { mini.remove(); });
-      st = el('div', { cls: F.ordered ? 'st ordered' : 'st done' }, [mini, F.ordered ? '📦 bestellt' : '♥ entschieden']);
-    } else st = el('div', { cls: 'st open', text: 'offen' });
-    var n = ids.length;
-    return el('button', { type: 'button', cls: 'tile', on: { click: function () { location.hash = hashFor(k.id); } } }, [
-      imageBox(lead.imgs, lead.shopLabel, null),
-      el('div', { cls: 'tb' }, [
-        el('h3', { text: k.kategorie }),
-        el('div', { cls: 'meta', text: n + (n === 1 ? ' Option' : ' Optionen') + '   ✓ ' + s.ok.length + ' · ✕ ' + s.no.length }),
-        st
-      ])
-    ]);
-  }
-
-  // ---------- mode 1: category ----------
-  var cardNodes = {};
-  function renderCategory(app, cid) {
-    var k = CAT_BY_ID[cid], edits = lsGet(LS_EDITS, { items: {}, kategorien: {} });
-    cardNodes = {};
-    var head = el('div', { cls: 'cathead' }, [
-      el('a', { cls: 'back', href: hashFor(null), text: '← Alle Kategorien' }),
-      el('h2', { text: k.kategorie }),
-      el('div', { cls: 'room-l', text: k.raum }),
-      k.vorgabe ? el('span', { cls: 'chip', text: vorgabeText(k.vorgabe) }) : null
-    ]);
-    var recText = (edits.kategorien[cid] && typeof edits.kategorien[cid].empfehlung === 'string') ? edits.kategorien[cid].empfehlung : (k.empfehlung || '');
-    if (MODE === 'edit') {
-      var ta = el('textarea', { rows: 1, placeholder: 'Kategorie-Empfehlung (1 Satz)' });
-      ta.value = recText;
-      ta.addEventListener('input', function () {
-        autogrow(ta);
-        var e2 = lsGet(LS_EDITS, { items: {}, kategorien: {} });
-        e2.kategorien[cid] = { empfehlung: ta.value }; lsSet(LS_EDITS, e2);
-      });
-      head.appendChild(el('div', { cls: 'editfield' }, [el('label', { text: 'Empfehlung bearbeiten' }), ta]));
-      setTimeout(function () { autogrow(ta); }, 0);
-    } else if (recText) head.appendChild(el('p', { cls: 'recline', text: recText }));
-    app.appendChild(head);
-
-    var grid = el('div', { cls: 'grid cards' });
-    var rec = recId(cid);
-    sortedIds(cid, true).forEach(function (id) {
-      var n = card(k, INFO[id], id === rec, edits);
-      cardNodes[id] = n; grid.appendChild(n);
-    });
-    app.appendChild(grid);
-    refreshCards(cid);
-
-    var s = sel(cid);
-    var cc = el('textarea', { rows: 2, placeholder: 'Dein Kommentar zur Kategorie …', 'aria-label': 'Kommentar zur Kategorie' });
-    cc.value = s.cc || '';
-    var sv = el('span', { cls: 'saved', text: 'gespeichert' });
-    bindSave(cc, sv, function (v) { sel(cid).cc = v; });
-    app.appendChild(el('section', { cls: 'catcomment' }, [el('h3', { text: 'Kommentar zu „' + k.kategorie + '“' }), el('div', { cls: 'cm' }, [cc, sv])]));
-    setTimeout(function () { autogrow(cc); }, 0);
-    window.scrollTo(0, 0);
-  }
-  function bindSave(ta, sv, apply) {
-    var t;
-    ta.addEventListener('input', function () {
-      autogrow(ta);
-      clearTimeout(t);
-      t = setTimeout(function () {
-        apply(ta.value); save();
-        sv.classList.add('show'); setTimeout(function () { sv.classList.remove('show'); }, 1200);
-      }, 500);
-    });
-  }
-  function card(k, I, isRec, edits) {
-    var badges = [
-      isRec ? el('span', { cls: 'badge rec', text: 'Empfehlung' }) : null,
-      I.ordered ? el('span', { cls: 'badge ord', text: '📦 Bestellt' }) : null
-    ];
-    var body = el('div', { cls: 'cb' });
-    body.appendChild(el('h3', { cls: 'clamp', text: I.title }));
-    if (I.desc) body.appendChild(el('p', { cls: 'desc clamp', text: I.desc }));
-    body.appendChild(el('div', { cls: I.price === null ? 'price unk' : 'price', text: fmtPrice(I.price) }));
-    var dt = dimsText(I.dims);
-    if (dt) body.appendChild(el('div', { cls: 'dims', text: dt }));
-    var vio = violations(k, I);
-    if (vio.length) body.appendChild(el('div', { cls: 'warn', text: vio.join(', ') }));
-
-    var noteText = (edits.items[I.id] && typeof edits.items[I.id].notiz === 'string') ? edits.items[I.id].notiz : I.note;
-    if (MODE === 'edit') {
-      var nt = el('textarea', { rows: 1, placeholder: 'Researcher-Notiz' });
-      nt.value = noteText;
-      nt.addEventListener('input', function () {
-        autogrow(nt);
-        var e2 = lsGet(LS_EDITS, { items: {}, kategorien: {} });
-        e2.items[I.id] = { notiz: nt.value }; lsSet(LS_EDITS, e2);
-      });
-      body.appendChild(el('div', { cls: 'editfield' }, [el('label', { text: '💬 ' + NOTE_LABEL + ' bearbeiten' }), nt]));
-      setTimeout(function () { autogrow(nt); }, 0);
-    } else if (noteText) {
-      body.appendChild(el('div', { cls: 'note' }, [el('b', { text: '💬 ' + NOTE_LABEL }), el('span', { text: noteText })]));
-    }
-
-    var seg = el('div', { cls: 'seg', role: 'group', 'aria-label': 'Bewertung' });
-    [['fav', '♥ Favorit'], ['ok', '✓ Auch ok'], ['no', '✕ Nein']].forEach(function (d) {
-      seg.appendChild(el('button', { type: 'button', 'data-r': d[0], 'aria-pressed': 'false', text: d[1], on: { click: function () {
-        setRating(k.id, I.id, d[0]); refreshCards(k.id); updateProgress();
-      } } }));
-    });
-    body.appendChild(seg);
-    body.appendChild(el('a', { cls: 'plink', href: safeUrl(I.url), target: '_blank', rel: 'noopener', text: 'Zum Produkt ↗' }));
-
-    var ta = el('textarea', { rows: 1, placeholder: 'Dein Kommentar …', 'aria-label': 'Dein Kommentar' });
-    ta.value = (sel(k.id).c || {})[I.id] || '';
-    var sv = el('span', { cls: 'saved', text: 'gespeichert' });
-    bindSave(ta, sv, function (v) { var s = sel(k.id); if (v) s.c[I.id] = v; else delete s.c[I.id]; });
-    body.appendChild(el('div', { cls: 'cm' }, [ta, sv]));
-    setTimeout(function () { autogrow(ta); }, 0);
-
-    var det = el('details', null, [el('summary', { text: 'Details' })]);
-    if (I.imgs.length > 1) {
-      var th = el('div', { cls: 'thumbs' });
-      I.imgs.slice(1).forEach(function (u) {
-        var img = el('img', { alt: '', loading: 'lazy', referrerpolicy: 'no-referrer', decoding: 'async' });
-        var b = el('div', { cls: 'imgbox' }, [img]);
-        img.addEventListener('error', function () { b.remove(); });
-        img.setAttribute('src', u);
-        th.appendChild(b);
-      });
-      det.appendChild(th);
-    }
-    var dl = el('dl');
-    [['Material', I.material], ['Farbe', I.farbe], ['Lieferzeit', I.lieferzeit], ['Shop', I.shopFull]].forEach(function (r) {
-      dl.appendChild(el('dt', { text: r[0] })); dl.appendChild(el('dd', { text: r[1] || 'nicht angegeben' }));
-    });
-    det.appendChild(dl);
-    if (I.pros.length) det.appendChild(el('ul', { cls: 'pc pro' }, I.pros.map(function (p) { return el('li', { text: p }); })));
-    if (I.cons.length) det.appendChild(el('ul', { cls: 'pc con' }, I.cons.map(function (p) { return el('li', { text: p }); })));
-    body.appendChild(det);
-
-    return el('article', { cls: 'card', 'data-id': I.id }, [imageBox(I.imgs, I.shopLabel, I.url, badges), body]);
-  }
-  function refreshCards(cid) {
-    var grid = null;
-    sortedIds(cid, true).forEach(function (id) {
-      var n = cardNodes[id]; if (!n) return;
-      var r = rating(cid, id);
-      n.classList.toggle('is-no', r === 'no');
-      n.classList.toggle('is-fav', r === 'fav');
-      Array.prototype.forEach.call(n.querySelectorAll('.seg button'), function (b) {
-        var on = b.getAttribute('data-r') === r;
-        b.className = on ? 'on-' + r : '';
-        b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      });
-      grid = n.parentNode;
-      if (grid) grid.appendChild(n);
-    });
-  }
-
-  // ---------- send ----------
-  function openCats(st) { return CATS.filter(function (k) { var s = st.sel[k.id]; return !(s && s.fav); }); }
-  function doSend() {
-    save();
-    encodeState(state).then(function (enc) {
-      var url = location.origin + location.pathname + '#mode=order&s=' + enc;
-      if (navigator.share) {
-        navigator.share({ title: 'CozyNest – unsere Auswahl', url: url }).catch(function (e) {
-          if (e && e.name === 'AbortError') return;
-          fallbackLink(url);
-        });
-      } else fallbackLink(url);
-    }).catch(function () { toast('Link konnte nicht erzeugt werden – Browser aktualisieren'); });
-  }
-  function fallbackLink(url) {
-    copyText(url).then(function (ok) {
-      if (ok) toast('Link kopiert');
-      else {
-        var ta = el('textarea', { readonly: true, rows: 4 }); ta.value = url;
-        modal('Link zum Kopieren', [ta], [{ label: 'Schließen', primary: true }]);
-        setTimeout(function () { ta.select(); }, 50);
-      }
-    });
-  }
-  function onSend() {
-    var open = openCats(state);
-    if (!open.length) return doSend();
-    modal(open.length + ' von ' + CATS.length + ' Kategorien noch offen', [
-      el('p', { text: open.map(function (k) { return k.kategorie + ' (' + k.raum + ')'; }).join(', ') }),
-      el('p', { cls: 'hint', text: 'Du kannst trotzdem senden und später ergänzen.' })
-    ], [{ label: 'Zurück' }, { label: 'Trotzdem senden', primary: true, fn: doSend }]);
-  }
-  function exportEdits() {
-    var e = lsGet(LS_EDITS, { items: {}, kategorien: {} });
-    var snip = JSON.stringify({ typ: 'researcher-edits', version: META.version || '', items: e.items, kategorien: e.kategorien }, null, 2);
-    var ta = el('textarea', { readonly: true, rows: 8 }); ta.value = snip;
-    copyText(snip).then(function (ok) { if (ok) toast('Kopiert – im Projekt-Chat einfügen'); });
-    modal('Änderungen exportieren', [el('p', { cls: 'hint', text: 'In den Projekt-Chat einfügen, /curate übernimmt es.' }), ta], [{ label: 'Schließen', primary: true }]);
-  }
-
-  // ---------- mode 2: order ----------
-  var ordered = lsGet(LS_ORDERED, {});
-  function isOrdered(I) { return I.ordered || !!ordered[I.id]; }
-  function favorites(st) {
-    var out = [];
-    CATS.forEach(function (k) { var s = st.sel[k.id]; if (s && s.fav && INFO[s.fav]) out.push({ cat: k, I: INFO[s.fav], c: (s.c || {})[s.fav] || '' }); });
-    return out;
-  }
-  function sumOf(list) { return list.reduce(function (a, f) { return a + (f.I.price || 0); }, 0); }
-  function renderOrder() {
-    var app = document.getElementById('app');
-    app.textContent = '';
-    var st = orderState, favs = favorites(st);
-    app.appendChild(el('h2', { text: 'Bestellübersicht', style: 'margin-top:12px' }));
-    if (st.ts) app.appendChild(el('p', { cls: 'hint', text: 'Auswahl vom ' + new Date(st.ts).toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' }) }));
-    if (!favs.length) app.appendChild(el('p', { cls: 'empty', text: 'Noch keine Favoriten gewählt.' }));
-
-    var shops = [];
-    favs.forEach(function (f) { if (shops.indexOf(f.I.shopKey) < 0) shops.push(f.I.shopKey); });
-    shops.forEach(function (sk) {
-      var list = favs.filter(function (f) { return f.I.shopKey === sk; });
-      var sec = el('section', { cls: 'shop' });
-      sec.appendChild(el('div', { cls: 'shophead' }, [el('h2', { text: list[0].I.shopLabel }), el('span', { cls: 'sum', text: list.length + ' Artikel, ' + EUR.format(sumOf(list)) })]));
-      var todo = list.filter(function (f) { return !isOrdered(f.I); });
-      sec.appendChild(el('div', { cls: 'actions', style: 'margin:10px 0 0' }, [
-        el('button', { type: 'button', cls: 'btn sec', disabled: todo.length ? null : true, text: 'Alle Links dieses Shops öffnen', on: { click: function () {
-          todo.forEach(function (f) { window.open(safeUrl(f.I.url), '_blank', 'noopener'); });
-        } } })
-      ]));
-      sec.appendChild(el('p', { cls: 'hint', text: 'Öffnet ' + todo.length + ' Tab(s), bereits bestellte werden übersprungen. Popup-Blocker ggf. einmalig erlauben.' }));
-      list.forEach(function (f) { sec.appendChild(orderRow(f)); });
-      app.appendChild(sec);
-    });
-
-    if (favs.length) {
-      var done = favs.filter(function (f) { return isOrdered(f.I); });
-      app.appendChild(el('div', { cls: 'totals' }, [
-        el('span', null, ['Gesamt ', el('b', { text: EUR.format(sumOf(favs)) })]),
-        el('span', { text: 'davon bestellt: ' + EUR.format(sumOf(done)) + ' (' + done.length + '/' + favs.length + ')' })
-      ]));
-      var fresh = favs.filter(function (f) { return ordered[f.I.id] && !f.I.ordered; });
-      app.appendChild(el('div', { cls: 'actions' }, [
-        el('button', { type: 'button', cls: 'btn', disabled: fresh.length ? null : true, text: 'Bestellstatus übernehmen', on: { click: function () {
-          var line = '/bestellt ' + fresh.map(function (f) { return f.I.id; }).join(' ');
-          copyText(line).then(function (ok) {
-            if (ok) toast('Kopiert – im Projekt-Chat einfügen');
-            else { var ta = el('textarea', { readonly: true, rows: 3 }); ta.value = line; modal('Zeile kopieren', [ta], [{ label: 'Schließen', primary: true }]); }
-          });
-        } } }),
-        el('button', { type: 'button', cls: 'btn sec', text: 'CSV exportieren', on: { click: function () { exportCsv(favs, st); } } })
-      ]));
-    }
-
-    var open = openCats(st);
-    if (open.length) {
-      var ob = el('section', { cls: 'open' }, [el('h2', { text: 'Offen' })]);
-      open.forEach(function (k) {
-        var s = st.sel[k.id] || { ok: [], cc: '' };
-        var box = el('div', { cls: 'oc' }, [el('b', { text: k.kategorie + ' (' + k.raum + ')' })]);
-        if (s.ok.length) box.appendChild(el('ul', null, s.ok.map(function (id) {
-          var I = INFO[id];
-          return el('li', null, [el('a', { href: safeUrl(I.url), target: '_blank', rel: 'noopener', text: I.title }), ' – ' + fmtPrice(I.price)]);
-        })));
-        else box.appendChild(el('p', { cls: 'hint', text: 'Keine „Auch ok“-Alternativen.' }));
-        if (s.cc) box.appendChild(el('div', { cls: 'pcom', text: s.cc }));
-        ob.appendChild(box);
-      });
-      app.appendChild(ob);
-    }
-    updateProgress();
-  }
-  function orderRow(f) {
-    var I = f.I;
-    var chk = el('input', { type: 'checkbox' });
-    var lbl;
-    if (I.ordered) {
-      chk.checked = true; chk.disabled = true;
-      lbl = 'bestellt' + (I.orderedAt ? ' am ' + fmtDate(I.orderedAt) : '');
-    } else {
-      chk.checked = !!ordered[I.id];
-      lbl = 'bestellt';
-      chk.addEventListener('change', function () {
-        if (chk.checked) ordered[I.id] = true; else delete ordered[I.id];
-        lsSet(LS_ORDERED, ordered); renderOrder();
-      });
-    }
-    var info2 = el('div', null, [
-      el('h3', { cls: 'clamp', text: I.title }),
-      el('div', { cls: 'rmeta', text: f.cat.kategorie + (I.shopFull !== I.shopLabel ? ' · ' + I.shopFull : '') }),
-      el('div', { cls: 'rline' }, [
-        el('span', { cls: 'price', style: 'font-size:1.2rem', text: fmtPrice(I.price) }),
-        I.artnr ? el('span', { cls: 'art' }, ['Art.-Nr. ' + I.artnr, el('button', { type: 'button', cls: 'cp', 'aria-label': 'Artikelnummer kopieren', text: 'Kopieren', on: { click: function () {
-          copyText(String(I.artnr)).then(function (ok) { toast(ok ? 'Artikelnummer kopiert' : 'Kopieren nicht möglich'); });
-        } } })]) : null
-      ]),
-      f.c ? el('div', { cls: 'pcom', text: f.c }) : null,
-      el('div', { cls: 'rline' }, [
-        el('a', { cls: 'plink', href: safeUrl(I.url), target: '_blank', rel: 'noopener', text: 'Zum Produkt ↗' }),
-        el('label', { cls: 'chk' }, [chk, lbl])
-      ])
-    ]);
-    return el('div', { cls: 'row' }, [imageBox(I.imgs, I.shopLabel, I.url), info2]);
-  }
-  function csvField(v) {
-    var s = String(v === null || v === undefined ? '' : v);
-    return /[;"\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
-  }
-  function exportCsv(favs, st) {
-    var head = ['ID', 'Raum', 'Kategorie', 'Produkt', 'Shop', 'Artikelnr', 'Preis', 'Link', 'Kommentar_Partnerin', 'Status', 'Bestellt_am'];
-    var rows = [head.join(';')];
-    favs.forEach(function (f) {
-      var I = f.I;
-      rows.push([I.id, f.cat.raum, f.cat.kategorie, I.title, I.shopFull, I.artnr,
-        I.price === null ? '' : I.price.toFixed(2).replace('.', ','), I.url, f.c,
-        isOrdered(I) ? 'bestellt' : 'offen', I.ordered ? I.orderedAt : ''].map(csvField).join(';'));
-    });
-    var blob = new Blob(['\uFEFF' + rows.join('\r\n')], { type: 'text/csv;charset=utf-8' });
-    var a = el('a', { href: URL.createObjectURL(blob), download: 'bestellliste.csv' });
-    document.body.appendChild(a); a.click(); a.remove();
-    toast('bestellliste.csv exportiert');
-  }
-
-  // ---------- init ----------
-  function init() {
-    var P = parseHash();
-    MODE = P.mode === 'order' ? 'order' : (P.mode === 'edit' ? 'edit' : 'decide');
-    var incoming = P.s ? decodeState(P.s).then(normalize) : Promise.resolve(null);
-    incoming.catch(function () { toast('Auswahl-Link unvollständig – bitte komplett kopieren'); return null; }).then(function (inc) {
-      if (MODE === 'order') {
-        orderState = inc || state;
-        document.getElementById('sendbar').hidden = true;
-        renderOrder();
-        return;
-      }
-      if (inc && inc.ts >= state.ts) { state = inc; lsSet(LS_STATE, state); }
-      if (P.s) history.replaceState(null, '', location.pathname + location.search + hashFor(P.c && CAT_BY_ID[P.c] ? P.c : null));
-      var btn = document.getElementById('sendbtn');
-      if (MODE === 'edit') { btn.textContent = 'Änderungen exportieren'; btn.addEventListener('click', exportEdits); }
-      else btn.addEventListener('click', onSend);
-      document.getElementById('sendbar').hidden = false;
-      window.addEventListener('hashchange', route);
-      route();
-    });
-  }
-  init();
+/* ---------- Render / Init ---------- */
+function render(){
+  $app.replaceChildren();$bar.replaceChildren();
+  if(MODE==='order'){renderOrder();barOrder();}
+  else{if(view.cat)renderCat(view.cat);else renderHome();barDecide();}
+  $app.appendChild(el('p','foot','Stand '+(META.version||'')));}
+function init(){
+  var s=H.get('s');
+  if(!s){render();return;}
+  if(typeof DecompressionStream==='undefined'){toast('Dieser Browser kann den Link nicht lesen. Bitte Browser aktualisieren.');render();return;}
+  decodeState(s).then(function(inc){var c=cleanState(inc,ITEMCAT);
+    if(MODE==='order')orderState=c;
+    else{if(c.ts>=state.ts){state=c;saveJSON(KEY,state);}history.replaceState(null,'',location.href.split('#')[0]+(MODE==='edit'?'#mode=edit':''));}
+  }).catch(function(){toast('Link unvollständig – bitte komplett kopieren und erneut öffnen.');}).then(render);}
+init();
 })();
-
 </script>
 </body>
 </html>
