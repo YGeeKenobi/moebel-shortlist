@@ -1,725 +1,1415 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="referrer" content="no-referrer">
-<meta name="color-scheme" content="light dark">
-<title>CozyNest – Unsere Auswahl</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A1%3C/text%3E%3C/svg%3E">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FBFAF7">
+<title>CozyNest</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500&family=Nunito+Sans:wght@400;600;700&display=swap">
 <style>
-:root{--bg:#F8F4EC;--surface:#FFFDF8;--sand:#EFE7DA;--beige:#E3D8C6;--border:#E8E0D2;--text:#3A3835;--muted:#8A857D;--sage:#8FA088;--sage-soft:#E3EADF;--rose:#B98589;--rose-soft:#F2E1DE;--note-bg:#F3EDE2;--img-bg:#FFFFFF;--shadow:0 2px 14px rgba(40,38,35,.06);--r:16px;--serif:"Fraunces",Georgia,serif;--sans:"Nunito Sans",system-ui,sans-serif}
-@media (prefers-color-scheme:dark){:root{--bg:#1E1D1B;--surface:#292826;--sand:#34322F;--beige:#403D39;--border:#3D3B37;--text:#F1ECE4;--muted:#A8A298;--sage:#A7B7A0;--sage-soft:#2F3A2D;--rose:#D7A9AC;--rose-soft:#3E2F30;--note-bg:#2F2D2A}}
-*{box-sizing:border-box}
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  color-scheme:light;
+  --bg:#FBFAF7;--surface:#FFFDF8;--sand:#EFE7DA;--beige:#E3D8C6;--border:#E8E0D2;
+  --text:#3A3835;--muted:#8A857D;--sage:#8FA088;--sage-soft:#E3EADF;--rose:#B98589;--rose-soft:#F2E1DE;
+  --note-bg:#F3EDE2;--img-bg:#FFFFFF;
+  --radius:16px;--shadow:0 2px 14px rgba(40,38,35,.06);
+  --f-head:"Fraunces",Georgia,serif;--f-body:"Nunito Sans",system-ui,sans-serif;
+}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 var(--sans);padding-top:env(safe-area-inset-top,0px)}
-body.hasbar{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.55 var(--f-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--f-head);font-weight:500;margin:0;line-height:1.2;letter-spacing:-.01em}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+[hidden]{display:none!important}
 :focus-visible{outline:2px solid var(--sage);outline-offset:2px}
-.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
-h1,h2,h3{font-family:var(--serif);font-weight:500;margin:0;line-height:1.2}
-.muted{color:var(--muted)}.small{font-size:13px}
-.hint{font-size:12px;color:var(--muted)}
-.warn{font-size:13px;color:var(--rose)}
-header.top{padding:24px 0 8px}
-header.top h1{font-size:32px;letter-spacing:-.01em}
-.sub{margin:2px 0 14px;color:var(--muted)}
-.prog{display:flex;align-items:center;gap:12px}
-.bar{flex:1;height:4px;background:var(--sand);border-radius:99px;overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:var(--sage);transition:width .3s}
-#progt{font-size:13px;color:var(--muted);white-space:nowrap}
-.room h2{font-size:22px;margin:28px 0 12px}
-.grid{display:grid;gap:16px;grid-template-columns:1fr}
-@media (min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
-.tile,.card,.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow)}
-.tile,.card{display:flex;flex-direction:column;overflow:hidden}
-.tile{cursor:pointer;transition:border-color .15s}
-.tile:hover{border-color:var(--beige)}
-.tbody{padding:12px 16px 16px;display:flex;flex-direction:column;gap:4px}
-.tname{font-family:var(--serif);font-weight:500;font-size:20px}
-.tstat{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:700;font-size:14px}
-.tstat.open{font-weight:600;color:var(--muted)}
-.mini{display:inline-flex;align-items:center;gap:6px;font-weight:400;color:var(--muted);min-width:0}
-.mini-t{max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.counts{font-size:13px;color:var(--muted)}
-.imgbox{position:relative;aspect-ratio:4/3;background:var(--img-bg);padding:8px;width:100%}
-.imgbox img{display:block;width:100%;height:100%;object-fit:contain}
-.imgbox.mini-img{width:40px;height:30px;aspect-ratio:auto;padding:2px;border-radius:6px;border:1px solid var(--border);flex:none}
-.imgbox.thumb{width:88px;padding:4px;border-radius:10px;border:1px solid var(--border);flex:none}
-.fb{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:12px;color:var(--muted);text-decoration:none}
-.badge{position:absolute;top:10px;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;background:var(--sage-soft);color:var(--text);border:1px solid var(--sage)}
-.badge.rec{left:10px}.badge.ord{right:10px}
-.card.dim{opacity:.55}
-.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px}
-.ptitle{font-weight:700;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.desc{font-size:14px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.price{font-size:22px;font-weight:700;line-height:1.2}
-.dims{font-size:14px}
-.note{background:var(--note-bg);border-left:4px solid var(--sage);border-radius:10px;padding:10px 12px}
-.note b{display:block;font-size:13px}
-.note p{margin:4px 0 0;white-space:pre-line}
-.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:4px}
-.sb{min-height:44px;border-radius:12px;background:var(--sand);border:1px solid var(--border);color:var(--text);font:inherit;font-size:14px;font-weight:600;cursor:pointer;padding:0 4px}
-.sb:hover{background:var(--beige)}
-.sb .ic{color:var(--muted)}
-.sb.fav[aria-pressed="true"]{background:var(--rose-soft);border-color:var(--rose)}
-.sb.fav[aria-pressed="true"] .ic{color:var(--rose)}
-.sb.ok[aria-pressed="true"]{background:var(--sage-soft);border-color:var(--sage)}
-.sb.ok[aria-pressed="true"] .ic{color:var(--sage)}
-.sb.no[aria-pressed="true"]{background:var(--sand);border-color:var(--muted)}
-.plink{align-self:flex-start;min-height:44px;display:inline-flex;align-items:center;color:var(--text);font-weight:600}
-.cwrap{display:flex;flex-direction:column;gap:2px}
-textarea.cmt,textarea.edit{width:100%;min-height:44px;resize:none;overflow:hidden;border:1px solid var(--border);border-radius:12px;background:var(--bg);color:var(--text);font:inherit;font-size:15px;padding:10px 12px}
-textarea.edit{background:var(--surface);white-space:pre-wrap}
-textarea.cmt:focus,textarea.edit:focus{outline:none;border-color:var(--beige);box-shadow:0 0 0 2px var(--beige)}
-.saved{font-size:12px;color:var(--sage);opacity:0;transition:opacity .2s;min-height:18px}
-.saved.on{opacity:1}
-details{border-top:1px solid var(--border);margin-top:4px}
-summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:700;list-style:none}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--muted);font-size:20px}
-details[open] summary::after{content:"–"}
-.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
-.thumbs .imgbox{padding:4px;border-radius:10px;border:1px solid var(--border)}
-dl.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0 0 10px;font-size:14px}
-dl.facts dt{color:var(--muted)}dl.facts dd{margin:0}
-.pc{display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:14px}
-.pc h4{margin:0 0 4px;font-size:13px;color:var(--muted);font-weight:700}
-.pc ul{margin:0;padding-left:16px}
-.cathead{padding:4px 0 16px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
-.back{background:none;border:0;color:var(--text);font:inherit;font-weight:600;min-height:44px;padding:0;cursor:pointer}
-.cattitle{font-size:28px}
-.chip{display:inline-flex;align-items:center;gap:6px;background:var(--rose-soft);border:1px solid var(--rose);border-radius:99px;padding:3px 12px;font-size:13px}
-.recnote{background:var(--sage-soft);border-radius:12px;padding:10px 12px;margin:4px 0 0;max-width:720px}
-.catc{margin:24px 0 8px;max-width:720px}
-.catc label,.elabel{display:block;font-weight:700;margin-bottom:6px}
-.btn{min-height:44px;padding:0 18px;border-radius:12px;background:var(--sand);color:var(--text);border:1px solid var(--border);font:inherit;font-weight:700;cursor:pointer}
+.wrap{max-width:1180px;margin:0 auto;padding-left:16px;padding-right:16px}
+
+/* Header */
+.top{padding-top:calc(18px + env(safe-area-inset-top,0px));padding-bottom:12px}
+.top-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.brand h1{font-size:30px}
+.sub{margin:2px 0 0;color:var(--muted);font-size:15px}
+.top-side{display:flex;flex-direction:column;align-items:flex-end;gap:6px;margin-left:auto}
+.sync{font-size:13px;color:var(--muted);min-height:18px}
+.auth{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;font-size:13px;color:var(--muted)}
+.bar{height:4px;border-radius:999px;background:var(--sand);overflow:hidden;margin-top:14px}
+.bar span{display:block;height:100%;width:0;background:var(--sage);border-radius:inherit;transition:width .4s ease}
+.notice{margin:12px 0 0;padding:10px 14px;border-radius:12px;background:var(--rose-soft);font-size:14px}
+.modenav,.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.modenav a,.tabs a{text-decoration:none;padding:8px 14px;border-radius:999px;font-size:14px;border:1px solid var(--border);background:var(--surface);min-height:44px;display:inline-flex;align-items:center}
+.modenav a[aria-current="page"],.tabs a[aria-current="page"]{background:var(--sand);border-color:var(--beige);font-weight:600}
+main{padding-top:4px;padding-bottom:48px}
+body.has-bottom main{padding-bottom:128px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:10px 16px;border-radius:12px;border:1px solid var(--border);background:var(--sand);color:var(--text);font-weight:600;font-size:15px;line-height:1.2;cursor:pointer;text-decoration:none}
 .btn:hover{background:var(--beige)}
 .btn:disabled{opacity:.5;cursor:default}
-.btn.primary{background:var(--text);color:var(--surface);border-color:var(--text)}
-.btn.primary:hover{background:var(--text);opacity:.92}
-.sendbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--bg);border-top:1px solid var(--border);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px))}
-.barin{max-width:560px;margin:0 auto;display:flex;gap:8px}
-.barin .btn{flex:1;min-height:50px}
-.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translate(-50%,8px);background:var(--text);color:var(--surface);padding:10px 16px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:40;max-width:calc(100% - 32px);text-align:center}
-body:not(.hasbar) .toast{bottom:calc(24px + env(safe-area-inset-bottom,0px))}
-.toast.on{opacity:1;transform:translate(-50%,0)}
-.scrim{position:fixed;inset:0;background:var(--text);opacity:.35;z-index:50}
-.sheet{position:fixed;left:0;right:0;bottom:0;z-index:51;max-width:560px;margin:0 auto;background:var(--surface);border-radius:20px 20px 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom,0px));box-shadow:var(--shadow)}
-.sheet h3{font-size:20px;margin-bottom:8px}
-.openlist{margin:0 0 16px;padding-left:18px;color:var(--muted)}
-.sheet-actions{display:flex;flex-direction:column;gap:8px}
-.panel{padding:16px;margin:16px 0}
-.panel h2{font-size:22px}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:12px 0 14px}
-.kpi{background:var(--bg);border-radius:12px;padding:10px 12px}
-.kpi b{display:block;font-size:17px}
-.kpi span{font-size:12px;color:var(--muted)}
-.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
-.shophead{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.shopsum{font-weight:700;white-space:nowrap}
-.orow{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--border)}
-.oinfo{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
-.oname{font-weight:700;color:var(--text)}
-.oside{display:flex;flex-direction:column;align-items:flex-end;gap:4px;text-align:right}
-.oprice{font-weight:700;white-space:nowrap}
-.art{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px}
-.art code{background:var(--sand);padding:2px 6px;border-radius:6px;font-size:13px}
-.mini-btn{min-height:44px;padding:0 12px;border-radius:10px;background:var(--sand);border:1px solid var(--border);color:var(--text);font:inherit;font-size:13px;font-weight:600;cursor:pointer}
-.mini-btn:hover{background:var(--beige)}
-.chk{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;font-size:14px}
-.chk input{width:22px;height:22px;accent-color:var(--sage);margin:0}
-.orow.isdone .oname{color:var(--muted)}
-.quote{background:var(--bg);border-left:4px solid var(--rose);border-radius:8px;padding:6px 10px;font-size:14px;white-space:pre-line}
-.openblk h3{font-size:17px;margin:14px 0 6px}
-.altlist{margin:0;padding-left:18px}
-.altlist li{margin-bottom:6px}
-.foot{padding:32px 16px 24px;font-size:12px;color:var(--muted)}
-.offscreen{position:fixed;left:-9999px;top:0;opacity:0}
-@media (max-width:560px){.orow{flex-wrap:wrap}.oside{flex-direction:row;width:100%;justify-content:space-between;align-items:center}}
+.btn:disabled:hover{background:var(--sand)}
+.btn-primary{background:var(--text);color:var(--surface);border-color:var(--text)}
+.btn-primary:hover{background:var(--text);opacity:.88}
+.btn-primary:disabled:hover{background:var(--text)}
+.btn-compact{padding:8px 12px;font-size:14px}
+
+/* Übersicht */
+.overview-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0 0}
+.progress-text{margin:0;color:var(--muted);font-size:15px}
+.room{margin-top:28px}
+.room-title{font-size:24px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:1fr;gap:18px}
+@media (min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}.brand h1{font-size:36px}}
+@media (min-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
+.tile{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);text-decoration:none;overflow:hidden}
+.tile:hover{border-color:var(--beige)}
+.tile-media{position:relative}
+.tile-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:2px}
+.tile-title{font-size:21px;margin-bottom:2px}
+.tile-meta{margin:0;color:var(--muted);font-size:14px}
+.tile-status{display:flex;align-items:center;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:14px;font-weight:600;min-height:57px}
+.tile-status-text{display:flex;flex-direction:column;min-width:0}
+.tile-fav-name{color:var(--muted);font-size:13px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.badge-new{position:absolute;top:10px;left:10px;background:var(--surface);border:1px solid var(--beige);border-radius:999px;padding:3px 10px;font-size:13px;font-weight:700}
+
+/* Bilder */
+.imgbox{position:relative;aspect-ratio:4/3;background:var(--img-bg);padding:8px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.imgbox img{width:100%;height:100%;object-fit:contain;display:block}
+.img-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;color:var(--muted);text-decoration:none}
+.imgbox.mini{width:56px;height:56px;aspect-ratio:auto;padding:4px;border-radius:10px;border:1px solid var(--border);flex:none}
+.imgbox.thumb{border-radius:10px;border:1px solid var(--border)}
+.badge-order{position:absolute;top:10px;right:10px;z-index:1;background:var(--sage-soft);border:1px solid var(--sage);border-radius:999px;padding:3px 10px;font-size:13px;font-weight:700}
+
+/* Kategorie + Karten */
+.back{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;color:var(--muted);font-weight:600}
+.cat-head{margin:2px 0 18px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.cat-room{margin:0;color:var(--muted);font-size:14px}
+.cat-title{font-size:30px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;transition:opacity .2s ease}
+.card.is-no{opacity:.55}
+.card-body{padding:16px;display:flex;flex-direction:column;gap:8px}
+.badge-reco{align-self:flex-start;background:var(--sage-soft);border:1px solid var(--sage);border-radius:999px;padding:2px 10px;font-size:13px;font-weight:700}
+.card-title{font-family:var(--f-body);font-weight:700;font-size:17px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.summary{margin:0;color:var(--muted);font-size:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.price{margin:2px 0 0;font-family:var(--f-head);font-size:26px;line-height:1.15}
+.price.is-unknown{font-family:var(--f-body);font-size:16px;color:var(--muted)}
+.dims{margin:0;font-size:14px}
+.vorgabe-hint{margin:0;font-size:13px;font-weight:600;color:var(--rose)}
+.note{background:var(--note-bg);border-left:4px solid var(--sage);border-radius:10px;padding:10px 12px}
+.note-label{font-weight:700;font-size:14px;margin:0 0 4px}
+.note-text{margin:0;white-space:pre-line;font-size:15px;overflow-wrap:anywhere}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:4px}
+.seg-btn{min-height:44px;border-radius:12px;border:1px solid var(--border);background:var(--sand);font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:6px 8px}
+.seg-btn:hover{background:var(--beige)}
+.seg-fav.is-on{background:var(--rose-soft);border-color:var(--rose)}
+.seg-fav.is-on .ico{color:var(--rose)}
+.seg-ok.is-on{background:var(--sage-soft);border-color:var(--sage)}
+.seg-ok.is-on .ico{color:var(--sage)}
+.seg-no.is-on{background:var(--sand);border-color:var(--muted)}
+.seg-no.is-on .ico{color:var(--muted)}
+.prio-btn.is-on{background:var(--beige);border-color:var(--muted)}
+.product-link{align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;font-size:14px;color:var(--muted)}
+textarea.comment{width:100%;min-height:44px;resize:none;border:1px solid var(--border);border-radius:12px;background:var(--bg);padding:10px 12px;font-size:15px;line-height:1.45;overflow:hidden}
+textarea:focus,input:focus,select:focus{outline:2px solid var(--beige);border-color:var(--beige)}
+details.more{border-top:1px solid var(--border);padding-top:4px}
+details.more summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600;font-size:14px}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
+dl.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0 0 8px;font-size:14px}
+dl.facts dt{color:var(--muted)}
+dl.facts dd{margin:0}
+.pc-title{font-size:14px;font-weight:700;margin:8px 0 2px}
+.pc{font-size:14px;margin:0;padding-left:18px}
+.cat-comment{margin-top:28px;max-width:720px}
+.cc-label{display:block;font-weight:600;margin-bottom:6px}
+
+/* Unterer Balken, Toast, Dialog */
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;justify-content:center;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--border)}
+.btn-done{width:100%;max-width:420px}
+.btn-done[aria-pressed="true"]{background:var(--sage-soft);color:var(--text);border-color:var(--sage)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:30;max-width:calc(100% - 32px);background:var(--text);color:var(--surface);padding:10px 16px;border-radius:12px;font-size:14px;box-shadow:var(--shadow)}
+.dlg{border:none;border-radius:var(--radius);background:var(--surface);color:var(--text);padding:20px;width:min(580px,calc(100% - 24px));max-height:calc(100% - 32px);box-shadow:var(--shadow)}
+.dlg::backdrop{background:color-mix(in srgb,var(--text) 30%,transparent)}
+.dlg-title{font-size:22px;margin-bottom:12px}
+.dlg-body p{margin:0 0 8px}
+.dlg-list{margin:0 0 8px;padding-left:18px;font-size:14px;max-height:40vh;overflow:auto}
+.dlg-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:16px}
+
+/* Formulare */
+.field{display:flex;flex-direction:column;gap:4px;margin:0 0 12px}
+.field>span{font-size:14px;font-weight:600}
+.field input,.field select,.field textarea{min-height:44px;width:100%;border:1px solid var(--border);border-radius:12px;background:var(--bg);padding:10px 12px;font-size:16px}
+.field textarea{resize:vertical;line-height:1.45}
+fieldset{border:1px solid var(--border);border-radius:12px;padding:12px;margin:0 0 12px;min-width:0}
+legend{font-weight:700;padding:0 6px}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seg-prio{max-width:260px}
+.dup-hint{margin:-4px 0 12px;padding:8px 12px;border-radius:12px;background:var(--rose-soft);font-size:14px}
+.addform{max-width:560px}
+.saved-title{font-family:var(--f-head);font-size:28px;margin:0 0 4px}
+
+/* Panels, Zeilen, Chips */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin:16px 0}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.panel-title{font-size:22px}
+.panel p{margin:4px 0}
+.row{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--border)}
+.row.is-no{opacity:.55}
+.row.is-focus{background:var(--sage-soft);border-radius:12px;padding-left:8px;padding-right:8px}
+.row-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.row-name{font-weight:600;text-decoration:none;overflow-wrap:anywhere;margin:0}
+a.row-name:hover{text-decoration:underline}
+.row-meta{margin:0;font-size:14px;color:var(--muted);overflow-wrap:anywhere}
+.row-comment{margin:2px 0 0;font-size:14px;white-space:pre-line;overflow-wrap:anywhere}
+.row-url{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.row-side{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none}
+.row-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.row-price{font-weight:700;white-space:nowrap}
+@media (max-width:560px){.row{flex-wrap:wrap}.row-side{width:100%;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:center;padding-left:68px}}
+.chip{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:3px 10px;font-size:13px;font-weight:600;border:1px solid var(--border);background:var(--sand);white-space:nowrap}
+.chip-rose{background:var(--rose-soft);border-color:var(--rose)}
+.chip-sage{background:var(--sage-soft);border-color:var(--sage)}
+.chip-plain{background:var(--surface)}
+.chip-gap{background:var(--rose-soft);border-color:var(--rose);white-space:normal;align-self:flex-start;margin-top:4px}
+.note-inline{margin:4px 0 0;padding:6px 10px;border-radius:10px;background:var(--note-bg);font-size:14px;white-space:pre-line;overflow-wrap:anywhere}
+.counts{font-size:17px;margin:2px 0 6px}
+.group{margin-top:18px}
+.group-title{font-size:18px;margin-bottom:4px}
+.group-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.dec-cc{margin:8px 0 0;font-size:14px;white-space:pre-line}
+.sum{display:flex;justify-content:space-between;gap:12px;font-weight:700;padding-top:10px;border-top:1px solid var(--border)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.cat-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:24px;margin-bottom:4px}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.hint{font-size:13px;color:var(--muted);margin:4px 0}
+.empty{color:var(--muted);padding:32px 0;text-align:center}
+.check{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;font-size:14px}
+.check input{width:20px;height:20px;accent-color:var(--sage);margin:0}
+.bookmarklet{display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;border-radius:12px;border:1px dashed var(--muted);background:var(--sand);font-weight:700;text-decoration:none;cursor:grab}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap">
-<h1>CozyNest</h1>
-<p class="sub" id="sub">Unsere Auswahl für die neue Wohnung</p>
-<div class="prog"><div class="bar" id="barwrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Fortschritt"><i id="bar"></i></div><span id="progt"></span></div>
-</div></header>
-<main class="wrap" id="app"></main>
-<footer class="foot wrap" id="foot"></footer>
-<div class="sendbar" id="sendbar" hidden></div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-<div id="sheet-root"></div>
-<noscript><p class="wrap">Bitte JavaScript aktivieren.</p></noscript>
-<script type="application/json" id="data">{"meta":{"version":"20260922-4","noteLabel":"Anmerkung aus der Recherche"},"kategorien":[{"id":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","vorgabe":null,"vergleichsdimensionen":["Breite","Höhe","Tiefe","Material","Preis"],"empfehlung":""},{"id":"k-wohnzimmer-raumtrenner","raum":"Wohnzimmer","kategorie":"Raumtrenner","vorgabe":null,"vergleichsdimensionen":["Breite","Höhe","Tiefe","Preis"],"empfehlung":""},{"id":"k-wohnzimmer-tv-board","raum":"Wohnzimmer","kategorie":"TV Board","vorgabe":null,"vergleichsdimensionen":["Breite","Höhe","Material","Preis"],"empfehlung":""},{"id":"k-kueche-muell","raum":"Küche","kategorie":"Müll","vorgabe":null,"vergleichsdimensionen":["Breite","Höhe","Tiefe","Material","Preis"],"empfehlung":""},{"id":"k-wohnzimmer-regal","raum":"Wohnzimmer","kategorie":"Regal","vorgabe":null,"vergleichsdimensionen":["Breite","Höhe","Tiefe","Material","Preis"],"empfehlung":""}],"items":[{"id":"xxxl-001630021901","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.xxxlutz.de/p/landscape-regal-akazie-mangoholz-vollmassiv-schwarz-akaziefarben-001630021901","shop":"xxxl","artikelnr":"001630021901","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"Landscape REGAL Akazie, Mangoholz vollmassiv, Schwarz/Akaziefarben","shop":"XXXLutz","preis":349.0,"preis_status":"BELEGT","streichpreis":851.0,"artikelnr":"1630021901","artikelnr_status":"BELEGT","masse_b":120,"masse_t":38,"masse_h":201,"masse_status":"BELEGT","material":"Holz (Akazie/Mangoholz, vollmassiv), Metall","material_status":"BELEGT","farbe":"Schwarz, Akaziefarben","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PIjGzYeIGpR1iRo5ODvr5h_Q/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIgquaicMkcdTQNkvouDH2LA/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Stehregal aus massivem Akazienholz mit Metallfüßen, 7 offene Fächer, industrieller Look.","lieferzeit":"ab sofort lieferbar (Standardversand 59,99€)","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Akazie/Mango vollmassiv","Sofort lieferbar","Größte Höhe (201 cm), viel Stauraum"],"cons":["Zweitteuerste Option (349 €)","201 cm hoch – Deckenhöhe prüfen","Standardversand 59,99 €"]},"status":"offen","bestellt_am":""},{"id":"xxxl-001749018632","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.xxxlutz.de/p/mid-you-regal-schwarz-eichefarben-001749018632","shop":"xxxl","artikelnr":"001749018632","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"MID.YOU REGAL Schwarz, Eichefarben","shop":"XXXLutz","preis":155.0,"preis_status":"BELEGT","streichpreis":254.0,"artikelnr":"1749018632","artikelnr_status":"BELEGT","masse_b":114,"masse_t":35,"masse_h":185,"masse_status":"BELEGT","material":"Metall (Stahl, pulverbeschichtet), Holzwerkstoff (MDF-Nachbildung)","material_status":"BELEGT","farbe":"Schwarz, Eichefarben","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PIhiIUh686OMMHa8OA9DuVZQ/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIwBYLstF4o_lpSTeOl0krXA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIKQBK0X2ScIeDPH_iV3RSTA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIaDhUm4CTwb4zF_NA0rCdtg/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Wandregal mit versetzten Ebenen, filigranes Stahlgestell, 6 Ablageflächen in Eichefarben.","lieferzeit":"ca. 6-7 Wochen","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Günstig für 185 cm Höhe (155 €)","Versetzte Ebenen, leichte Optik","6 Ablageflächen"],"cons":["Lange Lieferzeit (6–7 Wochen)","MDF statt Massivholz","Nur 15 kg Gesamtbelastbarkeit"]},"status":"offen","bestellt_am":""},{"id":"xxxl-800001368666","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.xxxlutz.de/p/mirjan24-standregal-wrap-r105-800001368666","shop":"xxxl","artikelnr":"800001368666","prio":null,"notiz_researcher":"Finde ich an sich hübsch, auch wenn es vermutlich nicht mit den Türen passt.","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"MIRJAN24 STANDREGAL Wrap R105","shop":"XXXLutz (Marktplatz: MIRJAN24)","preis":223.0,"preis_status":"BELEGT","streichpreis":null,"artikelnr":"800001368666","artikelnr_status":"BELEGT","masse_b":105,"masse_t":40,"masse_h":167,"masse_status":"BELEGT","material":"Holzwerkstoff (Melamin), Metallfüße","material_status":"BELEGT","farbe":"Nussbaumfarben, Schwarz","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/NCF2y5LsiyE9Z6LR0Lb3JPBg/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCVPLE1tcqktmubeSFpX0W4Q/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCm3OVi1juFdgKHOHsYhxXgg/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCW4yAot7-KY5-r43qE1Ku3w/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Standregal im Industriestil mit 2 Drehtüren, griffloses Push-to-Open-System.","lieferzeit":null,"lieferzeit_status":"LUECKE","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Geschlossene Fächer durch 2 Türen","Push-to-Open, grifflos","Mittlere Tiefe 40 cm"],"cons":["Lieferzeit unbekannt [LÜCKE]","Marktplatz-Anbieter","Laut Notiz Zweifel wegen der Türen"]},"status":"offen","bestellt_am":""},{"id":"xxxl-800001853928","catId":"k-wohnzimmer-raumtrenner","raum":"Wohnzimmer","kategorie":"Raumtrenner","url":"https://www.xxxlutz.de/p/vallsero-raumteiler-stufenregal-industriestil-5-ablagen-102x30x160cm-schwarz-800001853928","shop":"xxxl","artikelnr":"800001853928","prio":null,"notiz_researcher":"Eventuell zu klein als fancy Regal für unsere AZ Lösung. Vermutlich auch zu klein als Raumtrenner für das WZ oder was denkst du?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"Vallsero RAUMTEILER-STUFENREGAL, Industriestil, 5 Ablagen","shop":"XXXLutz (Marktplatz: HEXANTRAT)","preis":101.91,"preis_status":"BELEGT","streichpreis":103.36,"artikelnr":"800001853928","artikelnr_status":"BELEGT","masse_b":102,"masse_t":30,"masse_h":160,"masse_status":"BELEGT","material":"Holzwerkstoff (MDF, Antikholz-Finish)","material_status":"BELEGT","farbe":"Schwarz","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/NCfNEtli1-r7Y3C07e-b-HPA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCiqUk-_hMMAwz7Jy4oszvug/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCvf8tpJRJ-nIKiiuhue2rfQ/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCYyaBLvwSYy-dE0dZXz46Ww/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Gestuftes Bücherregal im Industriestil, 5 Ablagen, integrierte Kippsicherung.","lieferzeit":null,"lieferzeit_status":"LUECKE","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Günstigster Preis der Auswahl (101,91€)","Kompakte Maße für begrenzten Raum","Integrierte Kippsicherung"],"cons":["Laut Notiz evtl. zu klein für beide Einsatzzwecke","Lieferzeit unbekannt [LÜCKE]","Einzige Option in dieser Kategorie"]},"status":"offen","bestellt_am":""},{"id":"xxxl-800000984646","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.xxxlutz.de/p/riess-ambiente-buecherregal-slim-line-wildeiche-185cm-800000984646","shop":"xxxl","artikelnr":"800000984646","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"riess-ambiente BÜCHERREGAL SLIM LINE Wildeiche 185cm","shop":"XXXLutz (Marktplatz: riess-ambiente)","preis":159.95,"preis_status":"BELEGT","streichpreis":null,"artikelnr":"800000984646","artikelnr_status":"BELEGT","masse_b":114,"masse_t":35,"masse_h":185,"masse_status":"BELEGT","material":"Holz, Metall","material_status":"BELEGT","farbe":"Braun, Schwarz","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/NCcw4H-ErjNlUU0TthC7oniw/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NCeOsdHihNEt6JOyhTpk-Tbg/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NClu3HXIc9Bi7t7ng0CA-j7w/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/NC1nmwcDwiXzYaLdSpwtTxng/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Standregal mit asymmetrisch angeordneten Böden in Wildeiche-Optik, schwarzes Metallgestell.","lieferzeit":null,"lieferzeit_status":"LUECKE","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Günstig (159,95 €)","Asymmetrische Böden, Wildeiche-Optik","114 × 185 cm"],"cons":["Lieferzeit unbekannt [LÜCKE]","Marktplatz-Anbieter","Kein Massivholz"]},"status":"offen","bestellt_am":""},{"id":"xxxl-002479000303","catId":"k-wohnzimmer-tv-board","raum":"Wohnzimmer","kategorie":"TV Board","url":"https://www.xxxlutz.de/p/milino-lowboard-lino-181-50-40-cm-typenauswahl-beimoebel-erhaeltlich-stehend-002479000303","shop":"xxxl","artikelnr":"002479000303","prio":null,"notiz_researcher":"Wie gesagt schwierig in Vorstellung und Farbe ohne das Sofa live im WZ zu haben. Aber Interessant für das backlog?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"Milino LOWBOARD LINO 181/50/40 cm","shop":"XXXLutz","preis":119.0,"preis_status":"BELEGT","streichpreis":448.0,"artikelnr":"2479000303","artikelnr_status":"BELEGT","masse_b":181,"masse_t":40,"masse_h":50,"masse_status":"BELEGT","material":"Metall (Gusseisen), Holzwerkstoff (MDF-Nachbildung)","material_status":"BELEGT","farbe":"Schwarz, Eichefarben","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PIIAMWufAf8bGPml0jobl1WQ/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIa7DYz6ATzcsWUuEpxzOlsQ/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIO2yPrm2kDjcFrZ73zfVa3g/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIXOxg9k9WQxhy8eX7O5EpPA/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Lowboard mit 4 grifflosen Drehtüren, Soft-Close, Gusseisenfüße, 100 kg belastbar.","lieferzeit":"ca. 3 Werktage (Postversand 19,99€)","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Günstigster Preis der TV-Boards (119€)","Kurze Lieferzeit (~3 Werktage)","Hohe Belastbarkeit (100kg)"],"cons":["Farbwirkung ohne Sofa laut Notiz schwer einschätzbar","Aufwendige Montage","Grifflose Türen ggf. gewöhnungsbedürftig"]},"status":"offen","bestellt_am":""},{"id":"xxxl-002778006402","catId":"k-wohnzimmer-tv-board","raum":"Wohnzimmer","kategorie":"TV Board","url":"https://www.xxxlutz.de/p/p-b-lowboard-helsinki-180-40-33-cm-stehend-002778006402","shop":"xxxl","artikelnr":"002778006402","prio":null,"notiz_researcher":"Wie gesagt schwierig in Vorstellung und Farbe ohne das Sofa live im WZ zu haben. Aber Interessant für das backlog?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"P & B LOWBOARD Helsinki 180/40/33 cm","shop":"XXXLutz","preis":174.0,"preis_status":"BELEGT","streichpreis":null,"artikelnr":"2778006402","artikelnr_status":"BELEGT","masse_b":180,"masse_t":33,"masse_h":40,"masse_status":"BELEGT","material":"Holzwerkstoff (Flachpressplatte, FSC)","material_status":"BELEGT","farbe":"Beige","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PIxL1p-xPuN_tSknKuWkQFFA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PI83_hVTQQUtbryRtV9rK-3w/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIU-duwadL23hFWwMTSlNcjw/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIXvXPsDADxJkgOaQgVT6iXg/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Lowboard mit 3 Klappen, Stangengriff, FSC-zertifiziertes Holzwerkstoff, online only.","lieferzeit":"ca. 1-2 Wochen (Postversand gratis)","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock (online only)","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Geringste Tiefe (33cm), platzsparend","FSC-zertifiziertes Material","Kurze Lieferzeit (1-2 Wochen)"],"cons":["Farbwirkung ohne Sofa laut Notiz schwer einschätzbar","Nur online ausgestellt","Farbe Beige ggf. weniger vielseitig"]},"status":"offen","bestellt_am":""},{"id":"xxxl-001849025404","catId":"k-wohnzimmer-tv-board","raum":"Wohnzimmer","kategorie":"TV Board","url":"https://www.xxxlutz.de/p/livetastic-lowboard-185-64-41-cm-1-schublade_n_-stehend-001849025404","shop":"xxxl","artikelnr":"001849025404","prio":null,"notiz_researcher":"Wie gesagt schwierig in Vorstellung und Farbe ohne das Sofa live im WZ zu haben. Aber Interessant für das backlog?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":"Livetastic LOWBOARD 185/64/41 cm, 1 Schublade","shop":"XXXLutz","preis":289.0,"preis_status":"BELEGT","streichpreis":814.0,"artikelnr":"1849025404","artikelnr_status":"BELEGT","masse_b":185,"masse_t":41,"masse_h":64,"masse_status":"BELEGT","material":"Holzwerkstoff (Flachpressplatte/MDF), Aluminiumgriff","material_status":"BELEGT","farbe":"Kaschmir","farbe_status":"BELEGT","bilder":["https://media.xxxlutz.com/i/xxxlutz/PI8DHKG3bDO0qIwxLRUKZSFw/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PI3h1ELlL0ns_QLAsGF_tcAA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIll0bCuLnhc6WRzPEmVmqOA/?fmt=auto&w=1200","https://media.xxxlutz.com/i/xxxlutz/PIfkaGmqozUSlCPE2AsKMjDA/?fmt=auto&w=1200"],"bilder_status":"BELEGT","beschreibung":"Lowboard mit 1 Tür, 1 Schublade, 2 verstellbaren Einlegeböden, FSC-Mix-Holzwerkstoff.","lieferzeit":"ca. 3 Werktage (Postversand gratis)","lieferzeit_status":"BELEGT","verfuegbarkeit":"instock (online only)","verfuegbarkeit_status":"BELEGT","abrufdatum":"2026-09-22","status":"ENRICHED"},"curate":{"pros":["Größte Höhe (64cm), mehr Stauraum","Schublade + Tür kombiniert","Kurze Lieferzeit (~3 Werktage)"],"cons":["Mit 289€ teuerste TV-Board-Option","Farbwirkung ohne Sofa laut Notiz schwer einschätzbar","Nur online ausgestellt"]},"status":"offen","bestellt_am":""},{"id":"amazon-b0hdymptfc","catId":"k-kueche-muell","raum":"Küche","kategorie":"Müll","url":"https://www.amazon.de/dp/B0HDYMPTFC/","shop":"amazon","artikelnr":"B0HDYMPTFC","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":null,"status":"BLOCKED","abrufdatum":"2026-09-22","preis_status":"LUECKE: blockiert","artikelnr_status":"LUECKE: blockiert","masse_status":"LUECKE: blockiert","material_status":"LUECKE: blockiert","farbe_status":"LUECKE: blockiert","bilder_status":"LUECKE: blockiert","lieferzeit_status":"LUECKE: blockiert","verfuegbarkeit_status":"LUECKE: blockiert","bilder":[]},"curate":{"pros":[],"cons":["Produktdaten fehlen – Amazon blockiert Abruf [LÜCKE]"]},"status":"offen","bestellt_am":""},{"id":"hoeffner-40340135","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.hoeffner.de/artikel/40340135","shop":"hoeffner","artikelnr":"40340135","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","preis_status":"MANUELL","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"LUECKE","titel":"Regal Josha","shop":"Höffner","preis":371.68,"streichpreis":null,"preis_hinweis":"371,68 € als Online-Kundenkartenpreis, daneben 659,00 € ausgewiesen","artikelnr":"40340135","masse_b":115,"masse_t":35,"masse_h":174,"material":"Massivholz Akazie (Böden), Eisengestell","farbe":"Akazie, Schwarz","bilder":["https://media.hoeffner.de/medias/large/40340135_2-202405131235.webp","https://media.hoeffner.de/medias/large/40340135_8-202405131235.webp","https://media.hoeffner.de/medias/large/40340135_1-202405131235.webp","https://media.hoeffner.de/medias/large/40340135_3-202405131235.webp"],"beschreibung":"Rustikales Standregal mit Akazien-Massivholzböden auf schwarzem Kufengestell, 6 Böden, 4 Fächer mit Rückwand.","lieferzeit":"ca. 5 Tage (Spedition 59,00 €)","verfuegbarkeit":null},"curate":{"pros":["Böden aus massiver Akazie","Rückwände an 4 Fächern","Lieferung ca. 5 Tage bis in die Wohnung"],"cons":["Teuerste Option (371,68 € Kundenkartenpreis)","Spedition 59 €","Mit 174 cm eher mittelhoch"]},"status":"offen","bestellt_am":""},{"id":"hoeffner-13348658","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.hoeffner.de/artikel/13348658","shop":"hoeffner","artikelnr":"13348658","prio":null,"notiz_researcher":"Eine etwas niedrigere Variante. Oder vielleicht fürs Wohnzimmer?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"Regal Seano","shop":"Höffner","preis":109.0,"streichpreis":null,"artikelnr":"13348658","masse_b":114,"masse_t":35,"masse_h":78,"material":"Metall pulverbeschichtet, Holzwerkstoff foliert","farbe":"Wildeiche-Nachbildung, Schwarz matt","bilder":["https://media.hoeffner.de/medias/large/13348658_11-202405142234.webp","https://media.hoeffner.de/medias/large/13348658_9-202405142234.webp","https://media.hoeffner.de/medias/large/13348658_7-202405142234.webp","https://media.hoeffner.de/medias/large/13348658_12-202405142234.webp"],"beschreibung":"Niedriges Regal mit asymmetrischen Fächern, schwarzes Metallgestell, 3 Böden, max. ca. 10 kg je Boden.","lieferzeit":"2–3 Werktage (Paket 5,90 €)","verfuegbarkeit":"sofort lieferbar"},"curate":{"pros":["Günstigste Option (109 €)","Sofort lieferbar, 2–3 Werktage","Asymmetrisches Design"],"cons":["Nur 78 cm hoch – Sideboard-Format","3 Böden, max. ca. 10 kg je Boden","Folierter Holzwerkstoff"]},"status":"offen","bestellt_am":""},{"id":"hoeffner-40341001","catId":"k-wohnzimmer-regal","raum":"Wohnzimmer","kategorie":"Regal","url":"https://www.hoeffner.de/artikel/40341001","shop":"hoeffner","artikelnr":"40341001","prio":null,"notiz_researcher":"Würde von der Breite genau dahin passen wo der Spiegel gerade steht.","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"Regal Seano (mit 2 Schüben)","shop":"Höffner","preis":129.0,"streichpreis":null,"artikelnr":"40341001","masse_b":42,"masse_t":35,"masse_h":185,"material":"Holzwerkstoff foliert, Metall pulverbeschichtet","farbe":"Wildeiche-Nachbildung, Schwarz matt","bilder":["https://media.hoeffner.de/medias/large/40341001_8-202312121237.webp","https://media.hoeffner.de/medias/large/40341001_2-202312121237.webp","https://media.hoeffner.de/medias/large/40341001_1-202312121237.webp","https://media.hoeffner.de/medias/large/40341001_9-202312121237.webp"],"beschreibung":"Schmales Hochregal mit 3 Böden und 2 Schubkästen auf schwarzem Metallgestell, max. ca. 5 kg je Boden.","lieferzeit":"1–2 Wochen (Sperrgut 19,00 €)","verfuegbarkeit":"bestellbar"},"curate":{"pros":["Schmal (42 cm), passt laut Notiz an den Spiegelplatz","2 Schubladen","Lieferung 1–2 Wochen"],"cons":["Einzige Option der Kategorie","Max. ca. 5 kg je Boden","Sperrgut-Versand 19 €"]},"status":"offen","bestellt_am":""},{"id":"hoeffner-40345492","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.hoeffner.de/artikel/40345492","shop":"hoeffner","artikelnr":"40345492","prio":null,"notiz_researcher":"Etwas schmal mit 100cm Breite? Was denkst du?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"Bücherregal Barden","shop":"Höffner (Versandpartner)","preis":110.0,"streichpreis":null,"artikelnr":"40345492","masse_b":100,"masse_t":30,"masse_h":170,"material":"Holzwerkstoff, Metall","farbe":"Braun, Schwarz","bilder":["https://media.hoeffner.de/medias/large/40345492_2-202510202351.webp","https://media.hoeffner.de/medias/large/40345492_3-202510202351.webp","https://media.hoeffner.de/medias/large/40345492_7-202510202351.webp","https://media.hoeffner.de/medias/large/40345492_4-202510202351.webp"],"beschreibung":"Bücherregal mit 10 offenen Fächern auf schwarzem 4-Fuß-Metallgestell, Böden in Braun.","lieferzeit":"4–7 Werktage (Paket 7,90 €)","verfuegbarkeit":"bestellbar"},"curate":{"pros":["Zweitgünstigste Option (110 €)","10 Fächer","Lieferung 4–7 Werktage"],"cons":["100 cm breit – laut Notiz evtl. schmal","Nur 30 cm tief","Versand über Partner"]},"status":"offen","bestellt_am":""},{"id":"hoeffner-40344905","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.hoeffner.de/artikel/40344905","shop":"hoeffner","artikelnr":"40344905","prio":null,"notiz_researcher":"Mal was anderes zu den Holzelementen?","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"LUECKE","verfuegbarkeit_status":"BELEGT","titel":"Standregal Insasi","shop":"Höffner (Versandpartner)","preis":129.0,"streichpreis":null,"artikelnr":"40344905","masse_b":101,"masse_t":36,"masse_h":161,"material":"Metall, Holzwerkstoff beschichtet","farbe":"Anthrazit","bilder":["https://media.hoeffner.de/medias/large/40344905_2-202507012033.webp","https://media.hoeffner.de/medias/large/40344905_4-202507012033.webp","https://media.hoeffner.de/medias/large/40344905_3-202507012033.webp","https://media.hoeffner.de/medias/large/40344905_1-202507012033.webp"],"beschreibung":"Einfarbig anthrazitfarbenes Standregal mit 5 Fächern auf Metallgestell.","lieferzeit":null,"verfuegbarkeit":"zurzeit nicht bestellbar"},"curate":null,"status":"offen","bestellt_am":"","archived":true},{"id":"home24-b164c92f","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.home24.de/produkt/regal-coogee-x-walnuss-dekor","shop":"home24","artikelnr":null,"prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"Regal Coogee X","shop":"home24 (Marke Norrwood)","preis":149.99,"streichpreis":null,"artikelnr":"000000001000559456","masse_b":114,"masse_t":35,"masse_h":185,"material":"MDF foliert, Metall pulverbeschichtet","farbe":"Walnuss-Dekor, Schwarz","bilder":["https://cdn1.home24.net/images/media/catalog/product/original/jpg/-/1/-1000559456-260624-010-IMAGE-P000000001000559456.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/-/1/-1000559456-260624-020-MOOD-DETAILS-P000000001000559456-mood.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/-/1/-1000559456-260624-021-MOOD-DETAILS-P000000001000559456-mood.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/-/1/-1000559456-260624-050-DETAILS-P000000001000559456.jpg"],"beschreibung":"Standregal mit 5 festen Böden in Walnuss-Optik auf schwarzem Metallgestell, 21,7 kg.","lieferzeit":"sofort versandfertig, ca. 24.–25.09. (Paket Sperrgut)","verfuegbarkeit":"sofort versandfertig"},"curate":{"pros":["Sofort versandfertig (ca. 24.–25.09.)","Mittleres Preisniveau (149,99 €)","5 feste Böden, 114 × 185 cm"],"cons":["Folierter MDF","Walnuss-Dekor dunkler als Eiche-Optionen","Zerlegt, Selbstaufbau"]},"status":"offen","bestellt_am":""},{"id":"home24-f3048aee","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.home24.de/produkt/regal-mephisto-185-cm-marmor-schwarz-dekor-schwarz-breite-120-cm","shop":"home24","artikelnr":null,"prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"Regal Mephisto 185 cm","shop":"home24 (Marke Norrwood)","preis":259.99,"streichpreis":null,"artikelnr":"000000001000542191","masse_b":120,"masse_t":35,"masse_h":185,"material":"Stahl pulverbeschichtet, MDF beschichtet","farbe":"Marmor-Schwarz-Dekor, Schwarz matt","bilder":["https://cdn1.home24.net/images/media/catalog/product/original/jpg/-/1/-1000542191-260224-010-IMAGE-P000000001000542191.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/-/1/-1000542191-260224-020-MOOD-DETAILS-P000000001000542191-mood.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/-/1/-1000542191-260224-021-MOOD-DETAILS-P000000001000542191-mood.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/-/1/-1000542191-260224-050-DETAILS-P000000001000542191.jpg"],"beschreibung":"Standregal mit 5 Böden in Marmor-Schwarz-Optik auf mattschwarzem Stahlgestell, 31,4 kg.","lieferzeit":"versandfertig in 1–2 Wochen, ca. 07.–12.10. (Spedition)","verfuegbarkeit":"bestellbar"},"curate":{"pros":["Breite 120 cm, Höhe 185 cm","Stahlgestell, 31,4 kg stabil","Direkt von home24"],"cons":["Hoher Preis (259,99 €)","Lieferung erst ca. 07.–12.10.","Marmor-Schwarz-Optik sehr dunkel"]},"status":"offen","bestellt_am":""},{"id":"home24-ab8f4e56","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.home24.de/produkt/regal-p11-braun","shop":"home24","artikelnr":null,"prio":null,"notiz_researcher":"Sollte passen mit den Schubladen","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","streichpreis":null,"preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"Regal P11","shop":"home24 (Marktplatz: heute-wohnen)","preis":176.99,"artikelnr":"000000003001864089","masse_b":81,"masse_t":33,"masse_h":150,"material":"Holzwerkstoff (melaminbeschichtet), Eisengestell","farbe":"Braun","bilder":["https://cdn1.home24.net/images/media/catalog/product/original/jpg/7/9/79ce05736ba943d69a32066387393f36.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/1/2/120edb557a90425db10ca686c9f7bb62.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/c/1/c1a8d1ee33a841fc849f2057488b2e13.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/6/3/633df3d53d2e4eae8aca4aca15fbe9c5.jpg"],"beschreibung":"Industrial-Regal mit offenen Ablagen und 2 Schubladen, Eisengestell, 25,75 kg.","lieferzeit":"sofort versandfertig, ca. 25.–29.09. (Paket)","verfuegbarkeit":"sofort versandfertig"},"curate":{"pros":["2 Schubladen für verdeckten Stauraum","Eisengestell im Industrial-Look","Sofort versandfertig"],"cons":["Kompakt: nur 81 × 150 cm","Marktplatz-Anbieter","Mit 176,99 € teuer für die Größe"]},"status":"offen","bestellt_am":""},{"id":"home24-f94b988b","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.home24.de/produkt/regal-standregal-mit-schubladen-holz-braun-stahl-30-x-180-x-90-cm","shop":"home24","artikelnr":null,"prio":null,"notiz_researcher":"Eigentlich ganz cool mit den Schubladen. Allerdings nur 90cm breit.","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","streichpreis":null,"preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"MANUELL","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"UNSICHER","verfuegbarkeit_status":"BELEGT","titel":"Standregal mit Schubladen, Holz/Stahl","shop":"home24 (Marktplatz: Fativo)","preis":134.99,"artikelnr":"000000003000848008","masse_b":90,"masse_t":30,"masse_h":180,"material":"Holzwerkstoff, Stahl","farbe":"Nussbaum dunkel Dekor, Schwarz","bilder":["https://cdn1.home24.net/images/media/catalog/product/original/png/9/1/91f30311f7634d56806ccf2475cc4efa.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/5/0/509d1c21149d4b7087fcbd6358d2bd39.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/4/f/4fc81e86ab0e4ef3a2e71e3e8073ce27.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/0/b/0b6c32aaca8e4dd190303a53052f4792.jpg"],"beschreibung":"Vintage-Standregal mit 6 Fächern und Schublade, Stahlgestell in Schwarz, 26 kg.","lieferzeit":"angezeigt: ca. 16.–20. Juli","verfuegbarkeit":"sofort versandfertig"},"curate":{"pros":["Schublade + 6 Fächer","Günstig (134,99 €)","Stahlgestell"],"cons":["Nur 90 cm breit (laut Notiz)","Lieferzeit auf der Seite widersprüchlich [UNSICHER]","Marktplatz-Anbieter"]},"status":"offen","bestellt_am":""},{"id":"home24-f952d720","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.home24.de/produkt/stufenregal-coogee-wildeiche-dekor","shop":"home24","artikelnr":null,"prio":null,"notiz_researcher":"So ein Stufenregal könnte auch ganz gut aussehen in der Ecke.","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","streichpreis":null,"preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"Stufenregal Coogee","shop":"home24 (Marke Norrwood)","preis":164.99,"artikelnr":"000000001000325228","masse_b":135,"masse_t":35,"masse_h":150,"material":"MDF beschichtet, Metall pulverbeschichtet","farbe":"Wildeiche-Dekor, Schwarz","bilder":["https://cdn1.home24.net/images/media/catalog/product/original/png/-/1/-1000325228-220118-14022400097-IMAGE-P000000001000325228.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/-/1/-1000325228-260625-027-MOOD-DETAILS-P000000001000325228-ai-mood.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/png/-/1/-1000325228-220118-140224000118-DETAILS-P000000001000325228.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/png/-/1/-1000325228-220118-140224000129-DETAILS-P000000001000325228.jpg"],"beschreibung":"Gestuftes Regal in Wildeiche-Optik auf schwarzem Metallgestell, Bodenabstand 33,8 cm, 19,9 kg.","lieferzeit":"sofort versandfertig, ca. 24.–25.09. (Paket Sperrgut)","verfuegbarkeit":"sofort versandfertig"},"curate":{"pros":["Stufenform, passt laut Notiz in eine Ecke","Breiteste Option (135 cm)","Sofort versandfertig"],"cons":["Nur 150 cm hoch","Obere Stufen mit wenig Ablagefläche","Folierter MDF"]},"status":"offen","bestellt_am":""},{"id":"home24-4190df29","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.home24.de/produkt/regal-coogee-xi-wildeiche-dekor","shop":"home24","artikelnr":null,"prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","streichpreis":null,"preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"Regal Coogee XI","shop":"home24 (Marke Norrwood)","preis":214.99,"artikelnr":"000000001000305898","masse_b":135,"masse_t":35,"masse_h":185,"material":"MDF foliert, Metall pulverbeschichtet","farbe":"Wildeiche-Dekor, Schwarz","bilder":["https://cdn1.home24.net/images/media/catalog/product/original/png/-/1/-1000305898-211109-13074800026-IMAGE-P000000001000305898.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/png/-/1/-1000305898-220215-020-MOOD-DETAILS-P000000001000305898-mood.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/png/-/1/-1000305898-211109-13074800047-DETAILS-P000000001000305898.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/png/-/1/-1000305898-211109-13074800049-DETAILS-P000000001000305898.jpg"],"beschreibung":"Breites Standregal in Wildeiche-Optik mit schwarzem Metallgestell, 10 kg je Boden, 29,2 kg.","lieferzeit":"sofort versandfertig, ca. 29.09.–02.10. (Spedition)","verfuegbarkeit":"sofort versandfertig"},"curate":{"pros":["135 × 185 cm, viel Stauraum","Lieferung per Spedition bis in die Wohnung","Direkt von home24"],"cons":["Höheres Preisniveau (214,99 €)","Max. 10 kg je Boden","Lieferung erst ca. 29.09.–02.10."]},"status":"offen","bestellt_am":""},{"id":"home24-bdcbffc9","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.home24.de/produkt/standregal-raelingen-breite-120-cm","shop":"home24","artikelnr":null,"prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","streichpreis":null,"preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"Standregal Rælingen 120 cm","shop":"home24 (Marktplatz: premiumXL, Marke en.casa)","preis":127.99,"artikelnr":"000000003001089650","masse_b":120,"masse_t":33,"masse_h":180,"material":"Spanplatte, Metallgestell","farbe":"Schwarz","bilder":["https://cdn1.home24.net/images/media/catalog/product/original/png/1/1/117d7a6bae5e428087dea6834e8a8e43.cropped-411-47-1174-1902.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/4/b/4bced698e41b43e3a9fbe3adb6f53591.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/8/9/89e1ce585c9d445a8e37927623d99424.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/8/c/8c46bbfc286a431d974b3338559078f0.jpg"],"beschreibung":"Schwarzes Bücherregal mit offenen Fächern auf Metallgestell, Fußhöhe 7,5 cm, 29,8 kg.","lieferzeit":"sofort versandfertig, ca. 29.–30.09. (Paket)","verfuegbarkeit":"sofort versandfertig"},"curate":{"pros":["Günstig für 120 cm Breite (127,99 €)","10 offene Fächer","Sofort versandfertig"],"cons":["Komplett schwarz, kein Holzton","Spanplatte","Marktplatz-Anbieter"]},"status":"offen","bestellt_am":""},{"id":"home24-46faf36b","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.home24.de/produkt/raumteiler-mauro-schwarz-holzwerkstoff-108-x-177-x-33-cm","shop":"home24","artikelnr":null,"prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","streichpreis":null,"preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"Raumteiler MAURO","shop":"home24 (Marktplatz: mömax)","preis":181.99,"artikelnr":"000000003002108409","masse_b":108,"masse_t":33,"masse_h":177,"material":"Holzwerkstoff","farbe":"Schwarz","bilder":["https://cdn1.home24.net/images/media/catalog/product/original/jpg/7/d/7d1df6a726bf4e12a0e84a9c2287153d.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/d/5/d52bc7ba7e714e17955d209a6e92f9fb.jpg","https://cdn1.home24.net/images/media/catalog/product/600x600/jpg/1/4/1493ff4a2e0842438649f4e09cd4e1a5.jpg"],"beschreibung":"Schwarzer Raumteiler aus Holzwerkstoff, Lieferung in 3 Packstücken, 54,4 kg.","lieferzeit":"sofort versandfertig, ca. 30.09.–01.10. (Paket)","verfuegbarkeit":"sofort versandfertig"},"curate":{"pros":["108 × 177 cm, auch als Raumteiler gedacht","Sofort versandfertig","Schwer und damit standfest (54,4 kg)"],"cons":["Komplett schwarz","3 Packstücke, aufwendiger Aufbau","Nur 3 Produktbilder"]},"status":"offen","bestellt_am":""},{"id":"otto-s0k8o0gm","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.otto.de/p/tribesigns-buecherregal-raumteiler-standregal-mit-9-ebenen-175-x-95-x-30-cm-S0K8O0GM/?variationId=S0K8O0GMJY6A","shop":"otto","artikelnr":"S0K8O0GM","prio":null,"notiz_researcher":"Fancy. In mehreren Varianten verfügbar. Allerdings nur 90cm breit.","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","streichpreis":219.99,"preis_status":"UNSICHER","artikelnr_status":"UNSICHER","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"MANUELL","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"Tribesigns Bücherregal Raumteiler, 9 Ebenen","shop":"Otto (Marktplatz: Tribesigns)","preis":159.99,"artikelnr":"S0K8O0GMJ27","masse_b":95,"masse_t":30,"masse_h":175,"material":"E1-Spanplatte, Metallrahmen","farbe":"Brown/braun, Schwarz","bilder":["https://i.otto.de/i/otto/e499319a-c6f9-4afa-9c31-953b6943e2fb/Brown.jpg?$formatz$","https://i.otto.de/i/otto/da41dff7-3540-40b9-ab16-0b60087674f7?h=380&w=312&sm=clamp&upscale=true&fmt=auto","https://i.otto.de/i/otto/a36a3982-9690-412e-b37c-b83bb158f534?h=380&w=312&sm=clamp&upscale=true&fmt=auto","https://i.otto.de/i/otto/023f9c16-aaed-4fe6-a706-f86f28b425b8?h=380&w=312&sm=clamp&upscale=true&fmt=auto"],"beschreibung":"Geometrisches Bücherregal mit 9 offenen Ebenen, Metallrahmen, auch als Raumteiler nutzbar, 27,2 kg.","lieferzeit":"6–7 Werktage","verfuegbarkeit":"lieferbar","preis_hinweis":"159,99 € nur für Variante grau belegt; Otto liefert beim Abruf stets die Standardvariante aus"},"curate":{"pros":["9 Ebenen, auch als Raumteiler nutzbar","95 × 175 cm","Lieferung 6–7 Werktage"],"cons":["Nur 95 cm breit (laut Notiz 90)","Preis der Brown-Variante nicht bestätigt [UNSICHER]","Marktplatz-Anbieter"]},"status":"offen","bestellt_am":""},{"id":"otto-s0m2j074","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.otto.de/p/riess-ambiente-standregal-snake-165cm-natur-schwarz-einzelartikel-1-tlg-wohnzimmer-holzwerkstoff-metall-raumteiler-modern-S0M2J074/","shop":"otto","artikelnr":"S0M2J074","prio":null,"notiz_researcher":"Chic, eventuell etwas zu wenig Stauraum.","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","streichpreis":null,"preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"riess-ambiente Standregal SNAKE 165 cm","shop":"Otto (Marktplatz: riess-ambiente)","preis":239.95,"artikelnr":"S0M2J074P6Q","masse_b":120,"masse_t":35,"masse_h":165,"material":"Holzwerkstoff foliert, Metall pulverbeschichtet","farbe":"Natur (Eichenoptik), Schwarz","bilder":["https://i.otto.de/i/otto/85bb40c6-fd92-5c9d-900b-bce989842d3b/riess-ambiente-standregal-snake-165cm-natur-schwarz-einzelartikel-1-tlg-wohnzimmer-holzwerkstoff-metall-raumteiler-modern-natur.jpg?$formatz$","https://i.otto.de/i/otto/7d59cd89-3623-5429-9ccb-86d25ec43d44?h=380&w=312&sm=clamp&upscale=true&fmt=auto","https://i.otto.de/i/otto/4958b467-b720-5d0c-b880-ba3977a4fae6?h=380&w=312&sm=clamp&upscale=true&fmt=auto","https://i.otto.de/i/otto/956aad33-8046-54b6-bf86-84cc6b2e7778?h=380&w=312&sm=clamp&upscale=true&fmt=auto"],"beschreibung":"Standregal mit 4 Fächern, Böden abwechselnd seitlich offen, Metallstreben schwarz, ca. 15 kg je Boden.","lieferzeit":"3–4 Werktage (Paket)","verfuegbarkeit":"lieferbar"},"curate":{"pros":["Abwechselnd offene Böden, markante Optik","120 cm breit, ca. 15 kg je Boden","Lieferung 3–4 Werktage"],"cons":["Hoher Preis (239,95 €)","Nur 4 Fächer – laut Notiz evtl. wenig Stauraum","Nur 165 cm hoch"]},"status":"offen","bestellt_am":""},{"id":"otto-s023a09k","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.otto.de/p/riess-ambiente-buecherregal-slim-line-185x135cm-natur-schwarz-einzelartikel-1-tlg-wohnzimmer-holzwerkstoff-metall-mit-ablage-industrial-S023A09K/","shop":"otto","artikelnr":"S023A09K","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","streichpreis":199.95,"preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"riess-ambiente Bücherregal SLIM LINE 185×135 cm","shop":"Otto (Marktplatz: riess-ambiente)","preis":169.95,"artikelnr":"S023A09KJHB","masse_b":135,"masse_t":35,"masse_h":185,"material":"Holzwerkstoff beschichtet, Metall pulverbeschichtet","farbe":"Natur (Wildeiche-Optik), Schwarz","bilder":["https://i.otto.de/i/otto/57560d11-4c46-5138-82d3-4753fd3de47d/riess-ambiente-buecherregal-slim-line-185x135cm-natur-schwarz-einzelartikel-1-tlg-wohnzimmer-holzwerkstoff-metall-mit-ablage-industrial-natur.jpg?$formatz$","https://i.otto.de/i/otto/92fce41e-0c4e-5b0f-9424-3c4d169bd19e?h=380&w=312&sm=clamp&upscale=true&fmt=auto","https://i.otto.de/i/otto/7df547f2-f29b-5c3d-99d5-bf1dadcd3681?h=380&w=312&sm=clamp&upscale=true&fmt=auto","https://i.otto.de/i/otto/6acbdd0c-4671-55a1-ae2a-6b716d61c668?h=380&w=312&sm=clamp&upscale=true&fmt=auto"],"beschreibung":"Breites Industrial-Regal mit asymmetrisch angeordneten Böden in Wildeiche-Optik, 8 Fächer, ca. 10 kg je Boden, 34 kg.","lieferzeit":"3–4 Werktage (Paket)","verfuegbarkeit":"lieferbar"},"curate":{"pros":["Breiteste Option (135 cm) bei 185 cm Höhe","8 Fächer","Lieferung 3–4 Werktage"],"cons":["Max. ca. 10 kg je Boden","Marktplatz-Anbieter","Längere Variante der XXXLutz-Slim-Line"]},"status":"offen","bestellt_am":""},{"id":"otto-s01fk05k","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.otto.de/p/tribesigns-buecherregal-5-stoeckiges-industrial-standregal-ausstellungsregal-mit-metallrahmen-180cm-etagere-buecherregal-freistehendes-regal-mit-offenem-stauraum-S01FK05K/","shop":"otto","artikelnr":"S01FK05K","prio":null,"notiz_researcher":"Fancy. Allerdings geringe Breite.","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","streichpreis":239.99,"preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"UNSICHER","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"Tribesigns Bücherregal 5 Etagen, Industrial","shop":"Otto (Marktplatz: Tribesigns)","preis":179.99,"artikelnr":"S01FK05K","masse_b":100,"masse_t":30,"masse_h":177,"masse_hinweis":"Seite nennt Breite 100 und 80 cm, Höhe 177/180 cm","material":"E1-MDF, Metallrahmen","farbe":"Braun, Schwarz","bilder":["https://i.otto.de/i/otto/9e71417a-21f3-47c3-8cc6-8628aae88dce/tribesigns-buecherregal-5-stoeckiges-industrial-standregal-ausstellungsregal-mit-metallrahmen-180cm-etagere-buecherregal-freistehendes-regal-mit-offenem-stauraum.jpg?$formatz$","https://i.otto.de/i/otto/21c4625d-0cb7-4bdb-802e-18a4e8014fe6?h=380&w=312&sm=clamp&upscale=true&fmt=auto","https://i.otto.de/i/otto/929416c1-f6e4-4860-9d64-542afe82d118?h=380&w=312&sm=clamp&upscale=true&fmt=auto","https://i.otto.de/i/otto/5344993a-7f6d-4b90-8658-0243106ad6f2?h=380&w=312&sm=clamp&upscale=true&fmt=auto"],"beschreibung":"Etagere-Regal mit versetzten Böden und geschwungenem schwarzem Metallrahmen, 5 Etagen, Kippschutz, 31,9 kg.","lieferzeit":"7–9 Werktage","verfuegbarkeit":"bestellbar"},"curate":{"pros":["Geschwungener Metallrahmen, markante Optik","Kippschutz inklusive","Hohe Belastbarkeit laut Anbieter"],"cons":["Breite unklar: 80 oder 100 cm [UNSICHER]","Lieferung 7–9 Werktage","Keine Bewertungen"]},"status":"offen","bestellt_am":""},{"id":"otto-s0w9z0j7","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.otto.de/p/tribesigns-buecherregal-176cm-hoch-standregal-freistehende-12-offene-regale-buecherregale-aus-holz-mit-metallrahmen-fuer-wohnzimmer-schlafzimmer-S0W9Z0J7/?variationId=S0W9Z0J7KDGN","shop":"otto","artikelnr":"S0W9Z0J7","prio":null,"notiz_researcher":"Fancy. Allerdings geringe Breite.","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","streichpreis":229.99,"preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"Tribesigns Bücherregal 176 cm, 12 offene Fächer","shop":"Otto (Marktplatz: Tribesigns)","preis":135.99,"artikelnr":"S0W9Z0J7TTW","masse_b":100,"masse_t":30,"masse_h":176,"material":"MDF, Stahlrahmen","farbe":"Vintagebraun, Schwarz","bilder":["https://i.otto.de/i/otto/3085d2f5-af3d-4807-bef7-cb631db679b3/tribesigns-buecherregal-176cm-hoch-standregal-freistehende-12-offene-regale-buecherregale-aus-holz-mit-metallrahmen-fuer-wohnzimmer-schlafzimmer-vintagebraunplusschwarz.jpg?$formatz$","https://i.otto.de/i/otto/03a2772e-3c3f-4eef-8478-a6d221f231f1?h=380&w=312&sm=clamp&upscale=true&fmt=auto","https://i.otto.de/i/otto/d6f34c2a-f1ee-4846-8d2a-d9fc6858d33e?h=380&w=312&sm=clamp&upscale=true&fmt=auto","https://i.otto.de/i/otto/b0a0e71c-9d7a-4d6a-b2e1-9f862fe0d2bf?h=380&w=312&sm=clamp&upscale=true&fmt=auto"],"beschreibung":"Standregal mit geschwungenem Metallrahmen und 12 offenen Fächern, bis 30 kg je Boden, Kippschutz, 24 kg.","lieferzeit":"6–7 Werktage","verfuegbarkeit":"lieferbar"},"curate":{"pros":["Günstig (135,99 €)","12 offene Fächer, bis 30 kg je Boden","Kippschutz inklusive"],"cons":["100 cm breit – laut Notiz geringe Breite","Nur 30 cm tief","Keine Bewertungen"]},"status":"offen","bestellt_am":""},{"id":"otto-c1695848857","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.otto.de/p/actona-group-buecherregal-metallgestell-im-modernen-industrie-look-4-einlegeboeden-hoehe-150-cm-C1695848857/?variationId=1695861028","shop":"otto","artikelnr":"C1695848857","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","streichpreis":163.12,"preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"ACTONA GROUP Bücherregal, 4 Einlegeböden, 150 cm","shop":"Otto (Verkäufer nicht genannt)","preis":153.12,"artikelnr":"1025256325","masse_b":135,"masse_t":35,"masse_h":150,"material":"Metall pulverbeschichtet, MDF","farbe":"Wildeiche-Optik, Schwarz matt","bilder":["https://i.otto.de/i/otto/9e1f4d1b-747b-51c7-87a5-6626eff887f4/actona-group-buecherregal-metallgestell-im-modernen-industrie-look-4-einlegeboeden-hoehe-150-cm.jpg?$formatz$"],"beschreibung":"Niedriges, breites Regal mit schwarzem Metallrahmen und 4 festen Böden in Wildeiche-Optik, 10 kg je Boden, 21 kg.","lieferzeit":"6–8 Werktage","verfuegbarkeit":"lieferbar"},"curate":{"pros":["135 cm breit","Solider Preis (153,12 €)","Skandinavisches Design (Actona)"],"cons":["Nur 150 cm hoch, 4 Böden","Verkäufer nicht angegeben","Nur 1 Produktbild"]},"status":"offen","bestellt_am":""},{"id":"otto-s0ydm0h6","catId":"k-arbeitszimmer-regal","raum":"Arbeitszimmer","kategorie":"Regal","url":"https://www.otto.de/p/extsud-buecherregal-5-etagen-einlegeboeden-mit-schwarzem-stahlrohr-holzmaserung-braun-121l-x-35b-x-175-h-cm-S0YDM0H6/","shop":"otto","artikelnr":"S0YDM0H6","prio":null,"notiz_researcher":"Chic, eventuell etwas zu wenig Stauraum.","preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"abrufdatum":"2026-09-22","status":"ENRICHED","streichpreis":464.99,"preis_status":"BELEGT","artikelnr_status":"BELEGT","masse_status":"BELEGT","material_status":"BELEGT","farbe_status":"BELEGT","bilder_status":"BELEGT","lieferzeit_status":"BELEGT","verfuegbarkeit_status":"BELEGT","titel":"EXTSUD Bücherregal 5 Etagen, Stahlrohr","shop":"Otto (Marktplatz: Rastar Online Retail)","preis":253.68,"artikelnr":"S0YDM0H6","masse_b":121,"masse_t":35,"masse_h":176,"material":"MDF, Stahlrohr","farbe":"Braun (Holzmaserung), Schwarz","bilder":["https://i.otto.de/i/otto/e284c826-eae4-40b4-9cac-e67c6064ac44/extsud-buecherregal-5-etagen-einlegeboeden-mit-schwarzem-stahlrohr-holzmaserung-braun-121l-x-35b-x-175-h-cm.jpg?$formatz$","https://i.otto.de/i/otto/6c3f78b5-1610-4aa6-80b5-ce6c644f877e?h=380&w=312&sm=clamp&upscale=true&fmt=auto","https://i.otto.de/i/otto/ac917d9c-fbf4-4e34-9f03-692aab168558?h=380&w=312&sm=clamp&upscale=true&fmt=auto","https://i.otto.de/i/otto/dd45a232-54c2-494c-ad8b-81e5c644086f?h=380&w=312&sm=clamp&upscale=true&fmt=auto"],"beschreibung":"Großes Regal mit 5 offenen Etagen aus MDF in Holzmaserung und schwarzem Stahlrohr, Kippschutz, 46,5 kg, 2 Packstücke.","lieferzeit":"5–6 Werktage","verfuegbarkeit":"lieferbar"},"curate":{"pros":["121 cm breit, 5 Etagen","Stahlrohr, 46,5 kg sehr standfest","Lieferung 5–6 Werktage"],"cons":["Hoher Preis (253,68 €)","Laut Notiz evtl. wenig Stauraum","Marktplatz-Anbieter, keine Bewertungen"]},"status":"offen","bestellt_am":""},{"id":"amazon-b0f3hwdgfv","catId":"k-kueche-muell","raum":"Küche","kategorie":"Müll","url":"https://www.amazon.de/dp/B0F3HWDGFV/","shop":"amazon","artikelnr":"B0F3HWDGFV","prio":null,"notiz_researcher":null,"preis_manuell":null,"masse_manuell":null,"bild_url_manuell":null,"enrich":{"titel":null,"status":"BLOCKED","abrufdatum":"2026-09-22","preis_status":"LUECKE: blockiert","artikelnr_status":"LUECKE: blockiert","masse_status":"LUECKE: blockiert","material_status":"LUECKE: blockiert","farbe_status":"LUECKE: blockiert","bilder_status":"LUECKE: blockiert","lieferzeit_status":"LUECKE: blockiert","verfuegbarkeit_status":"LUECKE: blockiert","bilder":[]},"curate":{"pros":[],"cons":["Produktdaten fehlen – Amazon blockiert Abruf [LÜCKE]"]},"status":"offen","bestellt_am":""}]}</script>
+<header class="top">
+  <div class="wrap">
+    <div class="top-row">
+      <div class="brand">
+        <h1>CozyNest</h1>
+        <p class="sub">Unsere Auswahl für die neue Wohnung</p>
+      </div>
+      <div class="top-side">
+        <span id="sync" class="sync" role="status" aria-live="polite"></span>
+        <div id="auth" class="auth"></div>
+      </div>
+    </div>
+    <nav id="modenav" class="modenav" aria-label="Bereiche" hidden></nav>
+    <div id="bar" class="bar" role="progressbar" aria-label="Fortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="barfill"></span></div>
+    <p id="notice" class="notice" role="status" hidden></p>
+  </div>
+</header>
+<main id="app" class="wrap"></main>
+<div id="bottom" class="bottom" hidden></div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<dialog id="dlg" class="dlg"></dialog>
 <script>
-(() => {
 'use strict';
-const DATA = JSON.parse(document.getElementById('data').textContent);
-const META = DATA.meta || {};
-const NOTE_LABEL = META.noteLabel || 'Anmerkung aus der Recherche';
-const K_STATE = 'shortlist-state', K_ORD = 'shortlist-bestellt', K_EDIT = 'shortlist-edits';
-const SHOPS = { xxxl: 'XXXLutz', hoeffner: 'Höffner', home24: 'home24', otto: 'Otto', amazon: 'Amazon', ikea: 'IKEA', westwing: 'Westwing' };
-const CATS = Array.isArray(DATA.kategorien) ? DATA.kategorien : [];
-const ITEMS = (Array.isArray(DATA.items) ? DATA.items : []).filter(i => i && !i.archived);
-const byId = new Map(ITEMS.map(i => [i.id, i]));
-const catById = new Map(CATS.map(c => [c.id, c]));
-const itemsOf = new Map(CATS.map(c => [c.id, []]));
-ITEMS.forEach(i => { const a = itemsOf.get(i.catId); if (a) a.push(i); });
-const activeCats = CATS.filter(c => itemsOf.get(c.id).length > 0);
-const EUR = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
-const HP = new URLSearchParams(location.hash.replace(/^#/, ''));
-const MODE = HP.get('mode') === 'order' ? 'order' : (HP.get('mode') === 'edit' ? 'edit' : 'decide');
-const $ = id => document.getElementById(id);
+(function () {
+  /* ---------- Konfiguration ---------- */
+  const APP_CONFIG = {"firebaseConfig": {"apiKey": "AIzaSyCtrdbLPlQuPPQ4o6qI9Lioe6oMKt74--I", "authDomain": "cozynest-shortlist.firebaseapp.com", "projectId": "cozynest-shortlist", "storageBucket": "cozynest-shortlist.firebasestorage.app", "messagingSenderId": "983869338234", "appId": "1:983869338234:web:df26b7c4772efc73d5c1c3"}, "listId": "7c7cxdk5pxj23z34jj8l"};
+  const LIST_ID = APP_CONFIG.listId;
+  const FB_VERSION = '12.19.0';
+  const FB_BASE = 'https://www.gstatic.com/firebasejs/' + FB_VERSION + '/';
+  const loadModule = (u) => import(u);
+  const COLS = ['categories', 'items', 'decisions', 'orders', 'progress'];
+  const ENRICH_FIELDS = ['name', 'shop', 'price', 'articleNo', 'dims', 'material', 'color', 'images', 'summary', 'deliveryTime', 'availability', 'pros', 'cons', 'flags', 'vorgabeCheck', 'fetchedAt'];
+  const PRICE_FIELDS = ['price', 'availability', 'fetchedAt', 'flags'];
+  const RESEARCHER_FIELDS = ['catId', 'url', 'title', 'note', 'prio', 'state', 'addedAt', 'edited'];
+  const EDITABLE = ['name', 'shop', 'price', 'articleNo', 'dims', 'material', 'color', 'images', 'summary', 'deliveryTime', 'availability', 'pros', 'cons'];
+  const GAP_FLAGS = ['LÜCKE', 'UNSICHER', 'BLOCKIERT'];
+  const LABEL = { name: 'Name', shop: 'Shop', price: 'Preis', articleNo: 'Artikelnr.', dims: 'Maße', material: 'Material', color: 'Farbe', images: 'Bilder', summary: 'Kurzbeschreibung', deliveryTime: 'Lieferzeit', availability: 'Verfügbarkeit', pros: 'Pros', cons: 'Cons', vorgabeCheck: 'Vorgabe', fetchedAt: 'Abruf' };
+  const LS_VISIT = 'cozynest-lastVisit';
+  const LS_CAT = 'cozynest-lastCat';
+  const LS_LEGACY = 'shortlist-state';
+  const DEBOUNCE_MS = 1500;
+  const BATCH_MAX = 450;
+  const TRACKING = /^(utm_.*|gclid|gclsrc|gbraid|wbraid|dclid|fbclid|msclkid|yclid|twclid|ttclid|li_fat_id|mc_cid|mc_eid|_ga|_gl|igshid|srsltid|wt_mc|wt\.mc_id|emc|ref_src)$/i;
 
-function h(tag, attrs, ...kids) {
-  const el = document.createElement(tag);
-  if (attrs) for (const [k, v] of Object.entries(attrs)) {
-    if (v == null || v === false) continue;
-    if (k === 'class') el.className = v;
-    else if (k === 'text') el.textContent = String(v);
-    else if (k === 'value') el.value = String(v);
-    else if (k.startsWith('on') && typeof v === 'function') el.addEventListener(k.slice(2), v);
-    else if (k === 'disabled' || k === 'checked' || k === 'hidden') el[k] = !!v;
-    else el.setAttribute(k, v === true ? '' : String(v));
-  }
-  for (const k of kids.flat(3)) {
-    if (k == null || k === false) continue;
-    el.append(k instanceof Node ? k : document.createTextNode(String(k)));
-  }
-  return el;
-}
-
-/* ---------- Daten-Helfer ---------- */
-const E = it => it.enrich || {};
-const shopName = it => SHOPS[it.shop] || E(it).shop || it.shop || 'Shop';
-const title = it => E(it).titel || (shopName(it) + '-Artikel' + (it.artikelnr ? ' ' + it.artikelnr : ''));
-const artNr = it => E(it).artikelnr || it.artikelnr || '';
-const safeUrl = u => (typeof u === 'string' && /^https?:\/\//i.test(u.trim())) ? u.trim() : null;
-function num(v) {
-  if (typeof v === 'number') return Number.isFinite(v) ? v : null;
-  if (typeof v !== 'string' || !v.trim()) return null;
-  let s = v.replace(/[^\d.,-]/g, '');
-  s = s.includes(',') ? s.replace(/\./g, '').replace(',', '.') : s;
-  const n = parseFloat(s);
-  return Number.isFinite(n) ? n : null;
-}
-function images(it) {
-  const out = [];
-  const m = it.bild_url_manuell;
-  if (typeof m === 'string') m.split(/\s+|,(?=\s*https?:)/).forEach(u => { const s = safeUrl(u); if (s && !out.includes(s)) out.push(s); });
-  (Array.isArray(E(it).bilder) ? E(it).bilder : []).forEach(u => { const s = safeUrl(u); if (s && !out.includes(s)) out.push(s); });
-  return out;
-}
-const price = it => { const m = num(it.preis_manuell); return m != null ? m : num(E(it).preis); };
-const fmtPrice = it => { const p = price(it); return p != null ? EUR.format(p) : 'Preis im Shop'; };
-function dims(it) {
-  let b = null, t = null, hh = null;
-  if (typeof it.masse_manuell === 'string') {
-    const p = it.masse_manuell.toLowerCase().split(/[x×*]/).map(s => num(s.trim()));
-    if (p.length === 3) [b, t, hh] = p;
-  }
-  if (b == null && t == null && hh == null) { const e = E(it); b = num(e.masse_b); t = num(e.masse_t); hh = num(e.masse_h); }
-  return (b == null && t == null && hh == null) ? null : { b, t, h: hh };
-}
-const fmtN = v => String(v).replace('.', ',');
-function fmtDims(d) {
-  const p = [];
-  if (d.b != null) p.push('B ' + fmtN(d.b));
-  if (d.t != null) p.push('T ' + fmtN(d.t));
-  if (d.h != null) p.push('H ' + fmtN(d.h));
-  return p.join(' × ') + ' cm';
-}
-function parseVorgabe(v) {
-  const r = {};
-  if (typeof v !== 'string') return r;
-  const re = /(EUR|B|T|H)\s*(<=|≤|<)\s*([\d.,]+)/gi;
-  let m;
-  while ((m = re.exec(v))) r[m[1].toUpperCase()] = num(m[3]);
-  return r;
-}
-function vorgabeText(v) {
-  const V = parseVorgabe(v), p = [];
-  if (V.B != null) p.push('max. ' + fmtN(V.B) + ' cm breit');
-  if (V.T != null) p.push('max. ' + fmtN(V.T) + ' cm tief');
-  if (V.H != null) p.push('max. ' + fmtN(V.H) + ' cm hoch');
-  if (V.EUR != null) p.push('Budget max. ' + EUR.format(V.EUR));
-  return p.length ? 'Vorgabe: ' + p.join(', ') : 'Vorgabe: ' + v;
-}
-function violations(it, c) {
-  const V = parseVorgabe(c.vorgabe), d = dims(it), p = price(it), out = [];
-  if (d && V.B != null && d.b != null && d.b > V.B) out.push('breiter als Vorgabe');
-  if (d && V.T != null && d.t != null && d.t > V.T) out.push('tiefer als Vorgabe');
-  if (d && V.H != null && d.h != null && d.h > V.H) out.push('höher als Vorgabe');
-  if (V.EUR != null && p != null && p > V.EUR) out.push('über Budget');
-  return out;
-}
-const cleanTag = s => String(s).replace(/\s*\[(LÜCKE|LUECKE|UNSICHER|MANUELL|BELEGT)[^\]]*\]/g, '').trim();
-const pad = n => String(n).padStart(2, '0');
-const todayISO = () => { const d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
-const ddmm = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ''); return m ? m[3] + '.' + m[2] + '.' : ''; };
-
-/* ---------- State ---------- */
-function loadLS(k, def) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch (_) { return def; } }
-function saveLS(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) { /* Speicher voll oder gesperrt */ } }
-function normalize(st) {
-  const out = { v: 2, ts: (st && +st.ts) || 0, sel: {} };
-  const sel = st && st.sel && typeof st.sel === 'object' ? st.sel : {};
-  for (const [cid, s] of Object.entries(sel)) {
-    if (!itemsOf.has(cid) || !s || typeof s !== 'object') continue;
-    const ids = new Set(itemsOf.get(cid).map(i => i.id));
-    const o = { fav: null, ok: [], no: [], c: {}, cc: '' };
-    const seen = new Set();
-    if (s.fav && ids.has(s.fav)) { o.fav = s.fav; seen.add(s.fav); }
-    for (const x of (Array.isArray(s.ok) ? s.ok : [])) if (ids.has(x) && !seen.has(x)) { o.ok.push(x); seen.add(x); }
-    for (const x of (Array.isArray(s.no) ? s.no : [])) if (ids.has(x) && !seen.has(x)) { o.no.push(x); seen.add(x); }
-    if (s.c && typeof s.c === 'object') for (const [k, v] of Object.entries(s.c)) if (ids.has(k) && typeof v === 'string' && v) o.c[k] = v;
-    if (typeof s.cc === 'string') o.cc = s.cc;
-    out.sel[cid] = o;
-  }
-  return out;
-}
-function compact(st) {
-  const out = { v: 2, ts: st.ts, sel: {} };
-  for (const [cid, s] of Object.entries(st.sel)) {
-    if (s.fav || s.ok.length || s.no.length || Object.keys(s.c).length || s.cc) out.sel[cid] = s;
-  }
-  return out;
-}
-let state = normalize(loadLS(K_STATE, null));
-let orderState = null;
-let edits = loadLS(K_EDIT, null) || { items: {}, cats: {} };
-edits.items = edits.items || {}; edits.cats = edits.cats || {};
-const sel = cid => (state.sel[cid] = state.sel[cid] || { fav: null, ok: [], no: [], c: {}, cc: '' });
-function statusOf(S, cid, id) {
-  const s = S.sel[cid];
-  if (!s) return null;
-  if (s.fav === id) return 'fav';
-  if (s.ok.includes(id)) return 'ok';
-  if (s.no.includes(id)) return 'no';
-  return null;
-}
-function setStatus(cid, id, st) {
-  const s = sel(cid);
-  const cur = statusOf(state, cid, id);
-  let msg = '';
-  s.ok = s.ok.filter(x => x !== id);
-  s.no = s.no.filter(x => x !== id);
-  if (s.fav === id) s.fav = null;
-  if (cur !== st) {
-    if (st === 'fav') {
-      if (s.fav) { s.ok.push(s.fav); msg = 'Bisheriger Favorit ist jetzt „Auch ok“'; }
-      s.fav = id;
-    } else if (st === 'ok') s.ok.push(id);
-    else { s.no.push(id); msg = 'Ans Ende der Liste verschoben'; }
-  }
-  persist();
-  return msg;
-}
-function persist() { state.ts = Date.now(); saveLS(K_STATE, state); scheduleLink(); }
-
-/* ---------- Kodierung ---------- */
-function b64uEnc(bytes) {
-  let s = '';
-  for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
-  return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-}
-function b64uDec(str) {
-  str = str.replace(/-/g, '+').replace(/_/g, '/');
-  while (str.length % 4) str += '=';
-  const bin = atob(str), u = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
-  return u;
-}
-async function encodeState(st) {
-  const bytes = new TextEncoder().encode(JSON.stringify(st));
-  const cs = new Blob([bytes]).stream().pipeThrough(new CompressionStream('deflate-raw'));
-  return b64uEnc(new Uint8Array(await new Response(cs).arrayBuffer()));
-}
-async function decodeState(str) {
-  const ds = new Blob([b64uDec(str)]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
-  return JSON.parse(await new Response(ds).text());
-}
-let link = { ts: -1, url: null }, linkTimer;
-function scheduleLink() { clearTimeout(linkTimer); linkTimer = setTimeout(buildLink, 300); }
-async function buildLink() {
-  const ts = state.ts;
-  try { link = { ts, url: location.origin + location.pathname + '#mode=order&s=' + await encodeState(compact(state)) }; }
-  catch (_) { link = { ts: -1, url: null }; }
-}
-
-/* ---------- UI-Helfer ---------- */
-const timers = new Map(), pending = new Map();
-function debounced(key, fn) {
-  return () => {
-    clearTimeout(timers.get(key));
-    pending.set(key, fn);
-    timers.set(key, setTimeout(() => { pending.delete(key); timers.delete(key); fn(false); }, 450));
+  /* ---------- Zustand ---------- */
+  const S = {
+    cats: new Map(), items: new Map(), decisions: new Map(), orders: new Map(), progress: null,
+    loaded: new Set(), fresh: new Set(), snapPending: {},
+    fb: null, fbFailed: false, dbError: null, user: null, authReady: false, unsubs: [],
+    pendingWrites: 0, drafts: new Map(), timers: new Map(), openDetails: new Set(),
+    prevVisit: null, showArchived: false, legacyChecked: false,
+    lastRoute: null, addKey: '', addSaved: ''
   };
-}
-function flushAll() {
-  timers.forEach(t => clearTimeout(t)); timers.clear();
-  const fns = [...pending.values()]; pending.clear();
-  fns.forEach(f => f(true));
-}
-function grow(ta) { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; }
-function flash(el) { el.classList.add('on'); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('on'), 1400); }
-let toastT;
-function toast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2600); }
-function copyText(text, msg) {
-  const fallback = () => {
+
+  /* ---------- Hilfsfunktionen ---------- */
+  const $ = (sel) => document.querySelector(sel);
+  const isStr = (v) => typeof v === 'string';
+  const arr = (v) => (Array.isArray(v) ? v : []);
+  const isHttp = (u) => isStr(u) && /^https?:\/\//i.test(u);
+  const safeHref = (u) => (isHttp(u) ? u : '#');
+  const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
+
+  function h(tag, props, ...kids) {
+    const el = document.createElement(tag);
+    if (props) {
+      for (const [k, v] of Object.entries(props)) {
+        if (v === null || v === undefined || v === false) continue;
+        if (k === 'class') el.className = v;
+        else if (k === 'dataset') Object.assign(el.dataset, v);
+        else if (k === 'value') el.value = v;
+        else if (k === 'checked') el.checked = !!v;
+        else if (k.startsWith('on') && typeof v === 'function') el.addEventListener(k.slice(2), v);
+        else el.setAttribute(k, v === true ? '' : String(v));
+      }
+    }
+    for (const c of kids.flat(Infinity)) {
+      if (c === null || c === undefined || c === false) continue;
+      el.append(c instanceof Node ? c : String(c));
+    }
+    return el;
+  }
+
+  function toMs(v) {
+    if (v === null || v === undefined) return 0;
+    if (typeof v === 'number') return v;
+    if (isStr(v)) { const t = Date.parse(v); return isNaN(t) ? 0 : t; }
+    if (typeof v.toMillis === 'function') return v.toMillis();
+    if (typeof v.seconds === 'number') return v.seconds * 1000;
+    return 0;
+  }
+  const dtf = new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  const fmtDate = (v) => { const ms = toMs(v); return ms ? dtf.format(new Date(ms)) : '–'; };
+  const eur = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
+  const dec2 = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: false });
+  const num1 = new Intl.NumberFormat('de-DE', { maximumFractionDigits: 1 });
+
+  function priceNum(p) {
+    if (typeof p === 'number') return isFinite(p) ? p : null;
+    if (isStr(p)) {
+      let s = p.replace(/[^\d,.-]/g, '');
+      if (s.includes(',')) s = s.replace(/\./g, '').replace(',', '.');
+      const n = parseFloat(s);
+      return isFinite(n) ? n : null;
+    }
+    if (isObj(p) && 'value' in p) return priceNum(p.value);
+    return null;
+  }
+  const fmtPrice = (p) => { const n = priceNum(p); return n === null ? null : eur.format(n); };
+  function fmtDims(d) {
+    if (!isObj(d)) return null;
+    const parts = [['B', d.w], ['T', d.d], ['H', d.h]]
+      .filter(([, v]) => typeof v === 'number' && isFinite(v))
+      .map(([k, v]) => k + ' ' + num1.format(v));
+    return parts.length ? parts.join(' × ') + ' cm' : null;
+  }
+  const AVAIL = { instock: 'Auf Lager', outofstock: 'Nicht vorrätig', preorder: 'Vorbestellbar', backorder: 'Nachbestellbar', limitedavailability: 'Begrenzt verfügbar', discontinued: 'Nicht mehr erhältlich', soldout: 'Ausverkauft', instoreonly: 'Nur im Markt', onlineonly: 'Nur online' };
+  function fmtAvail(a) {
+    if (!isStr(a) || !a) return null;
+    const k = a.replace(/^https?:\/\/schema\.org\//i, '').toLowerCase().replace(/[^a-z]/g, '');
+    return AVAIL[k] || a;
+  }
+  function slug(s) {
+    return String(s || '').toLowerCase()
+      .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+      .normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+  const catIdFor = (room, name) => 'k-' + slug(room) + '-' + slug(name);
+  function hash8(s) {
+    let x = 0x811c9dc5;
+    for (let i = 0; i < s.length; i++) { x ^= s.charCodeAt(i); x = Math.imul(x, 0x01000193) >>> 0; }
+    return x.toString(16).padStart(8, '0');
+  }
+  function cleanUrl(raw) {
+    const u = new URL(String(raw).trim());
+    if (!/^https?:$/.test(u.protocol)) throw new Error('protocol');
+    u.hash = '';
+    for (const k of [...new Set(u.searchParams.keys())]) if (TRACKING.test(k)) u.searchParams.delete(k);
+    return u;
+  }
+  const storeUrl = (raw) => cleanUrl(raw).toString();
+  function normUrl(raw) {
+    const u = cleanUrl(raw);
+    u.hostname = u.hostname.toLowerCase().replace(/^www\./, '');
+    return u.toString();
+  }
+  function shopKey(raw) {
+    let host;
+    try { host = new URL(raw).hostname.toLowerCase().replace(/^www\./, ''); } catch (e) { return 'shop'; }
+    const p = host.split('.');
+    const label = p.length >= 3 && ['co', 'com', 'org', 'net'].includes(p[p.length - 2]) ? p[p.length - 3] : (p.length >= 2 ? p[p.length - 2] : p[0]);
+    return label.replace(/[^a-z0-9]/g, '') || 'shop';
+  }
+  const makeItemId = (raw) => { const n = normUrl(raw); return shopKey(n) + '-' + hash8(n); };
+  const oneLine = (s) => String(s === null || s === undefined ? '' : s).replace(/[\r\n]+/g, ' ').trim();
+  const ymd = () => { const d = new Date(); return d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); };
+
+  /* ---------- Daten-Sicht ---------- */
+  const prioOf = (i) => ([1, 2, 3].includes(i.prio) ? i.prio : 2);
+  const displayName = (i) => (i && (i.name || i.title || i.shop || shopKey(i.url))) || '';
+  const shopName = (i) => i.shop || shopKey(i.url);
+  const sortItems = (list) => list.sort((a, b) => prioOf(a) - prioOf(b) || toMs(a.addedAt) - toMs(b.addedAt) || a.id.localeCompare(b.id));
+  const catsSorted = () => [...S.cats.values()].sort((a, b) => ((typeof a.sort === 'number' ? a.sort : 999) - (typeof b.sort === 'number' ? b.sort : 999)) || a.id.localeCompare(b.id));
+  const activeItems = (catId) => [...S.items.values()].filter((i) => i.state === 'aktiv' && S.cats.has(i.catId) && (!catId || i.catId === catId));
+  const catsWithActive = () => catsSorted().filter((c) => activeItems(c.id).length > 0);
+  const isResearcher = () => !!(S.user && !S.user.isAnonymous);
+  const nextSort = () => catsSorted().reduce((m, c) => Math.max(m, typeof c.sort === 'number' ? c.sort : -1), -1) + 1;
+
+  function decision(catId) {
+    const raw = S.decisions.get(catId) || {};
+    const valid = new Set(activeItems(catId).map((i) => i.id));
+    const fav = valid.has(raw.fav) ? raw.fav : null;
+    const seen = new Set(fav ? [fav] : []);
+    const ok = []; const no = [];
+    for (const id of arr(raw.ok)) if (valid.has(id) && !seen.has(id)) { ok.push(id); seen.add(id); }
+    for (const id of arr(raw.no)) if (valid.has(id) && !seen.has(id)) { no.push(id); seen.add(id); }
+    const c = {};
+    if (isObj(raw.c)) for (const [k, v] of Object.entries(raw.c)) if (valid.has(k) && isStr(v)) c[k] = v;
+    return { fav, ok, no, c, cc: isStr(raw.cc) ? raw.cc : '', updatedAt: raw.updatedAt };
+  }
+  const statusOf = (d, id) => (d.fav === id ? 'fav' : d.ok.includes(id) ? 'ok' : d.no.includes(id) ? 'no' : null);
+  function progressCounts() {
+    const cats = catsWithActive();
+    return { done: cats.filter((c) => decision(c.id).fav).length, total: cats.length };
+  }
+
+  /* ---------- Firestore ---------- */
+  const serverTs = () => (S.fb ? S.fb.fsM.serverTimestamp() : new Date().toISOString());
+  function cref(name) { return S.fb.fsM.collection(S.fb.db, 'shortlists', LIST_ID, name); }
+  function dref(name, id) { return S.fb.fsM.doc(S.fb.db, 'shortlists', LIST_ID, name, id); }
+
+  async function initFirebase() {
     try {
-      const ta = h('textarea', { class: 'offscreen', 'aria-hidden': 'true', value: text });
-      document.body.append(ta); ta.select();
-      const ok = document.execCommand && document.execCommand('copy');
+      const [appM, authM, fsM] = await Promise.all(['firebase-app.js', 'firebase-auth.js', 'firebase-firestore.js'].map((f) => loadModule(FB_BASE + f)));
+      const app = appM.initializeApp(APP_CONFIG.firebaseConfig);
+      let db;
+      try {
+        db = fsM.initializeFirestore(app, { localCache: fsM.persistentLocalCache({ tabManager: fsM.persistentMultipleTabManager() }) });
+      } catch (e) {
+        db = fsM.getFirestore(app);
+      }
+      const auth = authM.getAuth(app);
+      S.fb = { authM, fsM, auth, db };
+      try { await authM.setPersistence(auth, authM.browserLocalPersistence); } catch (e) { /* Standard-Persistenz bleibt */ }
+      authM.onAuthStateChanged(auth, (u) => {
+        S.user = u || null;
+        S.authReady = true;
+        if (!u) {
+          authM.signInAnonymously(auth).catch(() => { S.dbError = 'auth'; scheduleRender(); });
+        } else {
+          startListeners();
+        }
+        scheduleRender();
+      });
+    } catch (e) {
+      S.fbFailed = true;
+      scheduleRender();
+    }
+  }
+
+  function startListeners() {
+    if (S.unsubs.length) return;
+    const { fsM } = S.fb;
+    for (const name of COLS) {
+      const un = fsM.onSnapshot(cref(name), { includeMetadataChanges: true }, (snap) => {
+        const first = !S.loaded.has(name);
+        const changed = first || snap.docChanges().length > 0;
+        S.snapPending[name] = snap.metadata.hasPendingWrites;
+        if (!snap.metadata.fromCache) S.fresh.add(name);
+        if (changed) {
+          const m = new Map();
+          snap.forEach((d) => m.set(d.id, Object.assign({}, d.data({ serverTimestamps: 'estimate' }), { id: d.id })));
+          if (name === 'categories') S.cats = m;
+          else if (name === 'items') S.items = m;
+          else if (name === 'decisions') S.decisions = m;
+          else if (name === 'orders') S.orders = m;
+          else S.progress = m.get('state') || null;
+          S.loaded.add(name);
+        }
+        if (S.dbError === 'net') S.dbError = null;
+        tryLegacyMigration();
+        if (changed) scheduleRender(); else updateSync();
+      }, (err) => {
+        S.dbError = err && err.code === 'permission-denied' ? 'perm' : 'net';
+        stopListeners();
+        scheduleRender();
+      });
+      S.unsubs.push(un);
+    }
+  }
+  function stopListeners() { for (const un of S.unsubs) { try { un(); } catch (e) { /* ignorieren */ } } S.unsubs = []; }
+
+  function writeError(e) {
+    if (e && e.code === 'permission-denied') toast('Keine Berechtigung – bitte mit dem Researcher-Konto anmelden');
+    else toast('Speichern fehlgeschlagen' + (e && e.code ? ' (' + e.code + ')' : ''));
+  }
+  function noDb() { toast('Keine Verbindung zur Datenbank – Änderung nicht gespeichert'); return Promise.resolve(false); }
+  function writeDoc(col, id, data) {
+    if (!S.fb) return noDb();
+    S.pendingWrites++; updateSync();
+    return S.fb.fsM.setDoc(dref(col, id), data, { merge: true })
+      .then(() => true, (e) => { writeError(e); return false; })
+      .finally(() => { S.pendingWrites--; updateSync(); });
+  }
+  function removeDoc(col, id) {
+    if (!S.fb) return noDb();
+    S.pendingWrites++; updateSync();
+    return S.fb.fsM.deleteDoc(dref(col, id))
+      .then(() => true, (e) => { writeError(e); return false; })
+      .finally(() => { S.pendingWrites--; updateSync(); });
+  }
+  async function commitBatches(ops) {
+    if (!S.fb) return noDb();
+    const { fsM, db } = S.fb;
+    S.pendingWrites++; updateSync();
+    try {
+      for (let i = 0; i < ops.length; i += BATCH_MAX) {
+        const b = fsM.writeBatch(db);
+        for (const op of ops.slice(i, i + BATCH_MAX)) {
+          if (op.del) b.delete(dref(op.col, op.id));
+          else b.set(dref(op.col, op.id), op.data, { merge: true });
+        }
+        await b.commit();
+      }
+      return true;
+    } catch (e) {
+      writeError(e);
+      return false;
+    } finally {
+      S.pendingWrites--; updateSync();
+    }
+  }
+
+  /* ---------- Einmalige Migration alter Bewertungen ---------- */
+  function dropLegacy() { try { localStorage.removeItem(LS_LEGACY); } catch (e) { /* ignorieren */ } }
+  function legacyToDecisions(old) {
+    const out = new Map();
+    const get = (catId) => { if (!out.has(catId)) out.set(catId, { fav: null, ok: [], no: [], c: {}, cc: '' }); return out.get(catId); };
+    function addItemState(id, v) {
+      const it = S.items.get(id); if (!it) return;
+      const d = get(it.catId);
+      const st = String(v.status || v.s || '').toLowerCase();
+      if (['fav', 'favorit', 'favorite'].includes(st)) { if (d.fav && d.fav !== id) d.ok.push(d.fav); d.fav = id; }
+      else if (['ok', 'auch ok', 'auch_ok'].includes(st)) d.ok.push(id);
+      else if (['no', 'nein'].includes(st)) d.no.push(id);
+      const cm = isStr(v.kommentar) ? v.kommentar : isStr(v.comment) ? v.comment : isStr(v.c) ? v.c : '';
+      if (cm) d.c[id] = cm;
+    }
+    const src = isObj(old) ? (old.decisions || old.categories || old.cats || old.state || old) : {};
+    for (const [key, v] of Object.entries(isObj(src) ? src : {})) {
+      if (!isObj(v)) continue;
+      if (S.cats.has(key)) {
+        const d = get(key);
+        if (isStr(v.fav)) d.fav = v.fav;
+        d.ok = d.ok.concat(arr(v.ok).filter(isStr));
+        d.no = d.no.concat(arr(v.no).filter(isStr));
+        if (isObj(v.c)) for (const [k, t] of Object.entries(v.c)) if (isStr(t)) d.c[k] = t;
+        if (isStr(v.cc)) d.cc = v.cc;
+      } else if (S.items.has(key)) addItemState(key, v);
+    }
+    if (isObj(old) && isObj(old.items)) for (const [key, v] of Object.entries(old.items)) if (isObj(v)) addItemState(key, v);
+    for (const [k, d] of [...out]) {
+      d.ok = [...new Set(d.ok)].filter((x) => x !== d.fav);
+      d.no = [...new Set(d.no)].filter((x) => x !== d.fav && !d.ok.includes(x));
+      if (!d.fav && !d.ok.length && !d.no.length && !Object.keys(d.c).length && !d.cc) out.delete(k);
+    }
+    return out;
+  }
+  function tryLegacyMigration() {
+    if (S.legacyChecked) return;
+    let raw = null;
+    try { raw = localStorage.getItem(LS_LEGACY); } catch (e) { S.legacyChecked = true; return; }
+    if (!raw) { S.legacyChecked = true; return; }
+    if (!S.fb || !['categories', 'items', 'decisions'].every((n) => S.fresh.has(n))) return;
+    S.legacyChecked = true;
+    let old;
+    try { old = JSON.parse(raw); } catch (e) { dropLegacy(); return; }
+    const ops = [];
+    for (const [catId, d] of legacyToDecisions(old)) {
+      const cur = S.decisions.get(catId);
+      const empty = !cur || (!cur.fav && !arr(cur.ok).length && !arr(cur.no).length && !(isObj(cur.c) && Object.keys(cur.c).length) && !cur.cc);
+      if (empty) ops.push({ col: 'decisions', id: catId, data: Object.assign({}, d, { updatedAt: serverTs() }) });
+    }
+    if (!ops.length) { dropLegacy(); return; }
+    commitBatches(ops).then((ok) => { if (ok) dropLegacy(); });
+  }
+
+  /* ---------- Bewertung, Kommentare, Fertig ---------- */
+  function setStatus(catId, itemId, st) {
+    const raw = S.decisions.get(catId) || {};
+    const cur = statusOf(decision(catId), itemId);
+    let fav = isStr(raw.fav) ? raw.fav : null;
+    let ok = arr(raw.ok).filter((x) => x !== itemId);
+    let no = arr(raw.no).filter((x) => x !== itemId);
+    if (fav === itemId) fav = null;
+    if (cur !== st) {
+      if (st === 'fav') { if (fav) ok.push(fav); fav = itemId; }
+      else if (st === 'ok') ok.push(itemId);
+      else no.push(itemId);
+    }
+    ok = [...new Set(ok)].filter((x) => x !== fav);
+    no = [...new Set(no)].filter((x) => x !== fav && !ok.includes(x));
+    writeDoc('decisions', catId, { fav, ok, no, updatedAt: serverTs() });
+  }
+
+  function queueComment(key, catId, itemId, text) {
+    S.drafts.set(key, { catId, itemId, text });
+    clearTimeout(S.timers.get(key));
+    S.timers.set(key, setTimeout(() => flushComment(key), DEBOUNCE_MS));
+    updateSync();
+  }
+  function flushComment(key) {
+    clearTimeout(S.timers.get(key)); S.timers.delete(key);
+    const dft = S.drafts.get(key);
+    if (!dft) return;
+    S.drafts.delete(key);
+    const raw = S.decisions.get(dft.catId) || { id: dft.catId };
+    let data;
+    if (dft.itemId) {
+      const prev = isObj(raw.c) ? raw.c[dft.itemId] : '';
+      if ((prev || '') === dft.text) { updateSync(); return; }
+      data = { c: { [dft.itemId]: dft.text } };
+      S.decisions.set(dft.catId, Object.assign({}, raw, { c: Object.assign({}, raw.c || {}, { [dft.itemId]: dft.text }) }));
+    } else {
+      if ((raw.cc || '') === dft.text) { updateSync(); return; }
+      data = { cc: dft.text };
+      S.decisions.set(dft.catId, Object.assign({}, raw, { cc: dft.text }));
+    }
+    data.updatedAt = serverTs();
+    writeDoc('decisions', dft.catId, data);
+  }
+  function flushAll() { for (const k of [...S.drafts.keys()]) flushComment(k); }
+
+  async function toggleDone() {
+    const done = !!(S.progress && S.progress.done);
+    if (done) { writeDoc('progress', 'state', { done: false, doneAt: null }); return; }
+    const { done: d, total } = progressCounts();
+    const open = total - d;
+    if (open > 0) {
+      const ok = await confirmDlg('Als fertig markieren?', [h('p', null, open === 1 ? 'Eine Kategorie hat noch keinen Favoriten.' : open + ' Kategorien haben noch keinen Favoriten.'), h('p', { class: 'muted' }, 'Du kannst trotzdem als fertig markieren und später weitermachen.')], 'Trotzdem fertig');
+      if (!ok) return;
+    }
+    flushAll();
+    writeDoc('progress', 'state', { done: true, doneAt: serverTs() }).then((ok) => { if (ok) toast('Als fertig markiert'); });
+  }
+
+  /* ---------- UI-Bausteine ---------- */
+  let toastTimer;
+  function toast(msg) {
+    const t = $('#toast');
+    t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.hidden = true; }, 3400);
+  }
+  function openDialog(opts) {
+    return new Promise((resolve) => {
+      const d = $('#dlg');
+      let done = false;
+      const finish = (v) => { if (done) return; done = true; if (d.open) { if (typeof d.close === 'function') d.close(); else d.removeAttribute('open'); } resolve(v); };
+      d.addEventListener('close', () => finish(false), { once: true });
+      d.replaceChildren(
+        h('h2', { class: 'dlg-title' }, opts.title),
+        h('div', { class: 'dlg-body' }, opts.body),
+        h('div', { class: 'dlg-actions' }, opts.actions.map((a) => h('button', { type: 'button', class: 'btn' + (a.primary ? ' btn-primary' : ''), onclick: () => finish(a.value) }, a.label)))
+      );
+      if (typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open', '');
+    });
+  }
+  const confirmDlg = (title, body, okLabel) => openDialog({ title, body, actions: [{ label: 'Abbrechen', value: false }, { label: okLabel, primary: true, value: true }] });
+
+  function copyText(text, msg) {
+    const fallback = () => {
+      const ta = h('textarea', { class: 'visually-hidden', 'aria-hidden': 'true' });
+      ta.value = text; document.body.append(ta); ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
       ta.remove();
       if (ok) { toast(msg); return; }
-    } catch (_) { /* weiter zum Prompt */ }
-    try { window.prompt('Zum Kopieren markieren:', text); } catch (_) { /* nichts */ }
-  };
-  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(() => toast(msg), fallback);
-  else fallback();
-}
-function sheet(head, lines, actions) {
-  const root = $('sheet-root');
-  const esc = ev => { if (ev.key === 'Escape') close(); };
-  const close = () => { root.replaceChildren(); document.removeEventListener('keydown', esc); };
-  const box = h('div', { class: 'sheet', role: 'dialog', 'aria-modal': 'true', 'aria-label': head },
-    h('h3', { text: head }),
-    lines.length ? h('ul', { class: 'openlist' }, lines.map(l => h('li', { text: l }))) : null,
-    h('div', { class: 'sheet-actions' }, actions.map(([lab, fn, primary]) =>
-      h('button', { type: 'button', class: primary ? 'btn primary' : 'btn', onclick: () => { close(); if (fn) fn(); } }, lab))));
-  root.replaceChildren(h('div', { class: 'scrim', onclick: close }), box);
-  document.addEventListener('keydown', esc);
-  const b = box.querySelector('button'); if (b) b.focus();
-}
-function linkEl(it, text, cls) {
-  const u = safeUrl(it.url);
-  return u ? h('a', { href: u, target: '_blank', rel: 'noopener', class: cls }, text) : h('span', { class: cls }, text);
-}
-function imgBox(it, opt) {
-  opt = opt || {};
-  const box = h('div', { class: 'imgbox' + (opt.cls ? ' ' + opt.cls : '') });
-  const urls = opt.urls || images(it);
-  let i = 0;
-  const fallback = () => {
-    if (opt.silent) { box.remove(); return; }
-    const u = opt.link ? safeUrl(it.url) : null;
-    box.prepend(u ? h('a', { class: 'fb', href: u, target: '_blank', rel: 'noopener' }, shopName(it)) : h('span', { class: 'fb' }, shopName(it)));
-  };
-  if (urls.length) {
-    const img = h('img', { alt: opt.silent ? '' : title(it), loading: 'lazy', referrerpolicy: 'no-referrer', decoding: 'async' });
-    img.addEventListener('error', () => { i++; if (i < urls.length) img.src = urls[i]; else { img.remove(); fallback(); } });
-    img.src = urls[0];
+      const box = h('textarea', { rows: '10', class: 'comment', readonly: true }); box.value = text;
+      openDialog({ title: 'Bitte manuell kopieren', body: [h('p', null, 'Text markieren und kopieren, dann im Projekt-Chat einfügen.'), box], actions: [{ label: 'Schließen', primary: true, value: true }] });
+      setTimeout(() => box.select(), 50);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => toast(msg), fallback);
+    else fallback();
+  }
+  function download(name, content, type) {
+    const url = URL.createObjectURL(new Blob([content], { type }));
+    const a = h('a', { href: url, download: name });
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  }
+  function grow(el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; }
+  const field = (label, control, hint) => h('label', { class: 'field' }, h('span', null, label), control, hint ? h('small', { class: 'muted' }, hint) : null);
+  const btn = (label, onclick, extra) => h('button', Object.assign({ type: 'button', class: 'btn btn-compact', onclick }, extra || {}), label);
+  const requireRes = () => { if (isResearcher()) return true; toast('Keine Berechtigung – bitte mit dem Researcher-Konto anmelden'); return false; };
+
+  function imgBox(item, opt) {
+    const o = opt || {};
+    const box = h('div', { class: 'imgbox' + (o.cls ? ' ' + o.cls : '') });
+    if (o.ordered) box.append(h('span', { class: 'badge-order' }, '📦 Bestellt'));
+    const urls = item ? arr(item.images).filter(isHttp) : [];
+    const fail = () => {
+      const img = box.querySelector('img');
+      if (img) img.remove();
+      if (o.cls === 'mini' || o.cls === 'thumb' || box.querySelector('.img-fallback') || !item) return;
+      const label = shopName(item);
+      box.append(o.link ? h('a', { class: 'img-fallback', href: safeHref(item.url), target: '_blank', rel: 'noopener' }, label) : h('span', { class: 'img-fallback' }, label));
+    };
+    if (!urls.length) { fail(); return box; }
+    let idx = 0;
+    const img = h('img', { alt: displayName(item), loading: 'lazy', referrerpolicy: 'no-referrer', decoding: 'async' });
+    img.addEventListener('error', () => { idx++; if (idx < urls.length) img.setAttribute('src', urls[idx]); else fail(); });
+    img.setAttribute('src', urls[0]);
     box.append(img);
-  } else fallback();
-  (opt.badges || []).forEach(b => box.append(b));
-  return box;
-}
-function savedEl() { return h('span', { class: 'saved', 'aria-live': 'polite' }, 'gespeichert'); }
-function recItem(cid) { return itemsOf.get(cid).find(i => num(i.prio) === 1) || null; }
-function sortedItems(cid, S) {
-  const arr = itemsOf.get(cid).slice();
-  const idx = new Map(arr.map((x, i) => [x.id, i]));
-  const rec = recItem(cid);
-  const pr = x => { const n = num(x.prio); return n == null ? 9 : n; };
-  arr.sort((a, b) => {
-    if (S) { const na = statusOf(S, cid, a.id) === 'no', nb = statusOf(S, cid, b.id) === 'no'; if (na !== nb) return na ? 1 : -1; }
-    if (rec && a !== b) { if (a === rec) return -1; if (b === rec) return 1; }
-    return pr(a) - pr(b) || idx.get(a.id) - idx.get(b.id);
-  });
-  return arr;
-}
-
-/* ---------- Navigation ---------- */
-let view = (history.state && history.state.cat && catById.has(history.state.cat)) ? history.state.cat : null;
-function openCat(cid) { flushAll(); view = cid; history.pushState({ cat: cid }, '', location.href); render(); try { window.scrollTo(0, 0); } catch (_) { /* ok */ } }
-function goBack() { flushAll(); if (history.state && history.state.cat) history.back(); else { view = null; render(); } }
-window.addEventListener('popstate', ev => { flushAll(); view = (ev.state && ev.state.cat && catById.has(ev.state.cat)) ? ev.state.cat : null; render(); });
-
-/* ---------- Render ---------- */
-function render() {
-  flushAll();
-  header();
-  if (MODE === 'order') renderOrder();
-  else if (view && catById.has(view)) renderCat(view);
-  else renderHome();
-  sendbar();
-  document.querySelectorAll('textarea.cmt, textarea.edit').forEach(grow);
-}
-function header() {
-  const S = MODE === 'order' ? (orderState || state) : state;
-  const n = activeCats.length;
-  const d = activeCats.filter(c => S.sel[c.id] && S.sel[c.id].fav).length;
-  const pct = n ? Math.round(d / n * 100) : 0;
-  $('bar').style.width = pct + '%';
-  $('barwrap').setAttribute('aria-valuenow', String(pct));
-  $('progt').textContent = d + '/' + n + ' entschieden';
-  $('sub').textContent = MODE === 'order' ? 'Bestellübersicht' : (MODE === 'edit' ? 'Recherche-Modus: Notizen und Empfehlungen bearbeiten' : 'Unsere Auswahl für die neue Wohnung');
-  $('foot').textContent = 'Datenstand ' + (META.version || '–');
-}
-function sendbar() {
-  const b = $('sendbar');
-  if (MODE === 'order') { b.hidden = true; document.body.classList.remove('hasbar'); return; }
-  b.hidden = false; document.body.classList.add('hasbar');
-  const btns = [];
-  if (MODE === 'edit') btns.push(h('button', { type: 'button', class: 'btn', onclick: exportEdits }, 'Änderungen exportieren'));
-  btns.push(h('button', { type: 'button', class: 'btn primary', onclick: send }, 'Auswahl senden'));
-  b.replaceChildren(h('div', { class: 'barin' }, btns));
-}
-
-function renderHome() {
-  const app = $('app');
-  const rooms = [];
-  activeCats.forEach(c => { let r = rooms.find(x => x.name === c.raum); if (!r) { r = { name: c.raum, cats: [] }; rooms.push(r); } r.cats.push(c); });
-  app.replaceChildren(...rooms.map(r => h('section', { class: 'room' }, h('h2', { text: r.name }), h('div', { class: 'grid' }, r.cats.map(tile)))));
-}
-function tile(c) {
-  const its = itemsOf.get(c.id);
-  const s = state.sel[c.id];
-  const fav = s && s.fav ? byId.get(s.fav) : null;
-  const lead = recItem(c.id) || sortedItems(c.id, null)[0];
-  let st;
-  if (fav) {
-    st = h('div', { class: 'tstat' },
-      h('span', { text: fav.status === 'bestellt' ? '📦 bestellt' : '♥ entschieden' }),
-      h('span', { class: 'mini' }, imgBox(fav, { cls: 'mini-img' }), h('span', { class: 'mini-t', text: title(fav) })));
-  } else st = h('div', { class: 'tstat open', text: 'offen' });
-  const el = h('div', { class: 'tile', role: 'button', tabindex: '0', 'aria-label': c.kategorie + ' im ' + c.raum + ' öffnen', onclick: () => openCat(c.id),
-    onkeydown: ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); openCat(c.id); } } },
-    imgBox(lead, {}),
-    h('div', { class: 'tbody' },
-      h('div', { class: 'tname', text: c.kategorie }),
-      h('div', { class: 'small muted', text: its.length + (its.length === 1 ? ' Option' : ' Optionen') }),
-      st,
-      h('div', { class: 'counts', text: '✓ ' + (s ? s.ok.length : 0) + ' · ✕ ' + (s ? s.no.length : 0) })));
-  return el;
-}
-
-function renderCat(cid) {
-  const c = catById.get(cid);
-  const edit = MODE === 'edit';
-  const empf = edit ? (edits.cats[cid] != null ? edits.cats[cid] : (c.empfehlung || '')) : (c.empfehlung || '');
-  let recEl = null;
-  if (edit) {
-    const ta = h('textarea', { class: 'edit', rows: '1', 'aria-label': 'Empfehlung', value: empf });
-    const ok = savedEl();
-    const save = debounced('empf:' + cid, silent => { edits.cats[cid] = ta.value; saveLS(K_EDIT, edits); if (!silent) flash(ok); });
-    ta.addEventListener('input', () => { grow(ta); save(); });
-    recEl = h('div', { class: 'catc' }, h('span', { class: 'elabel', text: 'Empfehlung (1 Satz)' }), ta, ok);
-  } else if (empf) recEl = h('p', { class: 'recnote', text: empf });
-  const head = h('div', { class: 'cathead' },
-    h('button', { type: 'button', class: 'back', onclick: goBack }, '← Übersicht'),
-    h('div', { class: 'small muted', text: c.raum }),
-    h('h2', { class: 'cattitle', text: c.kategorie }),
-    c.vorgabe ? h('span', { class: 'chip', text: vorgabeText(c.vorgabe) }) : null,
-    recEl);
-  const grid = h('div', { class: 'grid' }, sortedItems(cid, state).map(it => card(c, it, edit)));
-  const s = state.sel[cid];
-  const cc = h('textarea', { class: 'cmt', id: 'cc-' + cid, rows: '2', placeholder: 'Was fehlt dir hier, was gefällt dir generell …', value: (s && s.cc) || '' });
-  const ok = savedEl();
-  const save = debounced('cc:' + cid, silent => { sel(cid).cc = cc.value.trim() ? cc.value : ''; persist(); if (!silent) flash(ok); });
-  cc.addEventListener('input', () => { grow(cc); save(); });
-  $('app').replaceChildren(head, grid, h('div', { class: 'catc' }, h('label', { for: 'cc-' + cid, text: 'Kommentar zur Kategorie' }), cc, ok));
-}
-
-function card(c, it, edit) {
-  const st = statusOf(state, c.id, it.id);
-  const e = E(it);
-  const badges = [];
-  if (recItem(c.id) === it) badges.push(h('span', { class: 'badge rec', text: 'Empfehlung' }));
-  if (it.status === 'bestellt') badges.push(h('span', { class: 'badge ord', text: '📦 Bestellt' }));
-  const d = dims(it);
-  const viol = violations(it, c);
-  const seg = (k, ic, lab) => h('button', { type: 'button', class: 'sb ' + k, 'aria-pressed': String(st === k),
-    onclick: () => { const m = setStatus(c.id, it.id, k); render(); if (m && statusOf(state, c.id, it.id) === k) toast(m); } },
-    h('span', { class: 'ic', 'aria-hidden': 'true', text: ic }), ' ' + lab);
-  const s = state.sel[c.id];
-  const ta = h('textarea', { class: 'cmt', rows: '1', placeholder: 'Dein Kommentar …', 'aria-label': 'Dein Kommentar zu ' + title(it), value: (s && s.c[it.id]) || '' });
-  const ok = savedEl();
-  const save = debounced('c:' + it.id, silent => { const S = sel(c.id); if (ta.value.trim()) S.c[it.id] = ta.value; else delete S.c[it.id]; persist(); if (!silent) flash(ok); });
-  ta.addEventListener('input', () => { grow(ta); save(); });
-  return h('article', { class: 'card' + (st === 'no' ? ' dim' : ''), 'data-id': it.id },
-    imgBox(it, { link: true, badges }),
-    h('div', { class: 'body' },
-      h('div', { class: 'ptitle', text: title(it) }),
-      e.beschreibung ? h('div', { class: 'desc', text: e.beschreibung }) : null,
-      h('div', { class: 'price', text: fmtPrice(it) }),
-      (price(it) != null && /UNSICHER/.test(e.preis_status || '')) ? h('div', { class: 'hint', text: 'Preis kann je nach Variante abweichen' }) : null,
-      d ? h('div', { class: 'dims', text: fmtDims(d) }) : null,
-      (d && /UNSICHER/.test(e.masse_status || '')) ? h('div', { class: 'hint', text: 'Maßangaben im Shop uneinheitlich' }) : null,
-      viol.length ? h('div', { class: 'warn', text: viol.join(', ') }) : null,
-      noteBox(it, edit),
-      h('div', { class: 'seg', role: 'group', 'aria-label': 'Bewertung' }, seg('fav', '♥', 'Favorit'), seg('ok', '✓', 'Auch ok'), seg('no', '✕', 'Nein')),
-      safeUrl(it.url) ? h('a', { class: 'plink', href: safeUrl(it.url), target: '_blank', rel: 'noopener' }, 'Zum Produkt ↗') : null,
-      h('div', { class: 'cwrap' }, ta, ok),
-      details(it)));
-}
-function noteBox(it, edit) {
-  const orig = typeof it.notiz_researcher === 'string' ? it.notiz_researcher : '';
-  if (edit) {
-    const ta = h('textarea', { class: 'edit', rows: '1', 'aria-label': NOTE_LABEL, value: edits.items[it.id] != null ? edits.items[it.id] : orig });
-    const ok = savedEl();
-    const save = debounced('n:' + it.id, silent => { edits.items[it.id] = ta.value; saveLS(K_EDIT, edits); if (!silent) flash(ok); });
-    ta.addEventListener('input', () => { grow(ta); save(); });
-    return h('div', { class: 'note' }, h('b', { text: '💬 ' + NOTE_LABEL }), ta, ok);
+    return box;
   }
-  if (!orig) return null;
-  return h('div', { class: 'note' }, h('b', { text: '💬 ' + NOTE_LABEL }), h('p', { text: orig }));
-}
-function details(it) {
-  const e = E(it);
-  const more = images(it).slice(1);
-  const rows = [['Material', e.material], ['Farbe', e.farbe], ['Lieferzeit', e.lieferzeit], ['Verfügbarkeit', e.verfuegbarkeit], ['Shop', e.shop || shopName(it)], ['Art.-Nr.', artNr(it)]].filter(r => r[1]);
-  const cu = it.curate || {};
-  const pros = (Array.isArray(cu.pros) ? cu.pros : []).map(cleanTag).filter(Boolean);
-  const cons = (Array.isArray(cu.cons) ? cu.cons : []).map(cleanTag).filter(Boolean);
-  return h('details', null,
+  function commentBox(catId, itemId, stored, label) {
+    const key = itemId ? 'c:' + catId + ':' + itemId : 'cc:' + catId;
+    const dft = S.drafts.get(key);
+    return h('textarea', {
+      class: 'comment autogrow', rows: '1', id: itemId ? null : 'cc-' + catId,
+      placeholder: itemId ? 'Dein Kommentar …' : 'Was fällt dir zur ganzen Kategorie ein?',
+      'aria-label': label, dataset: { fkey: key },
+      value: dft ? dft.text : (stored || ''),
+      oninput: (e) => { grow(e.target); queueComment(key, catId, itemId, e.target.value); }
+    });
+  }
+  const STATUS_CHIP = { fav: ['♥ Favorit', 'chip-rose'], ok: ['✓ Auch ok', 'chip-sage'], no: ['✕ Nein', ''], none: ['– offen', 'chip-plain'] };
+  const statusChip = (st) => { const [t, c] = STATUS_CHIP[st || 'none']; return h('span', { class: 'chip ' + c }, t); };
+  const STATE_LABEL = { neu: 'Eingang', aktiv: 'aktiv', archiviert: 'archiviert' };
+
+  /* ---------- Modus 1: Entscheiderin ---------- */
+  function viewOverview() {
+    if (!S.loaded.has('items') || !S.loaded.has('categories')) {
+      return h('p', { class: 'empty' }, S.fbFailed || S.dbError ? 'Die Auswahl erscheint, sobald die Verbindung steht.' : 'Auswahl wird geladen …');
+    }
+    const cats = catsWithActive();
+    const { done, total } = progressCounts();
+    const wrap = h('div', { class: 'view' },
+      h('div', { class: 'overview-head' },
+        h('p', { class: 'progress-text' }, done + '/' + total + ' entschieden'),
+        S.progress && S.progress.done ? h('span', { class: 'chip chip-sage' }, 'Als fertig markiert') : null));
+    if (!cats.length) { wrap.append(h('p', { class: 'empty' }, 'Hier erscheinen die ausgewählten Möbel, sobald sie freigeschaltet sind.')); return wrap; }
+    const rooms = new Map();
+    for (const c of cats) { const r = c.room || 'Weitere'; if (!rooms.has(r)) rooms.set(r, []); rooms.get(r).push(c); }
+    for (const [room, list] of rooms) wrap.append(h('section', { class: 'room' }, h('h2', { class: 'room-title' }, room), h('div', { class: 'grid' }, list.map(tile))));
+    return wrap;
+  }
+  function tile(c) {
+    const items = sortItems(activeItems(c.id));
+    const d = decision(c.id);
+    const fav = d.fav ? S.items.get(d.fav) : null;
+    const newCount = S.prevVisit ? items.filter((i) => toMs(i.addedAt) > S.prevVisit).length : 0;
+    const status = fav
+      ? h('div', { class: 'tile-status' }, imgBox(fav, { cls: 'mini' }), h('span', { class: 'tile-status-text' }, S.orders.has(fav.id) ? '📦 bestellt' : '♥ entschieden', h('span', { class: 'tile-fav-name' }, displayName(fav))))
+      : h('div', { class: 'tile-status' }, h('span', { class: 'tile-status-text' }, 'offen'));
+    return h('a', { class: 'tile', href: '#k=' + encodeURIComponent(c.id) },
+      h('div', { class: 'tile-media' }, imgBox(items[0], {}), newCount ? h('span', { class: 'badge-new' }, 'Neu: ' + newCount) : null),
+      h('div', { class: 'tile-body' },
+        h('h3', { class: 'tile-title' }, c.name),
+        h('p', { class: 'tile-meta' }, items.length + (items.length === 1 ? ' Option' : ' Optionen')),
+        h('p', { class: 'tile-meta' }, '✓ ' + d.ok.length + ' · ✕ ' + d.no.length),
+        status));
+  }
+  function viewCategory(catId) {
+    const back = h('a', { class: 'back', href: '#' }, '‹ Alle Kategorien');
+    const c = S.cats.get(catId);
+    if (!c) return h('div', { class: 'view' }, back, h('p', { class: 'empty' }, S.loaded.has('categories') ? 'Diese Kategorie gibt es nicht mehr.' : 'Wird geladen …'));
+    const d = decision(catId);
+    const items = sortItems(activeItems(catId));
+    const ordered = items.filter((i) => statusOf(d, i.id) !== 'no').concat(items.filter((i) => statusOf(d, i.id) === 'no'));
+    return h('div', { class: 'view' }, back,
+      h('div', { class: 'cat-head' },
+        c.room ? h('p', { class: 'cat-room' }, c.room) : null,
+        h('h2', { class: 'cat-title' }, c.name),
+        c.vorgabe ? h('span', { class: 'chip chip-rose' }, 'Vorgabe: ' + c.vorgabe) : null),
+      items.length ? h('div', { class: 'grid' }, ordered.map((i) => card(i, d, c))) : h('p', { class: 'empty' }, 'In dieser Kategorie ist gerade nichts zur Auswahl.'),
+      h('div', { class: 'cat-comment' },
+        h('label', { class: 'cc-label', for: 'cc-' + catId }, 'Kommentar zur Kategorie'),
+        commentBox(catId, null, d.cc, 'Kommentar zur Kategorie')));
+  }
+  function card(i, d, c) {
+    const st = statusOf(d, i.id);
+    const name = displayName(i);
+    const price = fmtPrice(i.price);
+    const dims = fmtDims(i.dims);
+    const hasNote = isStr(i.note) && i.note.trim().length > 0;
+    const seg = (k, icon, label) => h('button', {
+      type: 'button', class: 'seg-btn seg-' + k + (st === k ? ' is-on' : ''), 'aria-pressed': st === k ? 'true' : 'false',
+      onclick: () => setStatus(c.id, i.id, k)
+    }, h('span', { class: 'ico', 'aria-hidden': 'true' }, icon), label);
+    return h('article', { class: 'card' + (st === 'no' ? ' is-no' : '') },
+      imgBox(i, { link: true, ordered: S.orders.has(i.id) }),
+      h('div', { class: 'card-body' },
+        prioOf(i) === 1 ? h('span', { class: 'badge-reco' }, 'Empfehlung') : null,
+        h('h3', { class: 'card-title' }, name),
+        i.summary ? h('p', { class: 'summary' }, i.summary) : null,
+        h('p', { class: 'price' + (price ? '' : ' is-unknown') }, price || 'Preis im Shop'),
+        dims ? h('p', { class: 'dims' }, dims) : null,
+        isObj(i.vorgabeCheck) && i.vorgabeCheck.ok === false ? h('p', { class: 'vorgabe-hint' }, i.vorgabeCheck.hint || 'Weicht von der Vorgabe ab') : null,
+        hasNote ? h('div', { class: 'note' }, h('p', { class: 'note-label' }, '💬 Anmerkung aus der Recherche'), h('p', { class: 'note-text' }, i.note)) : null,
+        h('div', { class: 'seg', role: 'group', 'aria-label': 'Bewertung' }, seg('fav', '♥', 'Favorit'), seg('ok', '✓', 'Auch ok'), seg('no', '✕', 'Nein')),
+        h('a', { class: 'product-link', href: safeHref(i.url), target: '_blank', rel: 'noopener' }, 'Zum Produkt ↗'),
+        commentBox(c.id, i.id, d.c[i.id], 'Kommentar zu ' + name),
+        details(i)));
+  }
+  function details(i) {
+    const more = arr(i.images).filter(isHttp).slice(1);
+    const facts = [['Material', i.material], ['Farbe', i.color], ['Lieferzeit', i.deliveryTime], ['Verfügbarkeit', fmtAvail(i.availability)]].filter(([, v]) => isStr(v) && v);
+    const pros = arr(i.pros).filter(isStr); const cons = arr(i.cons).filter(isStr);
+    if (!more.length && !facts.length && !pros.length && !cons.length) return null;
+    return h('details', {
+      class: 'more', open: S.openDetails.has(i.id),
+      ontoggle: (e) => { if (e.target.open) S.openDetails.add(i.id); else S.openDetails.delete(i.id); }
+    },
     h('summary', null, 'Details'),
-    more.length ? h('div', { class: 'thumbs' }, more.map(u => imgBox(it, { urls: [u], silent: true }))) : null,
-    rows.length ? h('dl', { class: 'facts' }, rows.map(r => [h('dt', { text: r[0] }), h('dd', { text: r[1] })])) : null,
-    (pros.length || cons.length) ? h('div', { class: 'pc' },
-      h('div', null, h('h4', { text: 'Pro' }), h('ul', null, pros.map(p => h('li', { text: p })))),
-      h('div', null, h('h4', { text: 'Contra' }), h('ul', null, cons.map(p => h('li', { text: p }))))) : null);
-}
-
-/* ---------- Senden ---------- */
-function send() {
-  flushAll();
-  const open = activeCats.filter(c => !(state.sel[c.id] && state.sel[c.id].fav));
-  if (open.length) {
-    sheet(open.length + ' von ' + activeCats.length + ' Kategorien noch ohne Favorit', open.map(c => c.raum + ': ' + c.kategorie),
-      [['Trotzdem senden', doSend, true], ['Weiter auswählen', null, false]]);
-  } else doSend();
-}
-async function doSend() {
-  flushAll();
-  if (link.ts !== state.ts || !link.url) await buildLink();
-  if (!link.url) { toast('Link konnte nicht erzeugt werden – bitte aktuellen Browser nutzen'); return; }
-  const url = link.url;
-  if (navigator.share) {
-    try { await navigator.share({ title: 'CozyNest – unsere Auswahl', url }); return; }
-    catch (err) { if (err && err.name === 'AbortError') return; }
+    more.length ? h('div', { class: 'thumbs' }, more.map((u) => imgBox({ images: [u], url: i.url, shop: i.shop, name: i.name }, { cls: 'thumb' }))) : null,
+    facts.length ? h('dl', { class: 'facts' }, facts.map(([k, v]) => [h('dt', null, k), h('dd', null, v)])) : null,
+    pros.length ? [h('p', { class: 'pc-title' }, 'Pro'), h('ul', { class: 'pc' }, pros.map((p) => h('li', null, p)))] : null,
+    cons.length ? [h('p', { class: 'pc-title' }, 'Contra'), h('ul', { class: 'pc' }, cons.map((p) => h('li', null, p)))] : null);
   }
-  copyText(url, 'Link kopiert – jetzt an den Umsetzer senden');
-}
-function exportEdits() {
-  flushAll();
-  const out = { version: META.version, notizen: {}, empfehlungen: {} };
-  for (const [id, v] of Object.entries(edits.items)) { const it = byId.get(id); if (it && v !== (it.notiz_researcher || '')) out.notizen[id] = v; }
-  for (const [cid, v] of Object.entries(edits.cats)) { const c = catById.get(cid); if (c && v !== (c.empfehlung || '')) out.empfehlungen[cid] = v; }
-  const n = Object.keys(out.notizen).length + Object.keys(out.empfehlungen).length;
-  if (!n) { toast('Keine Änderungen vorhanden'); return; }
-  copyText(JSON.stringify(out, null, 1), n + (n === 1 ? ' Änderung' : ' Änderungen') + ' kopiert – im Projekt-Chat mit /curate einfügen');
-}
 
-/* ---------- Modus 2: Umsetzer ---------- */
-function renderOrder() {
-  const app = $('app');
-  const S = orderState || state;
-  const loc = loadLS(K_ORD, {}) || {};
-  let dirty = false;
-  for (const id of Object.keys(loc)) { const it = byId.get(id); if (!it || it.status === 'bestellt') { delete loc[id]; dirty = true; } }
-  if (dirty) saveLS(K_ORD, loc);
-  const rows = [];
-  activeCats.forEach(c => { const s = S.sel[c.id]; if (s && s.fav && byId.has(s.fav)) rows.push({ c, it: byId.get(s.fav), cm: s.c[s.fav] || '', cc: s.cc || '' }); });
-  const done = r => r.it.status === 'bestellt' || !!loc[r.it.id];
-  const sum = l => l.reduce((a, r) => a + (price(r.it) || 0), 0);
-  const fmtSum = l => EUR.format(sum(l)) + (l.some(r => price(r.it) == null) ? ' + offene Preise' : '');
-  const newIds = rows.filter(r => r.it.status !== 'bestellt' && loc[r.it.id]).map(r => r.it.id);
-  const doneRows = rows.filter(done);
-  const kpi = (lab, val) => h('div', { class: 'kpi' }, h('b', { text: val }), h('span', { text: lab }));
-  const nodes = [];
-  nodes.push(h('section', { class: 'panel' },
-    h('h2', { text: 'Favoriten zum Bestellen' }),
-    h('div', { class: 'kpis' }, kpi('Favoriten', String(rows.length)), kpi('Summe gesamt', fmtSum(rows)), kpi('davon bestellt (' + doneRows.length + '/' + rows.length + ')', EUR.format(sum(doneRows)))),
-    h('div', { class: 'actions' },
-      h('button', { type: 'button', class: 'btn primary', disabled: !newIds.length, onclick: () => copyText('/bestellt ' + newIds.join(' '), 'Kopiert – im Projekt-Chat einfügen') },
-        'Bestellstatus übernehmen' + (newIds.length ? ' (' + newIds.length + ')' : '')),
-      h('button', { type: 'button', class: 'btn', disabled: !rows.length, onclick: () => exportCsv(rows, loc) }, 'CSV exportieren')),
-    orderState ? null : h('p', { class: 'hint', text: 'Kein Auswahl-Link geöffnet. Angezeigt wird die Auswahl auf diesem Gerät.' })));
-  if (!rows.length) nodes.push(h('p', { class: 'muted', text: 'Noch keine Favoriten ausgewählt.' }));
-  const shops = new Map();
-  rows.forEach(r => { const k = r.it.shop || shopName(r.it); if (!shops.has(k)) shops.set(k, []); shops.get(k).push(r); });
-  shops.forEach(list => {
-    const todo = list.filter(r => !done(r));
-    nodes.push(h('section', { class: 'panel' },
-      h('div', { class: 'shophead' }, h('h2', { text: shopName(list[0].it) }), h('span', { class: 'shopsum', text: fmtSum(list) })),
-      h('div', { class: 'actions' },
-        h('button', { type: 'button', class: 'btn', disabled: !todo.length, onclick: () => todo.forEach(r => { const u = safeUrl(r.it.url); if (u) window.open(u, '_blank', 'noopener'); }) },
-          'Alle Links dieses Shops öffnen (' + todo.length + ')'),
-        h('span', { class: 'hint', text: 'Blockiert der Browser Pop-ups, einmalig für diese Seite erlauben.' })),
-      h('div', null, list.map(r => orderRow(r, loc)))));
-  });
-  const open = activeCats.filter(c => !(S.sel[c.id] && S.sel[c.id].fav));
-  if (open.length) {
-    nodes.push(h('section', { class: 'panel' }, h('h2', { text: 'Offen' }),
-      open.map(c => {
-        const s = S.sel[c.id] || { ok: [], c: {}, cc: '' };
-        const oks = s.ok.map(id => byId.get(id)).filter(Boolean);
-        return h('div', { class: 'openblk' },
-          h('h3', { text: c.raum + ': ' + c.kategorie }),
-          oks.length ? h('ul', { class: 'altlist' }, oks.map(it => h('li', null, linkEl(it, title(it), 'oname'), ' – ' + fmtPrice(it), s.c[it.id] ? h('div', { class: 'quote', text: s.c[it.id] }) : null)))
-            : h('p', { class: 'small muted', text: 'Keine „Auch ok“-Alternativen.' }),
-          s.cc ? h('div', { class: 'quote', text: 'Zur Kategorie: ' + s.cc }) : null);
-      })));
+  /* ---------- Modus 2: Umsetzer ---------- */
+  function viewOrder() {
+    if (!S.loaded.has('items') || !S.loaded.has('categories')) return h('p', { class: 'empty' }, S.fbFailed || S.dbError ? 'Keine Daten – keine Verbindung zur Datenbank.' : 'Daten werden geladen …');
+    const cats = catsWithActive();
+    const res = isResearcher();
+    const last = Math.max(0, toMs(S.progress && S.progress.doneAt), ...[...S.decisions.values()].map((d) => toMs(d.updatedAt)));
+    const done = !!(S.progress && S.progress.done);
+    const counts = { fav: 0, ok: 0, no: 0, none: 0 };
+    const favs = []; const openCats = [];
+    for (const c of cats) {
+      const d = decision(c.id);
+      for (const i of activeItems(c.id)) counts[statusOf(d, i.id) || 'none']++;
+      if (d.fav) favs.push({ item: S.items.get(d.fav), cat: c, d }); else openCats.push({ cat: c, d });
+    }
+    const head = h('section', { class: 'panel' },
+      h('h2', { class: 'panel-title' }, done ? 'Fertig markiert am ' + fmtDate(S.progress.doneAt) : 'In Arbeit'),
+      h('p', { class: 'muted' }, 'Letzte Änderung: ' + (last ? fmtDate(last) : '–')),
+      res ? null : h('p', { class: 'hint' }, 'Lesen geht ohne Anmeldung. Zum Aufräumen und Abhaken mit Google anmelden.'));
+
+    const decBlock = h('section', { class: 'panel' },
+      h('div', { class: 'panel-head' }, h('h2', { class: 'panel-title' }, 'Alle Entscheidungen'), btn('Aufräumen', cleanup)),
+      h('p', { class: 'counts' }, '♥ ' + counts.fav + ' · ✓ ' + counts.ok + ' · ✕ ' + counts.no + ' · – ' + counts.none),
+      cats.map((c) => {
+        const d = decision(c.id);
+        const items = sortItems(activeItems(c.id));
+        const rank = { fav: 0, ok: 1, null: 2, no: 3 };
+        items.sort((a, b) => rank[statusOf(d, a.id)] - rank[statusOf(d, b.id)]);
+        return h('div', { class: 'group' },
+          h('h3', { class: 'group-title' }, c.name + (c.room ? ' · ' + c.room : '')),
+          items.map((i) => {
+            const st = statusOf(d, i.id);
+            return h('div', { class: 'row' + (st === 'no' ? ' is-no' : '') }, imgBox(i, { cls: 'mini' }),
+              h('div', { class: 'row-main' }, h('a', { class: 'row-name', href: safeHref(i.url), target: '_blank', rel: 'noopener' }, displayName(i)), d.c[i.id] ? h('p', { class: 'row-comment' }, d.c[i.id]) : null),
+              h('div', { class: 'row-side' }, statusChip(st)));
+          }),
+          d.cc ? h('p', { class: 'dec-cc' }, h('strong', null, 'Kommentar zur Kategorie: '), d.cc) : null);
+      }));
+
+    const shops = new Map();
+    for (const f of favs) { const s = shopName(f.item); if (!shops.has(s)) shops.set(s, []); shops.get(s).push(f); }
+    let total = 0; let unknown = 0;
+    const shopBlocks = [...shops].sort((a, b) => a[0].localeCompare(b[0], 'de')).map(([shop, list]) => {
+      let sum = 0; let unk = 0;
+      for (const f of list) { const n = priceNum(f.item.price); if (n === null) unk++; else sum += n; }
+      total += sum; unknown += unk;
+      return h('div', { class: 'group' },
+        h('div', { class: 'group-head' }, h('h3', { class: 'group-title' }, shop), btn('Alle Links dieses Shops öffnen', () => openShop(list))),
+        list.map((f) => orderRow(f)),
+        h('p', { class: 'sum' }, h('span', null, 'Summe ' + shop), h('span', null, eur.format(sum) + (unk ? ' + ' + unk + ' ohne Preis' : ''))));
+    });
+    const favBlock = h('section', { class: 'panel' },
+      h('h2', { class: 'panel-title' }, 'Favoriten nach Shop'),
+      favs.length ? [h('p', { class: 'hint' }, 'Beim Öffnen mehrerer Links fragt der Browser ggf. nach Pop-ups – einmalig für diese Seite erlauben.'), shopBlocks,
+        h('p', { class: 'sum' }, h('span', null, 'Gesamt'), h('span', null, eur.format(total) + (unknown ? ' + ' + unknown + ' ohne Preis' : '')))]
+        : h('p', { class: 'muted' }, 'Noch keine Favoriten.'));
+
+    const openBlock = h('section', { class: 'panel' },
+      h('h2', { class: 'panel-title' }, 'Offen'),
+      openCats.length ? openCats.map(({ cat, d }) => h('div', { class: 'group' },
+        h('h3', { class: 'group-title' }, cat.name + (cat.room ? ' · ' + cat.room : '')),
+        d.ok.length ? d.ok.map((id) => { const i = S.items.get(id); return h('div', { class: 'row' }, imgBox(i, { cls: 'mini' }), h('div', { class: 'row-main' }, h('a', { class: 'row-name', href: safeHref(i.url), target: '_blank', rel: 'noopener' }, displayName(i)), d.c[i.id] ? h('p', { class: 'row-comment' }, d.c[i.id]) : null), h('div', { class: 'row-side' }, h('span', { class: 'row-price' }, fmtPrice(i.price) || 'Preis im Shop'))); })
+          : h('p', { class: 'muted small' }, 'Noch keine „Auch ok“-Alternativen.')))
+        : h('p', { class: 'muted' }, 'Alle Kategorien haben einen Favoriten.'));
+
+    const actions = h('section', { class: 'panel' },
+      h('h2', { class: 'panel-title' }, 'Werkzeuge'),
+      h('div', { class: 'row-actions' }, btn('Preise aktualisieren lassen', priceRefresh), btn('CSV-Export Bestellliste', exportCsv)));
+    return h('div', { class: 'view' }, head, decBlock, favBlock, openBlock, actions);
   }
-  app.replaceChildren(...nodes);
-}
-function orderRow(r, loc) {
-  const it = r.it, art = artNr(it), isData = it.status === 'bestellt', checked = isData || !!loc[it.id];
-  const cb = h('input', { type: 'checkbox', checked, disabled: isData, 'aria-label': 'bestellt: ' + title(it) });
-  cb.addEventListener('change', () => { const L = loadLS(K_ORD, {}) || {}; if (cb.checked) L[it.id] = todayISO(); else delete L[it.id]; saveLS(K_ORD, L); render(); });
-  const lab = isData ? (ddmm(it.bestellt_am) ? 'bestellt am ' + ddmm(it.bestellt_am) : 'bestellt') : 'bestellt';
-  return h('div', { class: 'orow' + (checked ? ' isdone' : '') },
-    imgBox(it, { link: true, cls: 'thumb' }),
-    h('div', { class: 'oinfo' },
-      h('div', { class: 'small muted', text: r.c.raum + ': ' + r.c.kategorie }),
-      linkEl(it, title(it), 'oname'),
-      art ? h('div', { class: 'art' }, h('span', { text: 'Art.-Nr.' }), h('code', { text: art }),
-        h('button', { type: 'button', class: 'mini-btn', 'aria-label': 'Artikelnummer ' + art + ' kopieren', onclick: () => copyText(art, 'Artikelnummer kopiert') }, 'Kopieren'))
-        : h('div', { class: 'small muted', text: 'Art.-Nr. im Shop prüfen' }),
-      r.cm ? h('div', { class: 'quote', text: r.cm }) : null,
-      r.cc ? h('div', { class: 'quote', text: 'Zur Kategorie: ' + r.cc }) : null),
-    h('div', { class: 'oside' }, h('div', { class: 'oprice', text: fmtPrice(it) }), h('label', { class: 'chk' }, cb, h('span', { text: lab }))));
-}
-function exportCsv(rows, loc) {
-  const cell = v => { v = v == null ? '' : String(v); return /[;"\r\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
-  const lines = ['ID;Raum;Kategorie;Produkt;Shop;Artikelnr;Preis;Link;Kommentar_Partnerin;Status;Bestellt_am'];
-  rows.forEach(r => {
-    const it = r.it, p = price(it), isData = it.status === 'bestellt', isLoc = !!loc[it.id];
-    lines.push([it.id, r.c.raum, r.c.kategorie, title(it), shopName(it), artNr(it), p != null ? p.toFixed(2).replace('.', ',') : '', it.url, r.cm,
-      (isData || isLoc) ? 'bestellt' : 'offen', isData ? (it.bestellt_am || '') : (isLoc ? loc[it.id] : '')].map(cell).join(';'));
-  });
-  const blob = new Blob(['\ufeff' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
-  const a = h('a', { href: URL.createObjectURL(blob), download: 'bestellliste.csv', class: 'offscreen' });
-  document.body.append(a); a.click();
-  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
-  toast('bestellliste.csv exportiert');
-}
+  function orderRow(f) {
+    const i = f.item;
+    const ordered = S.orders.get(i.id);
+    return h('div', { class: 'row' }, imgBox(i, { cls: 'mini' }),
+      h('div', { class: 'row-main' },
+        h('a', { class: 'row-name', href: safeHref(i.url), target: '_blank', rel: 'noopener' }, displayName(i)),
+        h('p', { class: 'row-meta' }, f.cat.name),
+        i.articleNo ? h('p', { class: 'row-meta' }, 'Art.-Nr. ' + i.articleNo + ' ', btn('Kopieren', () => copyText(String(i.articleNo), 'Artikelnummer kopiert'), { 'aria-label': 'Artikelnummer kopieren' })) : null,
+        f.d.c[i.id] ? h('p', { class: 'row-comment' }, f.d.c[i.id]) : null),
+      h('div', { class: 'row-side' },
+        h('span', { class: 'row-price' }, fmtPrice(i.price) || 'Preis im Shop'),
+        h('label', { class: 'check' }, h('input', { type: 'checkbox', checked: !!ordered, onchange: (e) => toggleOrder(i.id, e.target) }), ordered ? 'bestellt · ' + fmtDate(ordered.at).split(',')[0] : 'bestellt')));
+  }
+  function toggleOrder(id, el) {
+    if (!requireRes()) { el.checked = !el.checked; return; }
+    if (el.checked) writeDoc('orders', id, { at: serverTs(), updatedAt: serverTs() });
+    else removeDoc('orders', id);
+  }
+  function openShop(list) {
+    const todo = list.filter((f) => !S.orders.has(f.item.id) && isHttp(f.item.url));
+    if (!todo.length) { toast('Alle Artikel dieses Shops sind bestellt'); return; }
+    for (const f of todo) window.open(f.item.url, '_blank', 'noopener');
+    toast(todo.length + ' Tabs geöffnet – fehlen welche, Pop-ups erlauben');
+  }
+  async function cleanup() {
+    if (!requireRes()) return;
+    const rows = [];
+    for (const c of catsWithActive()) for (const id of decision(c.id).no) rows.push({ item: S.items.get(id), cat: c });
+    if (!rows.length) { toast('Keine „Nein“-Items zum Aufräumen'); return; }
+    const skip = rows.filter((r) => S.orders.has(r.item.id));
+    const go = rows.filter((r) => !S.orders.has(r.item.id));
+    const ok = await confirmDlg('Aufräumen', [
+      h('p', null, go.length + ' „Nein“-Items werden archiviert. Sie verschwinden aus der Auswahl und bleiben im Katalog wiederherstellbar.'),
+      h('ul', { class: 'dlg-list' }, go.map((r) => h('li', null, displayName(r.item) + ' – ' + r.cat.name))),
+      skip.length ? h('p', { class: 'muted small' }, 'Übersprungen, weil bestellt: ' + skip.map((r) => displayName(r.item)).join(', ')) : null
+    ], 'Bestätigen');
+    if (!ok || !go.length) return;
+    const done = await commitBatches(go.map((r) => ({ col: 'items', id: r.item.id, data: { state: 'archiviert' } })));
+    if (done) toast(go.length + ' archiviert' + (skip.length ? ' · ' + skip.length + ' bestellte übersprungen' : ''));
+  }
+  function enrichText(mode, items) {
+    const lines = ['/enrich ' + mode];
+    for (const id of [...new Set(items.map((i) => i.catId))]) {
+      const c = S.cats.get(id) || {};
+      lines.push('K ' + id + ' | ' + oneLine(c.room) + ' | ' + oneLine(c.name) + ' | Vorgabe: ' + (oneLine(c.vorgabe) || '–'));
+    }
+    for (const i of items) lines.push('I ' + i.id + ' | ' + i.catId + ' | ' + oneLine(i.url));
+    return lines.join('\n');
+  }
+  function priceRefresh() {
+    const items = [];
+    for (const c of catsWithActive()) { const d = decision(c.id); for (const id of [d.fav].concat(d.ok)) if (id) items.push(S.items.get(id)); }
+    if (!items.length) { toast('Noch keine Favoriten oder „Auch ok“-Items'); return; }
+    copyText(enrichText('preise', items), 'Kopiert – im Projekt-Chat einfügen');
+  }
+  function exportCsv() {
+    const esc = (v) => {
+      let s = String(v === null || v === undefined ? '' : v);
+      if (/^[=+\-@]/.test(s)) s = "'" + s;
+      return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+    };
+    const rows = [['ID', 'Raum', 'Kategorie', 'Produkt', 'Shop', 'Artikelnr', 'Preis', 'Link', 'Kommentar_Partnerin', 'Status', 'Bestellt_am']];
+    for (const c of catsWithActive()) {
+      const d = decision(c.id); if (!d.fav) continue;
+      const i = S.items.get(d.fav); const o = S.orders.get(i.id); const p = priceNum(i.price);
+      rows.push([i.id, c.room, c.name, displayName(i), shopName(i), i.articleNo || '', p === null ? '' : dec2.format(p), i.url, d.c[i.id] || '', o ? 'bestellt' : 'offen', o ? fmtDate(o.at) : '']);
+    }
+    download('bestellliste-' + ymd() + '.csv', '\uFEFF' + rows.map((r) => r.map(esc).join(';')).join('\r\n'), 'text/csv;charset=utf-8');
+  }
 
-/* ---------- Start ---------- */
-async function init() {
-  const s = HP.get('s');
-  if (s) {
-    try {
-      const imp = normalize(await decodeState(s));
-      if (MODE === 'order') orderState = imp;
-      else {
-        if (!state.ts || imp.ts >= state.ts) { state = imp; saveLS(K_STATE, state); }
-        history.replaceState(history.state, '', location.pathname + location.search + (MODE === 'edit' ? '#mode=edit' : ''));
+  /* ---------- Modus 3: Researcher ---------- */
+  function signInPanel(title, text) {
+    return h('section', { class: 'panel' }, h('h2', { class: 'panel-title' }, title), h('p', null, text), h('div', { class: 'row-actions' }, h('button', { type: 'button', class: 'btn', onclick: signIn }, 'Mit Google anmelden')));
+  }
+  function viewEdit(route) {
+    if (!S.authReady && !S.fbFailed) return h('p', { class: 'empty' }, 'Verbindung wird aufgebaut …');
+    if (!isResearcher()) return signInPanel('Researcher-Bereich', 'Eingang, Katalog und Import sind nur mit dem Researcher-Konto erreichbar.');
+    const inbox = [...S.items.values()].filter((i) => i.state === 'neu').sort((a, b) => toMs(a.addedAt) - toMs(b.addedAt));
+    const tabs = [['eingang', 'Eingang (' + inbox.length + ')'], ['katalog', 'Katalog'], ['import', 'Import/Export'], ['lesezeichen', 'Lesezeichen']];
+    const tab = tabs.some(([k]) => k === route.tab) ? route.tab : 'eingang';
+    const nav = h('nav', { class: 'tabs', 'aria-label': 'Researcher' }, tabs.map(([k, l]) => h('a', { href: '#mode=edit&tab=' + k, 'aria-current': k === tab ? 'page' : null }, l)));
+    const body = tab === 'katalog' ? tabCatalog() : tab === 'import' ? tabImport() : tab === 'lesezeichen' ? tabBookmark() : tabInbox(inbox);
+    return h('div', { class: 'view' }, nav, body);
+  }
+  function catLabel(catId) { const c = S.cats.get(catId); return c ? (c.room ? c.room + ' · ' : '') + c.name : 'ohne Kategorie'; }
+  function tabInbox(list) {
+    return h('section', { class: 'panel' },
+      h('div', { class: 'panel-head' },
+        h('p', { class: 'muted' }, list.length ? list.length + (list.length === 1 ? ' neuer Link wartet' : ' neue Links warten') + ' auf Anreicherung.' : 'Keine neuen Links. Erfasse Produkte mit dem Lesezeichen „＋ CozyNest“.'),
+        h('button', { type: 'button', class: 'btn btn-primary', disabled: !list.length, onclick: () => copyText(enrichText('neu', list), 'Kopiert – im Projekt-Chat einfügen') }, 'Zum Anreichern übergeben')),
+      list.map((i) => h('div', { class: 'row' },
+        h('div', { class: 'row-main' },
+          h('p', { class: 'row-name' }, i.title || '(ohne Titel)'),
+          h('a', { class: 'row-url', href: safeHref(i.url), target: '_blank', rel: 'noopener' }, i.url),
+          h('p', { class: 'row-meta' }, catLabel(i.catId) + ' · Prio ' + prioOf(i)),
+          isStr(i.note) && i.note ? h('p', { class: 'note-inline' }, i.note) : null),
+        h('div', { class: 'row-side' }, h('div', { class: 'row-actions' }, btn('Bearbeiten', () => editItem(i.id)), btn('Löschen', () => deleteItem(i.id)))))));
+  }
+  async function deleteItem(id) {
+    const i = S.items.get(id); if (!i) return;
+    if (await confirmDlg('Link löschen?', h('p', null, (i.title || i.url) + ' wird aus dem Eingang entfernt.'), 'Löschen')) removeDoc('items', id);
+  }
+  const gapsOf = (i) => (isObj(i.flags) ? Object.entries(i.flags).filter(([, v]) => GAP_FLAGS.includes(v)).map(([k]) => k) : []);
+  function tabCatalog() {
+    const route = parseHash();
+    const cats = catsSorted();
+    const visible = (i) => S.showArchived || i.state !== 'archiviert';
+    const itemRow = (i) => {
+      const gaps = gapsOf(i);
+      return h('div', { class: 'row' + (i.state === 'archiviert' ? ' is-no' : '') + (route.focus === i.id ? ' is-focus' : ''), id: 'item-' + i.id },
+        imgBox(i, { cls: 'mini' }),
+        h('div', { class: 'row-main' },
+          h('a', { class: 'row-name', href: safeHref(i.url), target: '_blank', rel: 'noopener' }, displayName(i)),
+          h('p', { class: 'row-meta' }, [fmtPrice(i.price), fmtDims(i.dims), 'Prio ' + prioOf(i)].filter(Boolean).join(' · ')),
+          gaps.length ? h('span', { class: 'chip chip-gap' }, 'Lücken: ' + gaps.map((g) => LABEL[g] || g).join(', ')) : null),
+        h('div', { class: 'row-side' },
+          h('span', { class: 'chip chip-plain' }, STATE_LABEL[i.state] || i.state || '–'),
+          h('div', { class: 'row-actions' }, btn('Bearbeiten', () => editItem(i.id)),
+            i.state === 'archiviert' ? btn('Wiederherstellen', () => writeDoc('items', i.id, { state: 'aktiv' })) : btn('Archivieren', () => writeDoc('items', i.id, { state: 'archiviert' })))));
+    };
+    const sections = cats.map((c, ix) => {
+      const items = sortItems([...S.items.values()].filter((i) => i.catId === c.id && visible(i)));
+      return h('div', null,
+        h('div', { class: 'cat-row' },
+          h('div', null, h('h3', { class: 'group-title' }, c.name), h('p', { class: 'muted small' }, (c.room || '–') + (c.vorgabe ? ' · Vorgabe: ' + c.vorgabe : ''))),
+          h('div', { class: 'row-actions' },
+            btn('↑', () => moveCat(c.id, -1), { 'aria-label': 'Kategorie nach oben', disabled: ix === 0 }),
+            btn('↓', () => moveCat(c.id, 1), { 'aria-label': 'Kategorie nach unten', disabled: ix === cats.length - 1 }),
+            btn('Bearbeiten', () => editCategory(c.id)))),
+        items.length ? items.map(itemRow) : h('p', { class: 'muted small' }, 'Keine Produkte.'));
+    });
+    const orphans = [...S.items.values()].filter((i) => !S.cats.has(i.catId) && visible(i));
+    return h('section', { class: 'panel' },
+      h('div', { class: 'toolbar' },
+        h('label', { class: 'check' }, h('input', { type: 'checkbox', checked: S.showArchived, onchange: (e) => { S.showArchived = e.target.checked; scheduleRender(); } }), 'archivierte zeigen'),
+        btn('＋ Kategorie anlegen', () => editCategory(null))),
+      sections,
+      orphans.length ? h('div', null, h('div', { class: 'cat-row' }, h('h3', { class: 'group-title' }, 'Ohne Kategorie')), orphans.map(itemRow)) : null);
+  }
+  function moveCat(id, dir) {
+    if (!requireRes()) return;
+    const list = catsSorted();
+    const ix = list.findIndex((c) => c.id === id); const j = ix + dir;
+    if (ix < 0 || j < 0 || j >= list.length) return;
+    [list[ix], list[j]] = [list[j], list[ix]];
+    const ops = list.map((c, n) => (c.sort === n ? null : { col: 'categories', id: c.id, data: { sort: n } })).filter(Boolean);
+    commitBatches(ops);
+  }
+  const roomsList = () => [...new Set(catsSorted().map((c) => c.room).filter(Boolean))];
+  async function editCategory(id) {
+    if (!requireRes()) return;
+    const c = id ? S.cats.get(id) : null;
+    const room = h('input', { type: 'text', list: 'dlg-rooms', value: c ? c.room || '' : '' });
+    const name = h('input', { type: 'text', value: c ? c.name || '' : '' });
+    const vorg = h('input', { type: 'text', value: c ? c.vorgabe || '' : '', placeholder: 'z. B. max. 80 cm breit' });
+    const ok = await confirmDlg(c ? 'Kategorie bearbeiten' : 'Kategorie anlegen', [
+      field('Raum', room), h('datalist', { id: 'dlg-rooms' }, roomsList().map((r) => h('option', { value: r }))),
+      field('Kategorie', name), field('Vorgabe', vorg)], 'Speichern');
+    if (!ok) return;
+    const R = room.value.trim(); const N = name.value.trim(); const V = vorg.value.trim();
+    if (!R || !N) { toast('Raum und Kategorie ausfüllen'); return; }
+    if (c) { writeDoc('categories', c.id, { room: R, name: N, vorgabe: V || null }); return; }
+    const nid = catIdFor(R, N);
+    if (S.cats.has(nid)) { toast('Diese Kategorie gibt es schon'); return; }
+    writeDoc('categories', nid, { room: R, name: N, vorgabe: V || null, sort: nextSort(), createdAt: new Date().toISOString() });
+  }
+  const lines = (s) => s.split(/\r?\n/).map((x) => x.trim()).filter(Boolean);
+  const numOrNull = (s) => { const t = String(s).trim().replace(',', '.'); if (!t) return null; const n = Number(t); return isFinite(n) ? n : null; };
+  function canon(f, v) {
+    if (v === null || v === undefined) return null;
+    if (f === 'price') { const n = priceNum(v); return n === null ? null : n; }
+    if (f === 'dims') {
+      if (!isObj(v)) return null;
+      const o = {}; for (const k of ['w', 'd', 'h']) if (typeof v[k] === 'number') o[k] = v[k];
+      return Object.keys(o).length ? o : null;
+    }
+    if (Array.isArray(v)) { const a = v.filter(isStr).map((x) => x.trim()).filter(Boolean); return a.length ? a : null; }
+    if (isStr(v)) return v.trim() || null;
+    return v;
+  }
+  async function editItem(id) {
+    if (!requireRes()) return;
+    const i = S.items.get(id); if (!i) return;
+    const inp = (v, type, extra) => h('input', Object.assign({ type: type || 'text', value: v === null || v === undefined ? '' : String(v) }, extra || {}));
+    const ta = (v, rows) => { const t = h('textarea', { rows: String(rows || 3) }); t.value = v === null || v === undefined ? '' : v; return t; };
+    const dims = isObj(i.dims) ? i.dims : {};
+    const F = {
+      name: inp(i.name), shop: inp(i.shop), price: inp(priceNum(i.price), 'number', { step: '0.01', min: '0', inputmode: 'decimal' }), articleNo: inp(i.articleNo),
+      w: inp(dims.w, 'number', { step: '0.1', inputmode: 'decimal', 'aria-label': 'Breite' }), d: inp(dims.d, 'number', { step: '0.1', inputmode: 'decimal', 'aria-label': 'Tiefe' }), hh: inp(dims.h, 'number', { step: '0.1', inputmode: 'decimal', 'aria-label': 'Höhe' }),
+      material: inp(i.material), color: inp(i.color), images: ta(arr(i.images).join('\n'), 3), summary: ta(i.summary, 2),
+      deliveryTime: inp(i.deliveryTime), availability: inp(i.availability), pros: ta(arr(i.pros).join('\n'), 3), cons: ta(arr(i.cons).join('\n'), 3),
+      note: ta(i.note, 4), prio: h('select', null, [1, 2, 3].map((p) => h('option', { value: String(p) }, 'Prio ' + p))),
+      cat: h('select', null, catsSorted().map((c) => h('option', { value: c.id }, catLabel(c.id))))
+    };
+    F.prio.value = String(prioOf(i));
+    if (S.cats.has(i.catId)) F.cat.value = i.catId;
+    const gaps = gapsOf(i);
+    const res = await openDialog({
+      title: 'Produkt bearbeiten',
+      body: [
+        h('p', { class: 'muted small' }, i.id + (gaps.length ? ' · Lücken: ' + gaps.map((g) => LABEL[g] || g).join(', ') : '')),
+        h('fieldset', null, h('legend', null, 'Produktdaten'),
+          field('Name', F.name), field('Shop', F.shop), field('Preis in €', F.price), field('Artikelnummer', F.articleNo),
+          h('div', { class: 'field' }, h('span', null, 'Maße in cm (B × T × H)'), h('div', { class: 'trio' }, F.w, F.d, F.hh)),
+          field('Material', F.material), field('Farbe', F.color), field('Bild-URLs', F.images, 'Eine Adresse pro Zeile, erste = Titelbild'),
+          field('Kurzbeschreibung', F.summary), field('Lieferzeit', F.deliveryTime), field('Verfügbarkeit', F.availability),
+          field('Pros', F.pros, 'Einer pro Zeile'), field('Cons', F.cons, 'Einer pro Zeile')),
+        h('fieldset', null, h('legend', null, 'Recherche'), field('Notiz', F.note, 'Wird genau so angezeigt'), field('Prio', F.prio), field('Kategorie', F.cat))
+      ],
+      actions: [{ label: 'Abbrechen', value: false }, { label: i.state === 'archiviert' ? 'Wiederherstellen' : 'Archivieren', value: 'state' }, { label: 'Speichern', primary: true, value: 'save' }]
+    });
+    if (res === 'state') { writeDoc('items', id, { state: i.state === 'archiviert' ? 'aktiv' : 'archiviert' }); return; }
+    if (res !== 'save') return;
+    const w = numOrNull(F.w.value); const d = numOrNull(F.d.value); const hh = numOrNull(F.hh.value);
+    const next = {
+      name: F.name.value, shop: F.shop.value, price: numOrNull(F.price.value), articleNo: F.articleNo.value,
+      dims: (w !== null || d !== null || hh !== null) ? Object.fromEntries([['w', w], ['d', d], ['h', hh]].filter(([, v]) => v !== null)) : null,
+      material: F.material.value, color: F.color.value, images: lines(F.images.value).filter(isHttp), summary: F.summary.value,
+      deliveryTime: F.deliveryTime.value, availability: F.availability.value, pros: lines(F.pros.value), cons: lines(F.cons.value)
+    };
+    const upd = {}; const edited = {}; const flags = {};
+    for (const f of EDITABLE) {
+      const nv = canon(f, next[f]); const ov = canon(f, i[f]);
+      if (JSON.stringify(nv) === JSON.stringify(ov)) continue;
+      upd[f] = nv === null ? S.fb.fsM.deleteField() : nv;
+      edited[f] = true; flags[f] = 'MANUELL';
+    }
+    if (Object.keys(edited).length) { upd.edited = edited; upd.flags = flags; }
+    const oldNote = isStr(i.note) ? i.note.replace(/\r\n?/g, '\n') : '';
+    if (F.note.value !== oldNote) upd.note = F.note.value.length ? F.note.value : null;
+    if (Number(F.prio.value) !== prioOf(i)) upd.prio = Number(F.prio.value);
+    if (F.cat.value && F.cat.value !== i.catId) upd.catId = F.cat.value;
+    if (!Object.keys(upd).length) { toast('Keine Änderungen'); return; }
+    writeDoc('items', id, upd).then((ok) => { if (ok) toast('Gespeichert'); });
+  }
+
+  /* Import / Export */
+  const validId = (id) => isStr(id) && id.length > 0 && id.length <= 400 && !id.includes('/');
+  function validateImport(o) {
+    if (!isObj(o) || o.v !== 3) throw new Error('Keine CozyNest-Datei (v: 3 fehlt).');
+    if (!['enrich', 'preise', 'full'].includes(o.kind)) throw new Error('Unbekannter Import-Typ: ' + String(o.kind));
+    if (!Array.isArray(o.items)) throw new Error('Die Datei enthält keine Produktliste.');
+    for (const it of o.items) if (!isObj(it) || !validId(it.id)) throw new Error('Ungültiger Eintrag in der Produktliste.');
+    if (o.kind === 'full' && o.categories !== undefined && !Array.isArray(o.categories)) throw new Error('Kategorien sind ungültig.');
+  }
+  function planImport(o) {
+    const plan = { kind: o.kind, ops: [], act: 0, upd: 0, unk: 0, unkIds: [], created: 0, cats: 0, kept: 0 };
+    const strip = (x) => { const c = Object.assign({}, x); delete c.id; return c; };
+    if (o.kind === 'full') {
+      for (const c of arr(o.categories)) if (isObj(c) && validId(c.id)) { plan.ops.push({ col: 'categories', id: c.id, data: strip(c) }); plan.cats++; }
+      for (const it of o.items) { plan.ops.push({ col: 'items', id: it.id, data: strip(it) }); if (S.items.has(it.id)) plan.upd++; else plan.created++; }
+      for (const d of arr(o.decisions)) if (isObj(d) && validId(d.id)) plan.ops.push({ col: 'decisions', id: d.id, data: strip(d) });
+      for (const d of arr(o.orders)) if (isObj(d) && validId(d.id)) plan.ops.push({ col: 'orders', id: d.id, data: strip(d) });
+      if (isObj(o.progress)) plan.ops.push({ col: 'progress', id: 'state', data: strip(o.progress) });
+      return plan;
+    }
+    const fields = o.kind === 'preise' ? PRICE_FIELDS : ENRICH_FIELDS;
+    for (const it of o.items) {
+      const cur = S.items.get(it.id);
+      if (!cur) { plan.unk++; plan.unkIds.push(it.id); continue; }
+      const edited = isObj(cur.edited) ? cur.edited : {};
+      const data = {};
+      for (const f of fields) {
+        if (f === 'flags' || !(f in it)) continue;
+        if (edited[f]) { plan.kept++; continue; }
+        data[f] = it[f];
       }
-    } catch (_) { toast('Auswahl-Link unvollständig – bitte komplett kopieren'); }
+      if (isObj(it.flags) && fields.includes('flags')) {
+        const fl = {};
+        for (const [k, v] of Object.entries(it.flags)) if (!edited[k] && (o.kind !== 'preise' || PRICE_FIELDS.includes(k))) fl[k] = v;
+        if (Object.keys(fl).length) data.flags = fl;
+      }
+      for (const k of Object.keys(data)) if (RESEARCHER_FIELDS.includes(k)) delete data[k];
+      if (cur.state === 'neu') { data.state = 'aktiv'; plan.act++; } else plan.upd++;
+      plan.ops.push({ col: 'items', id: it.id, data });
+    }
+    return plan;
   }
-  render();
-  buildLink();
-}
-render();
-init();
+  async function handleImportFile(file) {
+    if (!requireRes()) return;
+    let o;
+    try { o = JSON.parse(await file.text()); validateImport(o); } catch (e) { toast('Import abgelehnt: ' + (e && e.message ? e.message : 'Datei ist kein gültiges JSON')); return; }
+    const plan = planImport(o);
+    if (plan.kind === 'full') {
+      const first = await confirmDlg('Vollimport', [
+        h('p', null, plan.cats + ' Kategorien · ' + (plan.upd + plan.created) + ' Produkte (' + plan.created + ' neu, ' + plan.upd + ' überschrieben)'),
+        h('p', { class: 'muted' }, 'Ein Vollimport schreibt alle Felder – auch Notizen, Status, Entscheidungen und Bestellungen aus der Datei.')], 'Weiter');
+      if (!first) return;
+      const second = await confirmDlg('Wirklich alles übernehmen?', h('p', null, 'Vorhandene Werte mit gleicher ID werden überschrieben. Vorher ein Backup exportieren, falls noch nicht geschehen.'), 'Bestätigen');
+      if (!second) return;
+    } else {
+      const ok = await confirmDlg(plan.kind === 'preise' ? 'Preis-Update importieren' : 'Anreicherung importieren', [
+        h('p', { class: 'counts' }, plan.act + ' aktiviert · ' + plan.upd + ' aktualisiert · ' + plan.unk + ' unbekannte IDs'),
+        plan.unk ? h('p', { class: 'muted small' }, 'Unbekannt (werden übersprungen): ' + plan.unkIds.slice(0, 12).join(', ') + (plan.unk > 12 ? ' …' : '')) : null,
+        plan.kept ? h('p', { class: 'muted small' }, plan.kept + ' manuell bearbeitete Felder bleiben unverändert.') : null], 'Bestätigen');
+      if (!ok) return;
+    }
+    if (!plan.ops.length) { toast('Nichts zu importieren'); return; }
+    const done = await commitBatches(plan.ops);
+    if (done) toast(plan.kind === 'full' ? 'Vollimport übernommen' : 'Import übernommen: ' + plan.act + ' aktiviert · ' + plan.upd + ' aktualisiert');
+  }
+  function plain(v) {
+    if (v === null || v === undefined) return v === undefined ? null : v;
+    if (typeof v.toDate === 'function') return v.toDate().toISOString();
+    if (Array.isArray(v)) return v.map(plain);
+    if (typeof v === 'object') { const o = {}; for (const [k, x] of Object.entries(v)) o[k] = plain(x); return o; }
+    return v;
+  }
+  function exportCatalog() {
+    if (!S.loaded.has('items')) { toast('Daten sind noch nicht geladen'); return; }
+    const out = {
+      v: 3, kind: 'full', ts: new Date().toISOString(),
+      categories: catsSorted().map(plain), items: [...S.items.values()].map(plain),
+      decisions: [...S.decisions.values()].map(plain), orders: [...S.orders.values()].map(plain),
+      progress: S.progress ? plain(S.progress) : null
+    };
+    download('katalog-backup-' + ymd() + '.json', JSON.stringify(out, null, 2), 'application/json');
+    toast('Backup heruntergeladen');
+  }
+  function tabImport() {
+    const file = h('input', { type: 'file', accept: '.json,application/json', class: 'visually-hidden', tabindex: '-1', 'aria-hidden': 'true',
+      onchange: (e) => { const f = e.target.files && e.target.files[0]; e.target.value = ''; if (f) handleImportFile(f); } });
+    return h('div', null,
+      h('section', { class: 'panel' }, h('h2', { class: 'panel-title' }, 'Importieren'),
+        h('p', null, 'Ergebnis-Datei von Claude (import-….json) oder ein Katalog-Backup wählen. Vor dem Übernehmen siehst du eine Vorschau.'),
+        h('div', { class: 'row-actions' }, h('button', { type: 'button', class: 'btn btn-primary', onclick: () => file.click() }, 'Importieren')), file),
+      h('section', { class: 'panel' }, h('h2', { class: 'panel-title' }, 'Katalog exportieren'),
+        h('p', null, 'Sichert Kategorien, Produkte, Entscheidungen und Bestellungen als JSON-Datei.'),
+        h('div', { class: 'row-actions' }, btn('Katalog exportieren', exportCatalog))));
+  }
+  function tabBookmark() {
+    const appUrl = (location.origin + location.pathname).replace(/'/g, '%27');
+    const code = "javascript:(function(){window.open('" + appUrl + "#mode=add&u='+encodeURIComponent(location.href)+'&t='+encodeURIComponent(document.title),'cozynest','width=460,height=780');})();";
+    const link = h('a', { class: 'bookmarklet', href: code, draggable: 'true', onclick: (e) => { e.preventDefault(); toast('In die Lesezeichenleiste ziehen'); } }, '＋ CozyNest');
+    return h('section', { class: 'panel' }, h('h2', { class: 'panel-title' }, 'Lesezeichen'),
+      h('p', null, 'Zieh den Button in die Lesezeichenleiste deines Browsers. Auf einer Produktseite öffnet ein Klick darauf das Erfassungsfenster mit Link und Titel.'),
+      h('div', { class: 'row-actions' }, link),
+      h('p', { class: 'hint' }, 'Am Handy: ', h('a', { href: '#mode=add' }, 'Link erfassen'), ' öffnen und über „Teilen → Zum Home-Bildschirm“ als App-Symbol ablegen.'));
+  }
+
+  /* ---------- Modus 4: Hinzufügen ---------- */
+  function viewAdd(route) {
+    if (S.fbFailed) return h('p', { class: 'empty' }, 'Keine Verbindung zur Datenbank. Bitte später erneut versuchen.');
+    if (!S.authReady) return h('p', { class: 'empty' }, 'Verbindung wird aufgebaut …');
+    if (!isResearcher()) return signInPanel('Link erfassen', 'Zum Erfassen mit dem Researcher-Konto anmelden. Die Anmeldung bleibt in diesem Browser gespeichert.');
+    if (!S.loaded.has('categories') && !S.dbError) return h('p', { class: 'empty' }, 'Kategorien werden geladen …');
+    const urlIn = h('input', { type: 'url', value: route.u, placeholder: 'https://…', inputmode: 'url', autocomplete: 'off', oninput: () => checkDup() });
+    const dup = h('div', { 'aria-live': 'polite' });
+    const titleIn = h('input', { type: 'text', value: route.t });
+    const groups = new Map();
+    for (const c of catsSorted()) { const r = c.room || 'Weitere'; if (!groups.has(r)) groups.set(r, []); groups.get(r).push(c); }
+    const sel = h('select', null, h('option', { value: '' }, 'Bitte wählen …'),
+      [...groups].map(([r, list]) => h('optgroup', { label: r }, list.map((c) => h('option', { value: c.id }, c.name)))),
+      h('option', { value: '__new' }, 'Neu …'));
+    let last = '';
+    try { last = localStorage.getItem(LS_CAT) || ''; } catch (e) { last = ''; }
+    if (S.cats.has(last)) sel.value = last;
+    const newRoom = h('input', { type: 'text', list: 'add-rooms' });
+    const newName = h('input', { type: 'text' });
+    const newVorg = h('input', { type: 'text', placeholder: 'z. B. max. 80 cm breit' });
+    const newBox = h('fieldset', { hidden: sel.value !== '__new' }, h('legend', null, 'Neue Kategorie'),
+      field('Raum', newRoom), h('datalist', { id: 'add-rooms' }, roomsList().map((r) => h('option', { value: r }))),
+      field('Kategorie', newName), field('Vorgabe (optional)', newVorg));
+    sel.addEventListener('change', () => { newBox.hidden = sel.value !== '__new'; });
+    const note = h('textarea', { rows: '4', placeholder: 'Was fällt dir auf? Wird genau so angezeigt.' });
+    let prio = 2;
+    const prioBtns = [1, 2, 3].map((p) => h('button', {
+      type: 'button', class: 'seg-btn prio-btn' + (p === 2 ? ' is-on' : ''), 'aria-pressed': p === 2 ? 'true' : 'false',
+      onclick: () => { prio = p; prioBtns.forEach((b, n) => { b.classList.toggle('is-on', n + 1 === p); b.setAttribute('aria-pressed', n + 1 === p ? 'true' : 'false'); }); }
+    }, String(p)));
+    function findDup(raw) {
+      let n;
+      try { n = normUrl(raw); } catch (e) { return null; }
+      const id = makeItemId(raw);
+      for (const it of S.items.values()) {
+        if (it.id === id) return it;
+        try { if (normUrl(it.url) === n) return it; } catch (e) { /* ignorieren */ }
+      }
+      return null;
+    }
+    function checkDup() {
+      dup.replaceChildren();
+      const v = urlIn.value.trim(); if (!v) return null;
+      const ex = findDup(v);
+      if (ex) dup.append(h('p', { class: 'dup-hint' }, 'Schon erfasst: ', h('a', { href: '#mode=edit&tab=katalog&focus=' + encodeURIComponent(ex.id) }, displayName(ex)), ' (' + (STATE_LABEL[ex.state] || ex.state) + ')'));
+      return ex;
+    }
+    const clipBtn = route.u ? null : h('div', { class: 'row-actions', style: 'margin-bottom:12px' }, h('button', {
+      type: 'button', class: 'btn',
+      onclick: async () => {
+        try {
+          const t = await navigator.clipboard.readText();
+          const m = String(t || '').match(/https?:\/\/\S+/);
+          if (!m) throw new Error('leer');
+          urlIn.value = m[0]; checkDup();
+          if (!titleIn.value) titleIn.focus();
+        } catch (e) { toast('Zwischenablage nicht lesbar – Link bitte ins Feld einfügen'); urlIn.focus(); }
+      }
+    }, '＋ aus Zwischenablage'));
+    async function doSave() {
+      const raw = urlIn.value.trim();
+      let url;
+      try { url = storeUrl(raw); } catch (e) { toast('Bitte einen gültigen Link (https://…) eintragen'); urlIn.focus(); return; }
+      if (checkDup()) { toast('Dieser Link ist schon erfasst'); return; }
+      let catId = sel.value;
+      const ops = [];
+      if (!catId) { toast('Bitte Raum und Kategorie wählen'); sel.focus(); return; }
+      if (catId === '__new') {
+        const R = newRoom.value.trim(); const N = newName.value.trim();
+        if (!R || !N) { toast('Raum und Kategorie für die neue Kategorie ausfüllen'); return; }
+        catId = catIdFor(R, N);
+        if (!S.cats.has(catId)) ops.push({ col: 'categories', id: catId, data: { room: R, name: N, vorgabe: newVorg.value.trim() || null, sort: nextSort(), createdAt: new Date().toISOString() } });
+      }
+      const id = makeItemId(raw);
+      ops.push({ col: 'items', id, data: { catId, url, title: titleIn.value.trim() || null, note: note.value.length ? note.value : null, prio, state: 'neu', addedAt: new Date().toISOString(), edited: {} } });
+      try { localStorage.setItem(LS_CAT, catId); } catch (e) { /* ignorieren */ }
+      commitBatches(ops);
+      S.addSaved = location.hash;
+      $('#app').replaceChildren(h('section', { class: 'panel addform' },
+        h('p', { class: 'saved-title' }, 'Gespeichert ✓'),
+        h('p', { class: 'muted' }, 'Der Link liegt im Eingang – für die Entscheiderin noch unsichtbar.'),
+        h('div', { class: 'row-actions' },
+          h('button', { type: 'button', class: 'btn btn-primary', onclick: () => { S.addSaved = ''; S.addKey = ''; if (location.hash === '#mode=add') render(); else location.hash = '#mode=add'; } }, 'Weiteren Link'),
+          h('button', { type: 'button', class: 'btn', onclick: () => { window.close(); setTimeout(() => toast('Fenster bitte manuell schließen'), 300); } }, 'Fenster schließen'))));
+    }
+    const form = h('section', { class: 'panel addform' },
+      h('h2', { class: 'panel-title' }, 'Link erfassen'),
+      clipBtn, field('Link', urlIn), dup, field('Titel', titleIn), field('Raum und Kategorie', sel), newBox,
+      field('Notiz', note),
+      h('div', { class: 'field' }, h('span', null, 'Prio'), h('div', { class: 'seg seg-prio', role: 'group', 'aria-label': 'Prio' }, prioBtns)),
+      h('div', { class: 'row-actions' }, h('button', { type: 'button', class: 'btn btn-primary', onclick: doSave }, 'Speichern')));
+    if (route.u) checkDup();
+    return form;
+  }
+
+  /* ---------- Auth ---------- */
+  async function signIn() {
+    if (!S.fb) { toast('Keine Verbindung zur Datenbank'); return; }
+    const { authM, auth } = S.fb;
+    try { await authM.signInWithPopup(auth, new authM.GoogleAuthProvider()); }
+    catch (e) { if (!e || !['auth/popup-closed-by-user', 'auth/cancelled-popup-request'].includes(e.code)) toast('Anmeldung fehlgeschlagen' + (e && e.code ? ' (' + e.code + ')' : '')); }
+  }
+  async function signOut() {
+    if (!S.fb) return;
+    flushAll();
+    stopListeners();
+    try { await S.fb.authM.signOut(S.fb.auth); } catch (e) { toast('Abmelden fehlgeschlagen'); }
+  }
+
+  /* ---------- Rahmen: Header, Sync, unterer Balken ---------- */
+  function parseHash() {
+    const p = new URLSearchParams(location.hash.replace(/^#/, ''));
+    const mode = p.get('mode');
+    return { mode: ['order', 'edit', 'add'].includes(mode) ? mode : 'rate', k: p.get('k') || '', tab: p.get('tab') || 'eingang', u: p.get('u') || '', t: p.get('t') || '', focus: p.get('focus') || '' };
+  }
+  function updateSync() {
+    const el = $('#sync');
+    const pendingSnap = Object.values(S.snapPending).some(Boolean);
+    let t;
+    if (!navigator.onLine || S.fbFailed || S.dbError === 'net') t = 'offline – Änderungen werden nachgeholt';
+    else if (S.pendingWrites > 0 || S.drafts.size > 0 || pendingSnap || S.loaded.size < COLS.length) t = 'wird synchronisiert …';
+    else t = '✓ gespeichert';
+    if (el.textContent !== t) el.textContent = t;
+  }
+  function renderHeader(route) {
+    const res = route.mode !== 'rate';
+    const { done, total } = progressCounts();
+    const pct = total ? Math.round((done / total) * 100) : 0;
+    $('#barfill').style.width = pct + '%';
+    $('#bar').setAttribute('aria-valuenow', String(pct));
+    updateSync();
+    const n = $('#notice');
+    let msg = '';
+    if (S.fbFailed || S.dbError === 'net') msg = S.loaded.has('items') ? 'Offline – du siehst den zuletzt geladenen Stand. Änderungen werden nachgeholt.' : 'Keine Verbindung zur Datenbank. Die Auswahl erscheint, sobald die Verbindung steht.';
+    else if (S.dbError === 'perm') msg = 'Keine Berechtigung – bitte mit dem Researcher-Konto anmelden';
+    else if (S.dbError === 'auth') msg = 'Anmeldung bei der Datenbank fehlgeschlagen. Bitte Seite neu laden.';
+    n.textContent = msg; n.hidden = !msg;
+    const nav = $('#modenav');
+    nav.hidden = !res;
+    if (res) {
+      const cur = route.mode;
+      nav.replaceChildren(...[['rate', '#', 'Bewerten'], ['order', '#mode=order', 'Umsetzer'], ['edit', '#mode=edit', 'Researcher'], ['add', '#mode=add', 'Link erfassen']]
+        .map(([m, href, l]) => h('a', { href, 'aria-current': m === cur ? 'page' : null }, l)));
+    }
+    const a = $('#auth');
+    if (!res || !S.fb) { a.replaceChildren(); return; }
+    a.replaceChildren(...(isResearcher()
+      ? [h('span', null, 'Researcher angemeldet'), h('button', { type: 'button', class: 'btn btn-compact', onclick: signOut }, 'Abmelden')]
+      : [h('button', { type: 'button', class: 'btn btn-compact', onclick: signIn }, 'Mit Google anmelden')]));
+  }
+  function renderBottom(route) {
+    const b = $('#bottom');
+    const show = route.mode === 'rate' && S.loaded.has('items') && catsWithActive().length > 0;
+    b.hidden = !show;
+    document.body.classList.toggle('has-bottom', show);
+    if (!show) { b.replaceChildren(); return; }
+    const done = !!(S.progress && S.progress.done);
+    b.replaceChildren(h('button', { type: 'button', class: 'btn btn-primary btn-done', 'aria-pressed': done ? 'true' : 'false', onclick: toggleDone }, done ? '✓ Als fertig markiert – zurücknehmen' : 'Ich bin fertig'));
+  }
+
+  /* ---------- Rendering ---------- */
+  let queued = false;
+  function scheduleRender() {
+    if (queued) return;
+    queued = true;
+    (window.requestAnimationFrame || ((f) => setTimeout(f, 16)))(() => { queued = false; render(); });
+  }
+  function render() {
+    const route = parseHash();
+    const main = $('#app');
+    renderHeader(route);
+    renderBottom(route);
+    if (route.mode === 'add') {
+      if (S.addSaved && S.addSaved === location.hash) return;
+      S.addSaved = '';
+      const key = location.hash + '|' + (S.user ? (S.user.isAnonymous ? 'a' : 'g') : '-') + '|' + S.authReady + '|' + S.loaded.has('categories') + '|' + S.fbFailed + '|' + S.dbError;
+      if (S.addKey === key) return;
+      S.addKey = key;
+      main.replaceChildren(viewAdd(route));
+      S.lastRoute = location.hash;
+      return;
+    }
+    S.addKey = ''; S.addSaved = '';
+    const act = document.activeElement;
+    const focus = act && main.contains(act) && act.dataset && act.dataset.fkey ? { key: act.dataset.fkey, s: act.selectionStart, e: act.selectionEnd } : null;
+    const same = S.lastRoute === location.hash;
+    const y = window.scrollY;
+    let v;
+    try {
+      v = route.mode === 'order' ? viewOrder() : route.mode === 'edit' ? viewEdit(route) : route.k ? viewCategory(route.k) : viewOverview();
+    } catch (e) {
+      console.error(e);
+      v = h('p', { class: 'empty' }, 'Ansicht konnte nicht aufgebaut werden. Bitte Seite neu laden.');
+    }
+    main.replaceChildren(v);
+    main.querySelectorAll('textarea.autogrow').forEach(grow);
+    if (focus) {
+      const el = [...main.querySelectorAll('[data-fkey]')].find((x) => x.dataset.fkey === focus.key);
+      if (el) { el.focus({ preventScroll: true }); try { el.setSelectionRange(focus.s, focus.e); } catch (e) { /* ignorieren */ } }
+    }
+    if (same) window.scrollTo(0, y);
+    else {
+      window.scrollTo(0, 0);
+      if (route.focus) { const el = document.getElementById('item-' + route.focus); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center' }); }
+    }
+    S.lastRoute = location.hash;
+  }
+
+  function init() {
+    try {
+      if (parseHash().mode === 'rate') {
+        const pv = Number(localStorage.getItem(LS_VISIT));
+        S.prevVisit = pv > 0 ? pv : null;
+        localStorage.setItem(LS_VISIT, String(Date.now()));
+      }
+    } catch (e) { /* localStorage nicht verfügbar */ }
+    window.addEventListener('hashchange', render);
+    window.addEventListener('online', updateSync);
+    window.addEventListener('offline', updateSync);
+    window.addEventListener('pagehide', flushAll);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushAll(); });
+    render();
+    initFirebase();
+  }
+  init();
+  /* __END__ */
 })();
 </script>
 </body>
