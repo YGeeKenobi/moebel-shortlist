@@ -220,7 +220,7 @@ const CONFIG = {
   },
   listId: '7c7cxdk5pxj23z34jj8l'
 };
-const APP_VERSION = '3.5';
+const APP_VERSION = '3.6';
 const COMMIT_TIMEOUT_MS = 20000;
 const FB_VERSION = '12.19.0';
 const FB_BASE = 'https://www.gstatic.com/firebasejs/' + FB_VERSION + '/';
@@ -1458,7 +1458,7 @@ function unsubscribeAll() {
 function subscribeAll() {
   for (const col of COLS) {
     if (S.subs[col]) continue;
-    S.subs[col] = S.fs.onSnapshot(S.fs.collection(S.db, ROOT, col),
+    S.subs[col] = S.fs.onSnapshot(S.fs.collection(S.db, ROOT, col), { includeMetadataChanges: true },
       snap => ingest(col, snap),
       err => {
         S.subs[col] = null;
