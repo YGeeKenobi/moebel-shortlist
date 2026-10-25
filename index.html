@@ -220,7 +220,7 @@ const CONFIG = {
   },
   listId: '7c7cxdk5pxj23z34jj8l'
 };
-const APP_VERSION = '3.4';
+const APP_VERSION = '3.5';
 const COMMIT_TIMEOUT_MS = 20000;
 const FB_VERSION = '12.19.0';
 const FB_BASE = 'https://www.gstatic.com/firebasejs/' + FB_VERSION + '/';
@@ -1367,7 +1367,8 @@ function viewAdd(r) {
     field('Notiz', fNote),
     h('div', { class: 'fld' }, h('span', null, 'Prio'), h('div', { class: 'prio', role: 'group', 'aria-label': 'Prio' },
       [1, 2, 3].map(p => h('button', { class: 'segbtn s-ok' + (A.prio === p ? ' on' : ''), type: 'button', 'aria-pressed': A.prio === p ? 'true' : 'false', onclick: () => { A.prio = p; render(); } }, String(p) + (p === 1 ? ' · Empfehlung' : ''))))),
-    h('button', { class: 'btn primary', type: 'button', style: 'width:100%', disabled: !clean || !!dup || A.saving, onclick: saveAdd }, A.saving ? 'Wird gespeichert …' : 'Speichern')));
+    h('button', { class: 'btn primary', type: 'button', style: 'width:100%', disabled: !clean || !!dup || A.saving, onclick: saveAdd }, A.saving ? 'Wird gespeichert …' : 'Speichern'),
+    h('p', { class: 'muted small', style: 'margin-top:8px', role: 'status' }, A.status || (!clean ? 'Speichern erst mit gültiger URL möglich.' : dup ? 'Link bereits erfasst.' : ''))));
   return out;
 }
 async function pasteUrl() {
@@ -1383,29 +1384,32 @@ async function pasteUrl() {
   }
 }
 function focusKey(k) { const el = [...document.querySelectorAll('[data-fkey]')].find(e => e.dataset.fkey === k); if (el) el.focus(); }
+function addStatus(t) { if (S.add) { S.add.status = new Date().toLocaleTimeString('de-DE') + ' · ' + t; render(); } }
 async function saveAdd() {
   const A = S.add;
-  if (!requireResearcher()) return;
+  addStatus('Klick erkannt – prüfe Eingaben …');
+  if (!requireResearcher()) { addStatus('Abbruch: nicht als Researcher angemeldet.'); return; }
   const clean = cleanUrl(A.url);
-  if (!clean) { toast('Bitte eine gültige Web-Adresse eingeben.', 'err'); return; }
-  if (findDup(clean)) { toast('Dieser Link ist bereits erfasst.', 'err'); return; }
+  if (!clean) { toast('Bitte eine gültige Web-Adresse eingeben.', 'err'); addStatus('Abbruch: URL ungültig.'); return; }
+  if (findDup(clean)) { toast('Dieser Link ist bereits erfasst.', 'err'); addStatus('Abbruch: Link bereits erfasst.'); return; }
   let catId = A.catId;
   const ops = [];
   if (catId === '__new') {
     const room = A.newRoom.trim(), name = A.newName.trim();
-    if (!room || !name) { toast('Raum und Kategorie angeben.', 'err'); return; }
+    if (!room || !name) { toast('Raum und Kategorie angeben.', 'err'); addStatus('Abbruch: Raum oder Kategorie fehlt.'); return; }
     catId = 'k-' + slug(room) + '-' + slug(name);
     if (!S.cats.has(catId)) ops.push({ path: 'categories/' + catId, data: { room, name, vorgabe: A.newVorgabe.trim() || null, sort: nextSort(), createdAt: nowIso() } });
-  } else if (!S.cats.has(catId)) { toast('Bitte eine Kategorie wählen.', 'err'); return; }
+  } else if (!S.cats.has(catId)) { toast('Bitte eine Kategorie wählen.', 'err'); addStatus('Abbruch: keine Kategorie gewählt.'); return; }
   const id = itemIdFor(clean);
-  if (S.items.has(id)) { toast('Dieser Link ist bereits erfasst (' + id + ').', 'err'); return; }
+  if (S.items.has(id)) { toast('Dieser Link ist bereits erfasst (' + id + ').', 'err'); addStatus('Abbruch: ID existiert bereits.'); return; }
   ops.push({ path: 'items/' + id, data: { catId, url: stripTracking(A.url), title: A.title.trim() || null, note: A.note === '' ? null : A.note, prio: A.prio, state: 'neu', addedAt: nowIso(), edited: {} } });
-  A.saving = true; render();
+  A.saving = true;
+  addStatus('Sende an Server … (max. ' + COMMIT_TIMEOUT_MS / 1000 + ' s)');
   try {
     await commitOps(ops);
     lsSet(LS_LASTCAT, catId);
     S.addSaved = { id, label: A.title.trim() || clean };
-  } catch (e) { fail('Speichern fehlgeschlagen', e); }
+  } catch (e) { fail('Speichern fehlgeschlagen', e); A.status = new Date().toLocaleTimeString('de-DE') + ' · Fehler: ' + errText('Speichern fehlgeschlagen', e); }
   finally { A.saving = false; render(); }
 }
 function newLink() {
@@ -1429,6 +1433,7 @@ async function login() {
 }
 async function logout() {
   flushAll();
+  unsubscribeAll();
   try { await S.au.signOut(S.auth); toast('Abgemeldet'); }
   catch (e) { fail('Abmelden fehlgeschlagen', e); }
 }
@@ -1447,12 +1452,19 @@ function ingest(col, snap) {
   maybeMigrateLocal();
   scheduleRender();
 }
+function unsubscribeAll() {
+  for (const col of COLS) { if (S.subs[col]) { try { S.subs[col](); } catch (e) { console.error('[CozyNest] Listener beenden', e); } S.subs[col] = null; } }
+}
 function subscribeAll() {
   for (const col of COLS) {
     if (S.subs[col]) continue;
     S.subs[col] = S.fs.onSnapshot(S.fs.collection(S.db, ROOT, col),
       snap => ingest(col, snap),
-      err => { S.subs[col] = null; fail('Laden von „' + col + '“ fehlgeschlagen', err); });
+      err => {
+        S.subs[col] = null;
+        if (err && err.code === 'permission-denied' && (!S.user || !S.auth || S.auth.currentUser !== S.user)) { console.warn('[CozyNest] Listener während Anmeldewechsel beendet: ' + col); return; }
+        fail('Laden von „' + col + '“ fehlgeschlagen', err);
+      });
   }
 }
 function maybeMigrateLocal() {
@@ -1508,7 +1520,7 @@ async function initFirebase() {
           fail('Anonyme Anmeldung fehlgeschlagen', e); render();
         });
       } else subscribeAll();
-      render();
+      scheduleRender();
     });
     setTimeout(() => {
       if (!S.loaded.items && !S.dbError) { S.dbError = 'Die Datenbank antwortet nicht. Es wird weiter versucht – bitte Internetverbindung prüfen.'; S.dbSoft = true; render(); }
@@ -1532,7 +1544,11 @@ function route() {
   };
 }
 let rq = 0;
-function scheduleRender() { if (rq) return; rq = requestAnimationFrame(() => { rq = 0; render(); }); }
+let ptrDown = false, ptrDeferred = false;
+function scheduleRender() {
+  if (ptrDown) { ptrDeferred = true; return; }
+  if (rq) return; rq = requestAnimationFrame(() => { rq = 0; if (ptrDown) { ptrDeferred = true; return; } render(); });
+}
 function captureFocus() {
   const a = document.activeElement;
   if (!a || !a.dataset || !a.dataset.fkey) return null;
@@ -1585,6 +1601,10 @@ function init() {
   });
   window.addEventListener('error', e => { console.error('[CozyNest] Unerwarteter Fehler', e.error || e.message); toast('Unerwarteter Fehler: ' + ((e.error && e.error.message) || e.message || 'unbekannt'), 'err'); });
   window.addEventListener('unhandledrejection', e => { console.error('[CozyNest] Unbehandelter Fehler', e.reason); toast(errText('Unerwarteter Fehler', e.reason), 'err'); });
+  document.addEventListener('pointerdown', () => { ptrDown = true; }, true);
+  const ptrRelease = () => setTimeout(() => { ptrDown = false; if (ptrDeferred) { ptrDeferred = false; scheduleRender(); } }, 0);
+  document.addEventListener('pointerup', ptrRelease, true);
+  document.addEventListener('pointercancel', ptrRelease, true);
   window.addEventListener('online', syncUi);
   window.addEventListener('offline', syncUi);
   render();
