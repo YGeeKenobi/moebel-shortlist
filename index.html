@@ -220,7 +220,8 @@ const CONFIG = {
   },
   listId: '7c7cxdk5pxj23z34jj8l'
 };
-const APP_VERSION = '3.3';
+const APP_VERSION = '3.4';
+const COMMIT_TIMEOUT_MS = 20000;
 const FB_VERSION = '12.19.0';
 const FB_BASE = 'https://www.gstatic.com/firebasejs/' + FB_VERSION + '/';
 const ROOT = 'shortlists/' + CONFIG.listId;
@@ -434,6 +435,7 @@ const ERR_TEXT = {
   'invalid-argument': 'Ungültige Daten',
   'not-found': 'Eintrag nicht gefunden',
   'no-db': 'Keine Verbindung zur Datenbank',
+  'timeout': 'Server bestätigt das Speichern nicht – Verbindung zu Firestore blockiert (Werbeblocker, VPN, Firmennetz) oder offline',
   'auth/popup-blocked': 'Anmeldefenster wurde blockiert – bitte Popups für diese Seite erlauben',
   'auth/popup-closed-by-user': 'Anmeldefenster wurde geschlossen',
   'auth/cancelled-popup-request': 'Anmeldung abgebrochen',
@@ -486,6 +488,11 @@ async function removeDoc(path) {
   try { await track(S.fs.deleteDoc(ref(path))); return true; }
   catch (e) { fail('Löschen fehlgeschlagen', e); scheduleRender(); return false; }
 }
+function withTimeout(p, ms) {
+  let t;
+  const timer = new Promise((_, rej) => { t = setTimeout(() => { const e = new Error('Zeitüberschreitung beim Speichern'); e.code = 'timeout'; rej(e); }, ms); });
+  return Promise.race([p, timer]).finally(() => clearTimeout(t));
+}
 /* ops: [{path, data, mergeFields?, del?}] – wirft bei Fehlern (Aufrufer zeigt Meldung) */
 async function commitOps(ops, onProgress) {
   if (!S.fs) { const e = new Error('Keine Datenbankverbindung'); e.code = 'no-db'; throw e; }
@@ -498,7 +505,7 @@ async function commitOps(ops, onProgress) {
       else if (o.mergeFields) b.set(ref(o.path), o.data, { mergeFields: o.mergeFields });
       else b.set(ref(o.path), o.data, { merge: true });
     }
-    await track(b.commit());
+    await track(withTimeout(b.commit(), COMMIT_TIMEOUT_MS));
     done += chunk.length;
     if (onProgress) onProgress(done, ops.length);
   }
@@ -666,7 +673,8 @@ function statusBanner() {
 function authBar() {
   const u = S.user;
   const label = !S.authReady ? 'Anmeldung wird geprüft …' : isResearcher() ? 'Angemeldet als ' + (u.email || '(ohne E-Mail)') : 'Nicht angemeldet';
-  return h('div', { class: 'authbar' }, h('span', null, label),
+  const conn = !S.fs ? 'keine Datenbank' : S.server.items ? 'Server verbunden' : 'nur lokaler Cache';
+  return h('div', { class: 'authbar' }, h('span', null, label, h('span', { class: 'muted small' }, ' · v' + APP_VERSION + ' · ' + conn)),
     isResearcher()
       ? h('button', { class: 'btn', type: 'button', onclick: logout }, 'Abmelden')
       : h('button', { class: 'btn', type: 'button', onclick: login, disabled: !S.au }, 'Mit Google anmelden'));
@@ -1575,6 +1583,8 @@ function init() {
     render();
     window.scrollTo(0, S.scroll[location.hash] || 0);
   });
+  window.addEventListener('error', e => { console.error('[CozyNest] Unerwarteter Fehler', e.error || e.message); toast('Unerwarteter Fehler: ' + ((e.error && e.error.message) || e.message || 'unbekannt'), 'err'); });
+  window.addEventListener('unhandledrejection', e => { console.error('[CozyNest] Unbehandelter Fehler', e.reason); toast(errText('Unerwarteter Fehler', e.reason), 'err'); });
   window.addEventListener('online', syncUi);
   window.addEventListener('offline', syncUi);
   render();
